@@ -1,0 +1,20 @@
+{
+  "name": "arduino-bot",
+  "version": "0.0.1",
+  "description": "A bot to help the arduino community!",
+  "main": "bot.js",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  },
+  "devDependencies": {},,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BluLightShow/arduino-bot.git"
+  },
+  "author": "BluLightShow & CeaserGaming",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/BluLightShow/arduino-bot/issues"
+  },
+  "homepage": "https://github.com/BluLightShow/arduino-bot#readme"
+}
