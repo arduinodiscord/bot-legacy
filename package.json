@@ -4,7 +4,8 @@
   "description": "A bot to help the arduino community!",
   "main": "bot.js",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "enmap": "^4.3.3"
   },
   "devDependencies": {},
   "repository": {
