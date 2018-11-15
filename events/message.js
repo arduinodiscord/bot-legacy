@@ -28,5 +28,5 @@ module.exports = (client, message) => {
     // If that command doesn't exist, exit and do nothing
     if (!cmd) return;
     // Run the command
-    cmd.run(client, message, args, embed, sender, channel, thumbnail, footer, reactions);
+    cmd.run(client, message, args, embed, sender, channel, footer, reactions);
 };
