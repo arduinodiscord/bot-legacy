@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const version = "0.0.1" // DO NOT MODIFY
 const auth = require('./authentication.json');
 const fs = require('fs');
-const enmap = require('enmap');
+const Enmap = require('enmap');
 
 var footer = "Have a bug to report or a feature to request? Contact a mod!";
 
