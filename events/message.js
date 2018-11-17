@@ -1,32 +1,31 @@
-var bot = require('../bot.js');
+const Discord = require('discord.js')
+
+const { prefix } = require('@conf/bot.json')
 
 module.exports = (client, message) => {
-    var embed = new bot.Discord.RichEmbed();
+  if (message.author.bot)
+    return
 
-    if (message.author.bot) return;
+  if (message.channel.type === 'dm') {
+    new Discord.RichEmbed()
+      .setTitle(`**Mod Mail is coming soon!**`)
+      .setDescription(`In the meantime, you can look for a moderator in <&420594746990526468>!`)
+      .setColor('#00b3b3')
+      .setFooter(bot.footer)
+      .setTimestamp(new Date())
 
-    if (message.channel.type === "dm") {
-        embed.setTitle(`**Mod Mail is coming soon!**`);
-        embed.setDescription(`In the meantime, you can look for a moderator in <&420594746990526468>!`);
-        embed.setColor("#00b3b3");
-        embed.setFooter(bot.footer);
-        embed.setTimestamp(new Date());
-        message.channel.send(embed);
-        return;
-    };
+    return message.channel.send(embed)
+  }
 
-    if (message.content.indexOf("!") !== 0) return;
+  if (message.content.indexOf(prefix) !== 0) return
 
-    const args = message.content.slice(1).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
-    const sender = message.author;
-    const channel = message.channel;
-    const footer = bot.footer;
+  const args = message.content.slice(1).trim().split(/ +/g)
+  const command = args.shift().toLowerCase()
 
-    // Grab the command data from the client.commands Enmap
-    const cmd = client.commands.get(command);
-    // If that command doesn't exist, exit and do nothing
-    if (!cmd) return;
-    // Run the command
-    cmd.run(client, message, args, embed, sender, channel, footer);
-};
+  const cmd = client.commands.get(command)
+
+  if (!cmd)
+    return
+
+  cmd.run(client, message, args)
+}

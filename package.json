@@ -2,12 +2,19 @@
   "name": "arduino-bot",
   "version": "0.0.1",
   "description": "A bot to help the arduino community!",
-  "main": "bot.js",
+  "main": "main.js",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "enmap": "^4.3.3"
+    "enmap": "^4.3.3",
+    "module-alias": "^2.1.0"
   },
-  "devDependencies": {},
+  "scripts": {
+    "start": "node .",
+    "lint": "standard"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BluLightShow/arduino-bot.git"
@@ -17,5 +24,12 @@
   "bugs": {
     "url": "https://github.com/BluLightShow/arduino-bot/issues"
   },
-  "homepage": "https://github.com/BluLightShow/arduino-bot#readme"
+  "homepage": "https://github.com/BluLightShow/arduino-bot#readme",
+  "_moduleAliases": {
+    "@root"    : ".",
+    "@command" : "commands/",
+    "@event"   : "events/",
+    "@conf"    : "config/",
+    "@model"   : "model/"
+  }
 }
