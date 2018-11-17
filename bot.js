@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const version = "0.0.1" // DO NOT MODIFY
-const auth = require('./authentication.json');
 const fs = require('fs');
 const Enmap = require('enmap');
 
@@ -50,5 +49,4 @@ client.on('ready', () => {
     });
 });
 
-//client.login(auth.token);
 client.login(process.env.BOT_TOKEN);
