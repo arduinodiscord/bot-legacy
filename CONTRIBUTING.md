@@ -17,7 +17,8 @@ This repository uses GitFlow.
 | release/    | Collaborator | Branch for releasing a new version from develop to master |
 | hotfix/     | Community    | Branch for major bug fixes after a release                |
 
-- All PRs must go into the develop branch
+All PRs must go into the develop branch.
+You may also use edit/ instead of feature/ if the feature only involves editing docs. This is not officially part of GitFlow.
 
 # Contributing
 
@@ -35,3 +36,5 @@ This repository uses GitFlow.
   2. ~~Run unit tests~~ Coming soon!
 5. Commit & Push your code
 6. Open a Pull Request to the official repository
+
+* Contributors can skip forking, provided that a new branch is made, whose naming convention follows GitFlow.
