@@ -18,7 +18,7 @@ This repository uses GitFlow.
 | hotfix/     | Community    | Branch for major bug fixes after a release                |
 
 All PRs must go into the develop branch.
-You may also use edit/ instead of feature/ if the feature only envolves editing docs. This is not officially part of GitFlow.
+You may also use edit/ instead of feature/ if the feature only involves editing docs. This is not officially part of GitFlow.
 
 # Contributing
 
