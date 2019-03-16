@@ -1,5 +1,4 @@
 require('module-alias/register')
-
 const Discord = require('discord.js')
 
 const Client = require('@model/Bot.js')
