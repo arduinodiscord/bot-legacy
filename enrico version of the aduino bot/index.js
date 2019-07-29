@@ -31,7 +31,7 @@ const SPb = new Discord.RichEmbed() //series and parallel for circuits (not batt
 	.setTimestamp()
 	.setFooter('Arduino bot docs', 'https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*eYLvFjmi77iM_cjJTvRymg.png&f=1');
 
-	
+
 const resistors = new Discord.RichEmbed() //series and parallel for circuits (not batteries)
 	.setColor('#00979C')
 	.setTitle('Resistors')
@@ -46,98 +46,99 @@ const resistors = new Discord.RichEmbed() //series and parallel for circuits (no
 
 
 function deleteMessage(message) {
-	
+
 	message.channel.fetchMessage(message.id)
 		.then(message.delete())
 		.catch(console.error);
-	
+
 }
 
-client.once('ready', () => {
+client.on('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('message', message => {
-	if (message.content.startsWith(config.prefix + 'ping')) {s
-		
+	if (message.content.startsWith(config.prefix + 'ping')) {
+		s
+
 		message.channel.send(':ping_pong: Pong!');
-		
+
 	} else if (message.content.startsWith(config.prefix + 'ban')) {
-		
-		
-		if(!message.member.roles.some(r=>["admin"].includes(r.name)) )
+
+
+		if (!message.member.roles.some(r => ["admin"].includes(r.name)))
 			return message.reply("Sorry, you don't have permissions to use this!");
 
 		let member = message.mentions.members.first();
-		if(!member)
+		if (!member)
 			return message.reply("Please mention a valid member of this server");
-		if(!member.bannable) 
+		if (!member.bannable)
 			return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
-		member.ban("Don't ask")	
-		
-		.catch(error => message.reply(`Sorry **${message.author}** I couldn't ban because of : **${error}**`));
-			
-			message.channel.send(`**${member.user.tag}** has been banned by **${message.author.tag}**`);
-		
-		
+		member.ban("Don't ask")
+
+			.catch(error => message.reply(`Sorry **${message.author}** I couldn't ban because of : **${error}**`));
+
+		message.channel.send(`**${member.user.tag}** has been banned by **${message.author.tag}**`);
+
+
 	} else if (message.content.startsWith(config.prefix + 'kick')) {
-		
-		
-		if(!message.member.roles.some(r=>["admin"].includes(r.name)) )
+
+
+		if (!message.member.roles.some(r => ["admin"].includes(r.name)))
 			return message.reply("Sorry, you don't have permissions to use this!");
 
 		let member = message.mentions.members.first();
-		if(!member)
+		if (!member)
 			return message.reply("Please mention a valid member of this server");
-		if(!member.bannable) 
+		if (!member.bannable)
 			return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
 
-		member.kick()	
-		
-		.catch(error => message.reply(`Sorry **${message.author}** I couldn't kick because of : **${error}**`));
-			
-			message.channel.send(`**${member.user.tag}** has been kicked by **${message.author.tag}**`);
-		
-		
+		member.kick()
+
+			.catch(error => message.reply(`Sorry **${message.author}** I couldn't kick because of : **${error}**`));
+
+		message.channel.send(`**${member.user.tag}** has been kicked by **${message.author.tag}**`);
+
+
 	} else if (message.content.startsWith('<please enter role>')) {
-		
-		setTimeout(deleteMessage, 10000, message );
-		
+
+		setTimeout(deleteMessage, 10000, message);
+
 	} else if (message.content.startsWith(config.prefix + 'doc')) {
-		
+
 		const args = message.content.slice(config.prefix.length + 4).split(' ');
 		if (args[0] === '') {
-			
+
 			message.channel.send(`Please give page name`);
-			
-			setTimeout(deleteMessage, 10000, message );
-			
+
+			setTimeout(deleteMessage, 10000, message);
+
 		} else if (args[0] == 'seriesParallel' || args[0] == 'SPc') {
-			
+
 			message.channel.send(SPc);
-			
+
 		} else if (args[0] == 'seriesParallelBatteries' || args[0] == 'SPb') {
-			
+
 			message.channel.send(SPb);
-			
+
 		} else if (args[0] == 'resistors' || args[0] == 'Res') {
-			
+
 			message.channel.send(resistors);
-			
+
 		}
-		
+
 	} else if (message.content.startsWith('Please give page name')) {
-		
-		setTimeout(deleteMessage, 10000, message );
-		
+
+		setTimeout(deleteMessage, 10000, message);
+
 	} else if (message.content.startsWith('```')) {
-		
-		var msg=message.content;
-		var original=message.author.username + '#' + message.author.discriminator;
-		
+
+		var msg = message.content;
+		var original = message.author.username + '#' + message.author.discriminator;
+
 		pastebin
-			.createPaste(message.content.slice(3, msg.length-6), `Code by ${original}`)
+			.createPaste(message.content.slice(3, msg.length - 6), `Code by ${original}`)
 			.then(function (data) {
 				// paste succesfully created, data contains the id
 				message.channel.send(`Code moved to ${data}`);
@@ -147,12 +148,12 @@ client.on('message', message => {
 				// Something went wrong
 				console.log(err);
 			})
-		
+
 	} else if (message.content.startsWith(config.prefix + 'pastebin ')) {
-		
-		var msg=message.content;
-		var original=message.author.username + '#' + message.author.discriminator;
-		
+
+		var msg = message.content;
+		var original = message.author.username + '#' + message.author.discriminator;
+
 		pastebin
 			.createPaste(message.content.slice(10, msg.length), `Code by ${original}`)
 			.then(function (data) {
@@ -164,44 +165,36 @@ client.on('message', message => {
 				// Something went wrong
 				console.log(err);
 			})
-		
+
 	} else if (message.content.indexOf('```') > -1) {
-		
-		var msg=message.content;
-		var start=msg.indexOf('```');
-		var end=msg.slice(start+3, msg.length).indexOf('```');
-		var dif= end-start;
-		if (dif>=config.warningTooLongCodeThreshold) {
-			
+
+		var msg = message.content;
+		var start = msg.indexOf('```');
+		var end = msg.slice(start + 3, msg.length).indexOf('```');
+		var dif = end - start;
+		if (dif >= config.warningTooLongCodeThreshold) {
+
 			message.channel.send("I've noticed that your message contains a lot of code, please consider removing it from the original message and reposting the code to pastebin.com by using the command `!pastebin [your code]` to make the chat more cleaner and easy the life of the helpers. Thank you! (self-destructing in 10 seconds)");
-			
+
 		}
-		
+
 	} else if (message.content.startsWith("I've noticed that your message contains a lot of code, please consider removing it from the original message and reposting the code to pastebin.com by using the command `!pastebin [your code]` to make the chat more cleaner and easy the life of the helpers. Thank you! (self-destructing in 10 seconds)")) {
-		
-		setTimeout(deleteMessage, 10000, message );
-		
+
+		setTimeout(deleteMessage, 10000, message);
+
 	}
-	
-	
-	
-	/*else if (message.content.startsWith(config.prefix + 'test')) {
-		
-		console.log();
-		
-	}*/
 });
 
 client.on("guildMemberAdd", (member) => {
-  if (member.displayName.includes('discord.gg/')) {
-	  member.ban({reason: 'Having your name as a discord invite link is not allowed'});
-  } else {
-  console.log(member + 'just joinned')
-  
-  const channel = member.guild.channels.find('name',config.spawn);
-  channel.send("Welcome " + member + " to the Arduino official discord server! Please read the rules before continuing.");
-  }
-  
+	if (member.displayName.includes('discord.gg/')) {
+		member.ban({ reason: 'Having your name as a discord invite link is not allowed' });
+	} else {
+		console.log(member + 'just joinned')
+
+		const channel = member.guild.channels.find('name', config.spawn);
+		channel.send("Welcome " + member + " to the Arduino official discord server! Please read the rules before continuing.");
+	}
+
 });
 
 client.login(config.discordToken);
