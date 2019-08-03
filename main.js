@@ -1,9 +1,6 @@
 require('module-alias/register')
-
 const Discord = require('discord.js')
-
 const Client = require('@model/Bot.js')
-
 const version = require('@root/package.json').version
 const client = new Client()
 

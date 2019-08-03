@@ -6,10 +6,11 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "enmap": "^4.3.3",
+    "gists": "^2.0.0",
     "module-alias": "^2.1.0"
   },
   "scripts": {
-    "start": "node .",
+    "start": "node main.js",
     "lint": "standard"
   },
   "devDependencies": {
@@ -26,10 +27,10 @@
   },
   "homepage": "https://github.com/BluLightShow/arduino-bot#readme",
   "_moduleAliases": {
-    "@root"    : ".",
-    "@command" : "commands/",
-    "@event"   : "events/",
-    "@conf"    : "config/",
-    "@model"   : "model/"
+    "@root": ".",
+    "@command": "commands/",
+    "@event": "events/",
+    "@conf": "config/",
+    "@model": "model/"
   }
 }

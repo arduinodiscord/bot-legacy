@@ -10,4 +10,5 @@ exports.run = (client, message, args) => {
       .setTitle(`🏓 Pong! Round-trip latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms.`)
     m.edit(embed)
   })
+
 }
