@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const { icon } = require('@conf/bot.json')
 const Gists = require('gists')
 const gists = new Gists({
   token: process.env.GITHUB_TOKEN
@@ -14,38 +15,56 @@ module.exports = (client, message) => {
       .setTitle(`**Mod Mail is Coming Soon!**`)
       .setDescription(`In the meantime, you can look for a moderator in <&420594746990526468>!`)
       .setColor('#00b3b3')
-      .setFooter(client.footer)
+      .setFooter(client.footer, icon)
       .setTimestamp(new Date())
-
     return message.channel.send(embed)
   }
 
-  if (message.content.startsWith('```') && message.content.endsWith('```')) {
+  if (message.content.startsWith('```') && message.content.split('\n', 1)[0].includes('```') && message.content.endsWith('```')) {
     let embed = new Discord.RichEmbed()
       .setTitle('Code block detected! Automagically shooting to GitHub...')
       .setDescription('The link will appear right here in just a moment.')
       .setColor('#00b3b3')
-      .setFooter(client.footer)
+      .setFooter(client.footer, icon)
       .setTimestamp(new Date())
 
-    message.channel.send(embed).then(m => {
-      gists.create({
-        "description": `Code by ${message.author.username + '#' + message.author.discriminator} - ${new Date()}`,
-        "public": true,
-        "files": {
-          "Code Block Paste": {
-            "content": message.content.slice(3, message.content.length - 4)
-          }
+    if (message.content.split('\n', 1)[0].slice(3).replace('\n', '').length > 0) {
+      var fileExtension = message.content.split('\n', 1)[0].slice(3).replace('\n', '')
+      var extensionLength = fileExtension.length
+    } else {
+      var fileExtension = 'cpp'
+      var extensionLength = 0
+    }
+
+    var gistContent = message.content.slice(2 + extensionLength + 2, message.content.length - 4)
+    var gistObject = {
+      "description": `Code by ${message.author.username + '#' + message.author.discriminator} - ${new Date()}`,
+      "public": true,
+      "files": {
+        ["CodeBlockPaste." + fileExtension]: {
+          "content": gistContent
         }
-      }).then(gist => {
+      }
+    }
+
+    message.channel.send(embed).then(m => {
+      gists.create(gistObject).then(gist => {
         embed.setTitle('Code block detected! Automagically shooting to GitHub...')
         embed.setDescription(`**${gist.body.html_url}**`)
         embed.setColor('#00b3b3')
-        embed.setFooter(client.footer)
+        embed.setFooter(client.footer, icon)
         embed.setTimestamp(new Date())
-
         m.edit(embed)
       })
+    }).catch(err => {
+      console.error(err)
+
+      embed.setTitle('There was an error while processing your code block and sending it to GitHub.')
+      embed.setDescription('**Please report this to the server moderators!**')
+      embed.setColor('#00b3b3')
+      embed.setFooter(client.footer, icon)
+      embed.setTimestamp(new Date())
+      m.edit(embed)
     })
   }
 
@@ -53,10 +72,7 @@ module.exports = (client, message) => {
 
   const args = message.content.slice(1).trim().split(/ +/g)
   const command = args.shift().toLowerCase()
-
   const cmd = client.commands.get(command)
-
   if (!cmd) return
-
   cmd.run(client, message, args)
 }

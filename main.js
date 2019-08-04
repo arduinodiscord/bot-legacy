@@ -10,6 +10,7 @@ module.exports = {
 }
 
 client.footer = 'Have a bug to report or a feature to request? Contact a mod!'
+client.version = version
 
 client
   .register()

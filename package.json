@@ -1,6 +1,6 @@
 {
   "name": "arduino-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A bot to help the arduino community!",
   "main": "main.js",
   "dependencies": {
@@ -31,6 +31,7 @@
     "@command": "commands/",
     "@event": "events/",
     "@conf": "config/",
-    "@model": "model/"
+    "@model": "model/",
+    "@images": "images/"
   }
 }
