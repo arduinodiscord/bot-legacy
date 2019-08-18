@@ -57,7 +57,9 @@ module.exports = (client, message) => {
         m.edit(embed)
 
         message.delete().then(() => {
-          embed.setTitle('Code block pasted to github! The original message is deleted, you can access the code with the link below:')
+          var msg=message.content;
+		      var original=message.author.username + '#' + message.author.discriminator;
+          embed.setTitle(`Code block by ${original} pasted to github! The original message is deleted, you can access the code with the link below:`)
           return m.edit(embed)
         }).catch(err => {
           return console.log(err)
