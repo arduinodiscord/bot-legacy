@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const { icon } = require('@conf/bot.json')
 const Gists = require('gists')
 const gists = new Gists({
-  token: '8de15d4a7159344999269dcb246d5876eec67d54'
+  token: process.env.GITHUB_TOKEN
 })
 
 const { prefix } = require('@conf/bot.json')
