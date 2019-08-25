@@ -14,4 +14,4 @@ client.version = version
 
 client
   .register()
-  .login(process.env.BOT_TOKEN)
+  .login('NjA3MDk0Nzk2MTc1MDE1OTM3.XWFplg.CEzeoMCWF5KEHQojKzkiuYFErZk')

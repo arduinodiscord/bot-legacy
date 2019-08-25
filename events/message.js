@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const { icon } = require('@conf/bot.json')
 const Gists = require('gists')
 const gists = new Gists({
-  token: process.env.GITHUB_TOKEN
+  token: '8de15d4a7159344999269dcb246d5876eec67d54'
 })
 
 const { prefix } = require('@conf/bot.json')
@@ -19,34 +19,37 @@ module.exports = (client, message) => {
       .setTimestamp(new Date())
     return message.channel.send(embed)
   }
-
-  if (message.content.startsWith('```') && (message.content.split('\n', 20).length > 15) && message.content.split('\n', 1)[0].includes('```') && message.content.endsWith('```')) {
+  if ((message.content.startsWith('```') && message.content.endsWith('```')) && ((message.content.split('\n', 26).length >= 25) || (!message.content.includes('\n')))) {
     let embed = new Discord.RichEmbed()
       .setTitle('Code block detected! Automagically shooting to GitHub...')
       .setDescription('The link will appear right here in just a moment.')
       .setColor('#00b3b3')
       .setFooter(client.footer, icon)
+      .setAuthor(`${message.author.username + '#' + message.author.discriminator}`, message.author.avatarURL)
       .setTimestamp(new Date())
 
-    if (message.content.split('\n', 1)[0].slice(3).replace('\n', '').length > 0) {
-      var fileExtension = message.content.split('\n', 1)[0].slice(3).replace('\n', '')
-      var extensionLength = fileExtension.length
-    } else {
-      var fileExtension = 'cpp'
-      var extensionLength = 0
-    }
+    // I hate doing it this way but this is the only way I think works. It's fine for now.
+    var headermessage = '## This Gist was create by the Arduino discord server bot.'
+    var robot = '##### *This message was created automatically.*'
+    var badges = '[![](https://img.shields.io/github/issues/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/issues) [![](https://img.shields.io/github/forks/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![](https://img.shields.io/github/stars/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![](https://img.shields.io/github/license/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/blob/master/LICENSE) [![](https://user-images.githubusercontent.com/7288322/34429152-141689f8-ecb9-11e7-8003-b5a10a5fcb29.png)](http://arduino.cc/discord)'
+    var alertMessage = '> **This gist was automatically created to keep the help channels in the Arduino discord server clean. If you have any suggestions or bugs to report, you can do so on our [GitHub](https://github.com/BluLightShow/arduino-bot/ "GitHub page") repository, or in our discord server. This project is run by volunteers so feel free to fork and commit your changes then open a pull request!**'
+    var linebreak = '------------'
+    var code = '# ⬇️ Pasted Code ⬇️'
 
-    var gistContent = message.content.slice(2 + extensionLength + 2, message.content.length - 4)
+    var gistContent = message.content.slice(3, message.content.length - 3).replace('cpp', '')
     var gistObject = {
       "description": `Code by ${message.author.username + '#' + message.author.discriminator} - ${new Date()}`,
       "public": true,
       "files": {
-        ["CodeBlockPaste." + fileExtension]: {
+        "Arduino.md": {
+          "content": `${headermessage}\n${robot}\n${badges}\n${alertMessage}\n${linebreak}\n${code}`
+        },
+        "CodeBlockPaste.cpp": {
           "content": gistContent
         }
       }
     }
-
+    console.log(gistContent)
     message.channel.send(embed).then(m => {
       gists.create(gistObject).then(gist => {
         embed.setTitle('Code block pasted to github! Removing the original message...')
