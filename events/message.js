@@ -29,7 +29,7 @@ module.exports = (client, message) => {
       .setTimestamp(new Date())
 
     // I hate doing it this way but this is the only way I think works. It's fine for now.
-    var headermessage = '## This Gist was create by the Arduino discord server bot.'
+    var headermessage = '## This Gist was created by the Arduino discord server bot.'
     var robot = '##### *This message was created automatically.*'
     var badges = '[![](https://img.shields.io/github/issues/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/issues) [![](https://img.shields.io/github/forks/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![](https://img.shields.io/github/stars/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![](https://img.shields.io/github/license/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/blob/master/LICENSE) [![](https://user-images.githubusercontent.com/7288322/34429152-141689f8-ecb9-11e7-8003-b5a10a5fcb29.png)](http://arduino.cc/discord)'
     var alertMessage = '> **This gist was automatically created to keep the help channels in the Arduino discord server clean. If you have any suggestions or bugs to report, you can do so on our [GitHub](https://github.com/BluLightShow/arduino-bot/ "GitHub page") repository, or in our discord server. This project is run by volunteers so feel free to fork and commit your changes then open a pull request!**'
