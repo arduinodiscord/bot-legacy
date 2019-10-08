@@ -40,3 +40,8 @@ You may also use edit/ instead of feature/ if the feature only involves editing 
 8. Feel happy you contributed something! :)
 
 * Contributors can skip forking, provided that a new branch is made, whose naming convention follows GitFlow.
+
+### Implementation
+> After important changes or bug fixes have been released and merged into the master branch, a release will be created with a new version number. Once release has been created and new version is ready for deployment to the server, we will trigger a heroku redeployment to initiate the latest version of the master branch.
+
+*Thanks for showing interest in committing to our project! :)*
