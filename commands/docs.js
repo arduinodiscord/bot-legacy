@@ -5,15 +5,32 @@ const fs = require('fs')
 exports.run = (client, message, args) => {
   message.channel.startTyping()
   if (args.length === 0) {
-    var embed = new Discord.RichEmbed()
-      .setTitle('This command requires arguments!')
-      .setDescription(`Unsure what to input? Do ${prefix}help for more info!`)
+    var docs = [];
+    var preEmbed = new Discord.RichEmbed()
+      .setTitle('All Docs - Getting all docs...')
+      .setDescription(`Patience is bitter, but its fruit is sweet - Jean-Jacques Rousseau`)
       .setColor('#00b3b3')
       .setTimestamp(new Date())
       .setFooter(client.footer, icon)
       .setThumbnail()
+    message.channel.send(preEmbed).then(m => {
+      var replyEmbed = new Discord.RichEmbed()
+        .setTitle('All Docs - Use `!docs (doc alias)` to view any of the full docs.')
+        .setDescription(`**Here's a list of all existing docs on the Arduino Bot. Got one you'd like added? Contribute on [GitHub!](https://github.com/BluLightShow/arduino-bot)**`)
+        .setColor('#00b3b3')
+        .setTimestamp(new Date())
+        .setFooter(client.footer, icon)
+        .setThumbnail()
 
-    message.channel.send(embed)
+      fs.readdir('./docs', (err, files) => {
+        files.forEach(file => {
+          if (!file.endsWith('.json')) return
+          var actualFile = require('../docs/' + file)
+          replyEmbed.addField(`${actualFile.title} - "${actualFile.aliases[0]}"`, actualFile.description, true)
+        })
+        m.edit(replyEmbed)
+      })
+    })
     message.channel.stopTyping(true)
   } else {
     var preEmbed = new Discord.RichEmbed()

@@ -49,7 +49,6 @@ module.exports = (client, message) => {
         }
       }
     }
-    console.log(gistContent)
     message.channel.send(embed).then(m => {
       gists.create(gistObject).then(gist => {
         embed.setTitle('Code block pasted to github! Removing the original message...')
