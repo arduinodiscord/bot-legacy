@@ -10,8 +10,8 @@ const { prefix } = require('@conf/bot.json')
 module.exports = (client, message) => {
   if (message.author.bot) return
 
-  if ((message.channel.id === 699477883365621772) && (!message.content.startsWith('-agree'))) {
-    message.delete()
+  if ((message.channel.id === '699477883365621772') && (!message.content.startsWith('-agree'))) {
+    return message.delete()
   }
 
   if (message.channel.type === 'dm') {
