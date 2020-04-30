@@ -10,10 +10,14 @@ const { prefix } = require('@conf/bot.json')
 module.exports = (client, message) => {
   if (message.author.bot) return
 
+  if ((message.channel.id === 699477883365621772) && (!message.content.startsWith('-agree'))) {
+    message.delete()
+  }
+
   if (message.channel.type === 'dm') {
     var embed = new Discord.RichEmbed()
       .setTitle(`**Mod Mail is Coming Soon!**`)
-      .setDescription(`In the meantime, you can look for a moderator in <&420594746990526468>!`)
+      .setDescription(`In the meantime, you can look for a moderator in <&556594862502182914>!`)
       .setColor('#00b3b3')
       .setFooter(client.footer, icon)
       .setTimestamp(new Date())
@@ -28,7 +32,6 @@ module.exports = (client, message) => {
       .setAuthor(`${message.author.username + '#' + message.author.discriminator}`, message.author.avatarURL)
       .setTimestamp(new Date())
 
-    // I hate doing it this way but this is the only way I think works. It's fine for now.
     var headermessage = '## This Gist was created by the Arduino discord server bot.'
     var robot = '##### *This message was created automatically.*'
     var badges = '[![](https://img.shields.io/github/issues/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/issues) [![](https://img.shields.io/github/forks/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![](https://img.shields.io/github/stars/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![](https://img.shields.io/github/license/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/blob/master/LICENSE) [![](https://user-images.githubusercontent.com/7288322/34429152-141689f8-ecb9-11e7-8003-b5a10a5fcb29.png)](http://arduino.cc/discord)'
