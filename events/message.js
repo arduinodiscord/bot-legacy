@@ -24,16 +24,18 @@ module.exports = (client, message) => {
     return message.channel.send(embed)
   }
 
-  // if (message.attachments.filter(attachment => (attachment.name.endsWith(".ino") || (attachment.name.endsWith(".txt"))))) {
-  //   let attachmentEmbed = new Discord.RichEmbed()
-  //     .setTitle("We don't support file debugging!")
-  //     .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
-  //     .setColor('#00b3b3')
-  //     .setFooter(client.footer, icon)
-  //     .setTimestamp(new Date())
-  //   message.delete()
-  //   return message.channel.send(attachmentEmbed)
-  // }
+  message.attachments.each(attachment => {
+    if ((attachment.name.endsWith(".ino")) || (attachment.name.endsWith(".txt"))) {
+      let attachmentEmbed = new Discord.RichEmbed()
+        .setTitle("We don't support file debugging!")
+        .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
+        .setColor('#00b3b3')
+        .setFooter(client.footer, icon)
+        .setTimestamp(new Date())
+      message.channel.send(attachmentEmbed)
+      return message.delete()
+    }
+  })
 
   if ((message.content.startsWith('```') && message.content.endsWith('```')) && ((message.content.split('\n', 26).length >= 25) || (!message.content.includes('\n')))) {
     let embed = new Discord.RichEmbed()
