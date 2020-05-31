@@ -1,37 +1,34 @@
 {
   "name": "arduino-bot",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A bot to help the arduino community!",
-  "main": "main.js",
+  "main": "bot.js",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "enmap": "^4.3.3",
-    "gists": "^2.0.0",
-    "module-alias": "^2.1.0"
+    "discord-akairo": "^8.0.0",
+    "discord.js": "^12.2.0",
+    "gists": "^2.0.0"
   },
   "scripts": {
-    "start": "node main.js",
+    "start": "node bot.js",
     "lint": "standard"
   },
   "devDependencies": {
+    "eslint": "^7.1.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "standard": "^12.0.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BluLightShow/arduino-bot.git"
   },
-  "author": "BluLightShow & CeaserGaming",
-  "license": "UNLICENSED",
+  "author": "BluLightShow & Contributors",
+  "license": "GNU General Public License v3.0",
   "bugs": {
     "url": "https://github.com/BluLightShow/arduino-bot/issues"
   },
-  "homepage": "https://github.com/BluLightShow/arduino-bot#readme",
-  "_moduleAliases": {
-    "@root": ".",
-    "@command": "commands/",
-    "@event": "events/",
-    "@conf": "config/",
-    "@model": "model/",
-    "@images": "images/"
-  }
+  "homepage": "https://github.com/BluLightShow/arduino-bot#readme"
 }

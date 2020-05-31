@@ -1,16 +1,40 @@
-const Discord = require('discord.js')
-const { icon, prefix } = require('@conf/bot.json')
+const { Command } = require('discord-akairo')
+const config = require('../config.json')
+const fs = require('fs')
 
-exports.run = (client, message, args) => {
-  let embed = new Discord.RichEmbed()
-    .setTitle('Help!')
-    .setDescription('**Usage: [optional], (requires), this | or this, "literal text"**')
-    .setColor('#00b3b3')
-    .setTimestamp(new Date())
-    .setFooter(client.footer, icon)
-    .addField(`${prefix}help`, 'Displays this help page. I wonder how you got here? 🤔', true)
-    .addField(`${prefix}ping`, 'Play ping pong! Just kidding it gives you latency info. Unless... 🏓', true)
-    .addField(`${prefix}docs (doc name)`, 'Displays a doc page to provide information for commonly asked questions or topics.')
+class HelpCommand extends Command {
+  constructor () {
+    super('help', {
+      aliases: ['help', '?'],
+      channel: 'guild',
+      description: 'Displays the help page.'
+    })
+  }
 
-  message.channel.send(embed)
+  exec (message) {
+    var commands = []
+    fs.readdir('./commands', (err, files) => {
+      if (err) return console.error(err)
+      files.forEach(file => {
+        commands.push({
+          name: config.prefix + file.replace('.js', ''),
+          value: this.handler.findCommand(file.replace('.js', '')).description
+        })
+      })
+      sendEmbed()
+    })
+    const sendEmbed = () => {
+      const helpEmbed = this.client.util.embed({
+        title: 'Arduino Bot Help',
+        color: '#00b3b3',
+        timestamp: new Date(),
+        footer: {
+          text: config.footer
+        },
+        fields: commands
+      })
+      message.channel.send(helpEmbed)
+    }
+  }
 }
+module.exports = HelpCommand
