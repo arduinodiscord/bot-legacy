@@ -26,8 +26,7 @@ class MainClient extends AkairoClient {
   }
 }
 const client = new MainClient()
-// client.login(process.env.BOT_TOKEN)
-client.login('NjA3MDk0Nzk2MTc1MDE1OTM3.XtPrYg.s5U9oeHuQjL-i9AhDalXOSujf9E')
+client.login(process.env.BOT_TOKEN)
 client.options.fetchAllMembers = true
 client.options.presence = {
   status: 'online',
