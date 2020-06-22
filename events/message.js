@@ -25,7 +25,7 @@ module.exports = (client, message) => {
   }
 
   message.attachments.array().forEach(attachment => {
-    if ((attachment.filename.endsWith(".ino")) || (attachment.filename.endsWith(".txt"))) {
+    if ((attachment.filename.endsWith(".ino")) || (attachment.filename.endsWith(".txt")) || (attachment.filename.endsWith(".zip")) || (attachment.filename.endsWith(".rar"))) {
       let attachmentEmbed = new Discord.RichEmbed()
         .setTitle("We don't support file debugging!")
         .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
