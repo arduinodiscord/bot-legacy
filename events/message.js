@@ -10,10 +10,6 @@ const { prefix } = require('@conf/bot.json')
 module.exports = (client, message) => {
   if (message.author.bot) return
 
-  if ((message.channel.id === '699477883365621772') && (message.content !== '-agree')) {
-    return message.delete()
-  }
-
   if (message.channel.type === 'dm') {
     var embed = new Discord.RichEmbed()
       .setTitle(`**Mod Mail is Coming Soon!**`)
