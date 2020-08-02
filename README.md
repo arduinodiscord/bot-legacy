@@ -5,10 +5,4 @@ Welcome to the official [Arduino Discord](https://discord.gg/jQJFwW7) bot GitHub
 If you would like to contribute, check out [`contributing.md`](https://github.com/blulightshow/arduino-bot/blob/master/CONTRIBUTING.md) for details. More information will be out soon.
 
 # Roadmap
-- Update `README.md` ✔️
-- Lay out a detailed style guide ✔️
-- Update [`contributing.md`](https://github.com/blulightshow/arduino-bot/blob/master/CONTRIBUTING.md) ✔️
-- Add basic command logic ✔️
-- Add auto code block code paster ✔️
-- Add docs command to get help on a *growing list of topics* (we'd love your help!) [🟦🟦🟦🟦🟦🟦🟦🟦__]
-- More to come! If you've got a feature you think we should add, message the mods on the Arduino discord server, or you can message BluLightShow#0001 directly.
+**Update to discord.js v12 using a new command framework is on its way!** New roadmap coming soon...
