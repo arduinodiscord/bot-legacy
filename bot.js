@@ -21,15 +21,10 @@ class MainClient extends AkairoClient {
       prefix: config.prefix,
       defaultCooldown: 5000
     })
-    this.inhibitorHandler = new InhibitorHandler(this, {
-      directory: './inhibitors/'
-    })
     this.listenerHandler = new ListenerHandler(this, {
       directory: './listeners/'
     })
-    this.commandHandler.useInhibitorHandler(this.inhibitorHandler)
     this.commandHandler.useListenerHandler(this.listenerHandler)
-    this.inhibitorHandler.loadAll()
     this.listenerHandler.loadAll()
     this.commandHandler.loadAll()
   }
