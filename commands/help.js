@@ -1,9 +1,11 @@
 const { Command } = require('discord-akairo')
 const config = require('../config.json')
 const fs = require('fs')
+const { MessageEmbed } = require('discord.js')
+const { embed } = require('../bot')
 
 class HelpCommand extends Command {
-  constructor () {
+  constructor() {
     super('help', {
       aliases: ['help', '?'],
       channel: 'guild',
@@ -11,30 +13,15 @@ class HelpCommand extends Command {
     })
   }
 
-  exec (message) {
-    var commands = []
-    fs.readdir('./commands', (err, files) => {
-      if (err) return console.error(err)
-      files.forEach(file => {
-        commands.push({
-          name: config.prefix + file.replace('.js', ''),
-          value: this.handler.findCommand(file.replace('.js', '')).description
-        })
-      })
-      sendEmbed()
+  exec(message) {
+    var helpEmbed = new MessageEmbed(embed)
+      .setTitle('Arduino Bot Help')
+      .setTimestamp(new Date())
+
+    this.handler.modules.each(module => {
+      helpEmbed.addField(`${config.prefix}${module.aliases[0]}`, module.description, true)
     })
-    const sendEmbed = () => {
-      const helpEmbed = this.client.util.embed({
-        title: 'Arduino Bot Help',
-        color: '#00b3b3',
-        timestamp: new Date(),
-        footer: {
-          text: config.footer
-        },
-        fields: commands
-      })
-      message.channel.send(helpEmbed)
-    }
+    message.channel.send(helpEmbed)
   }
 }
 module.exports = HelpCommand

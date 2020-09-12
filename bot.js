@@ -1,6 +1,15 @@
 const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } = require('discord-akairo')
+const Discord = require('discord.js')
 const version = require('./package.json').version
 const config = require('./config.json')
+
+const embed = new Discord.MessageEmbed()
+.setFooter(config.embeds.footer)
+.setColor(config.embeds.color)
+
+module.exports = {
+  embed
+}
 
 class MainClient extends AkairoClient {
   constructor () {
