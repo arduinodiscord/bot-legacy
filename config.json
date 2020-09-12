@@ -1,0 +1,9 @@
+{
+  "prefix": "!",
+  "embeds": {
+    "footer":"Arduino Bot • Submit bugs on GitHub!",
+    "color": "17989e"
+  },
+  "pasteEmoji": "752975737400721549",
+  "helperRoleID": "452631962373455893"
+}

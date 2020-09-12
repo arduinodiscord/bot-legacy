@@ -1,13 +1,10 @@
 # Project Structure
-| File/Dir  | Module Alias | Description         |
-|-----------|--------------|---------------------|
-| .         | @root/       | Root directory      |
-| commands/ | @command/    | Command logic       |
-| config/   | @conf/       | Configuration files |
-| events/   | @event/      | Event logic         |
-| model/    | @model/      | N/A                 |
-| images/   | @images/     | Images directory
-| main.js   | N/A          | Bot entry point     |
+| File/Dir    | Description         |
+|-------------|---------------------|
+| commands/   | Command logic       |
+| events/     | Event logic         |
+| inhibitors/ | Inhibitor logic     |
+| bot.js      | Bot entry point     |
 
 # GitFlow
 This repository (is trying to) use GitFlow.
