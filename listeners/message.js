@@ -13,8 +13,9 @@ class MessageListener extends Listener {
 
   exec(message) {
     if (message.attachments.find(attachment => {
-      let name = attachment.name.toLowerCase()
-      return !name.endsWith('.png') && !name.endsWith('.jpg') && !name.endsWith('.gif') && !name.endsWith('.webp') && !name.endsWith('.tiff') && !name.endsWith('.heif') && !name.endsWith('.jpeg') && !name.endsWith('.svg') && !name.endsWith('.webm') && !name.endsWith('.mpg') && !name.endsWith('.mpeg') && !name.endsWith('.ogg') && !name.endsWith('.mp4') && !name.endsWith('.m4v') && !name.endsWith('.avi') && !name.endsWith('.mov') && !name.endsWith('.m4a') && !name.endsWith('.mp3') && !name.endsWith('.wav')
+      const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav']
+	    const extension = attachment.name.split('.').pop()
+	    return !allowedExtensions.includes(extension)
     })) {
       message.delete().then(() => {
         message.channel.send(
