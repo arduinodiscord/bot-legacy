@@ -25,7 +25,7 @@ class MessageListener extends Listener {
             .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
             .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
         )
-      })
+      }).catch(err => console.error(err))
     }
     if (message.content.includes('```') && message.content.match(/```/g).length >= 2) {
       message.react(config.pasteEmoji)

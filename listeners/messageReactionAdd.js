@@ -62,7 +62,7 @@ class MessageReactionAddListener extends Listener {
             .setAuthor(`Code by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .addField('Paste requested by:', user.tag, true)
             ).then(() => {
-              message.delete()
+              message.delete().catch(err => console.error(err))
             })
         })
       } else {

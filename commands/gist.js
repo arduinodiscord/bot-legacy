@@ -50,7 +50,7 @@ class GistCommand extends Command {
             .setAuthor(`Code by ${code.author.tag}`, code.author.avatarURL({ dynamic: true }))
             .addField('Paste requested by:', message.author.tag, true)
         ).then(() => {
-          code.delete()
+          code.delete().catch(err => console.error(err))
         })
       })
     }
