@@ -30,6 +30,11 @@ class MessageListener extends Listener {
     if (message.content.includes('```') && message.content.match(/```/g).length >= 2) {
       message.react(config.pasteEmoji)
     }
+    const autoCrosspostChannels = ['610239559376044043', '610239597317849248', '610253712824467473']
+    if (autoCrosspostChannels.includes(message.channel.id) && message.channel.type === 'news') {
+      // Only included in discord.js master branch as of now!
+      message.crosspost().catch(err => console.log('Could not crosspost a message! Probably hit ratelimit...'))
+    }
   }
 }
 module.exports = MessageListener
