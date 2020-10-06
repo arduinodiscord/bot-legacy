@@ -14,7 +14,7 @@ class MessageListener extends Listener {
   exec(message) {
     if (message.attachments.find(attachment => {
       const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav']
-	    const extension = attachment.name.split('.').pop()
+	    const extension = attachment.name.split('.').pop().toLowerCase()
 	    return !allowedExtensions.includes(extension)
     })) {
       message.delete().then(() => {
