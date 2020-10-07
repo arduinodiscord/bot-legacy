@@ -11,7 +11,7 @@ const gists = new Gists({
 class GistCommand extends Command {
   constructor() {
     super('gist', {
-      aliases: ['gist'],
+      aliases: ['gist', 'paste'],
       channel: 'guild',
       description: 'Command for helpers to paste any message to a gist.',
       args: [

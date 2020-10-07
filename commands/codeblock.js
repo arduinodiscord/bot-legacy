@@ -6,7 +6,7 @@ const { embed } = require('../bot')
 class CodeBlockCommand extends Command {
   constructor() {
     super('codeblock', {
-      aliases: ['codeblock'],
+      aliases: ['codeblock', 'codeblocks', 'code', 'block'],
       description: 'Explains how to post a code block in discord.'
     })
   }
