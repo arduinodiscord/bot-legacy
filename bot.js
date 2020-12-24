@@ -15,6 +15,15 @@ class MainClient extends AkairoClient {
   constructor () {
     super({
       ownerID: ['200616508328509442', '223217915673968641']
+    }, {
+      fetchAllMembers: true,
+      presence: {
+        status: 'online',
+        activity: {
+          name: `Arduino | ${version}`,
+          type: 'WATCHING'
+        }
+      }
     })
     this.commandHandler = new CommandHandler(this, {
       directory: './commands/',
@@ -31,11 +40,3 @@ class MainClient extends AkairoClient {
 }
 const client = new MainClient()
 client.login(process.env.BOT_TOKEN)
-client.options.fetchAllMembers = true
-client.options.presence = {
-  status: 'online',
-  activity: {
-    name: `Arduino | v${version}`,
-    type: 'WATCHING'
-  }
-}
