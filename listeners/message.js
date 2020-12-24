@@ -12,6 +12,7 @@ class MessageListener extends Listener {
   }
 
   exec(message) {
+    // File filter
     if (message.attachments.find(attachment => {
       const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav']
 	    const extension = attachment.name.split('.').pop().toLowerCase()
@@ -27,9 +28,33 @@ class MessageListener extends Listener {
         )
       }).catch(err => console.error(err))
     }
+
+    // Initial reaction for code block pastes
     if (message.content.includes('```') && message.content.match(/```/g).length >= 2) {
       message.react(config.pasteEmoji)
     }
+
+    // Message link flattening
+    const messageLinkMatchArray = message.content.match(/https?:\/\/(canary.)?discord\.com\/channels\/\d{18}\/\d{18}\/\d{18}/gm)
+    if (messageLinkMatchArray) {
+      messageLinkMatchArray.forEach(link => {
+        let linkArray = link.split('/')
+        linkArray.splice(0, 4)
+        if (linkArray[0] === message.guild.id) {
+          message.guild.channels.resolve(linkArray[1]).messages.fetch(linkArray[2]).then(msg => {
+            message.channel.send(
+              new MessageEmbed(embed)
+              .setTitle(msg.content)
+              .setAuthor(msg.author.tag + ' said:', msg.author.avatarURL({ dynamic: true }))
+              .setFooter(`Message link sent by ${message.author.tag}, click original for context.`)
+            )
+          }).catch(err => {
+            console.error(err)
+          })
+        }
+      })
+    }
+
   }
 }
 module.exports = MessageListener
