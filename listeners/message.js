@@ -54,7 +54,27 @@ class MessageListener extends Listener {
         }
       })
     }
-
+    
+    // Auto-crosspost feed channels
+    if ((message.channel.id === '610239559376044043') || (message.channel.id === '610239597317849248') || (message.channel.id === '610253712824467473')) {
+      var crosspostLog = message.guild.channels.resolve('801316586371416074')
+      message.crosspost().then(() => {
+        crosspostLog.send(
+          new MessageEmbed(embed)
+          .setTimestamp(new Date())
+          .setTitle(`Successfully auto-crossposted in #${message.channel.name}`)
+          )
+      }).catch(err => {
+        console.error(err)
+        crosspostLog.send(
+          new MessageEmbed(embed)
+          .setTimestamp(new Date())
+          .setTitle(`Failed to auto-crosspost in #${message.channel.name}`)
+          .setDescription('This is likely due to ratelimiting. Check production logs for more information.')
+        )
+      })
+    }
   }
 }
+
 module.exports = MessageListener
