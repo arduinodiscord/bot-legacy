@@ -1,11 +1,11 @@
 {
   "name": "arduino-bot",
-  "version": "v0.1.1",
+  "version": "v0.1.2",
   "description": "A bot to help the arduino community!",
   "main": "bot.js",
   "dependencies": {
-    "discord-akairo": "^8.0.0",
-    "discord.js": "^12.2.0",
+    "discord-akairo": "^8.1.0",
+    "discord.js": "^12.5.1",
     "gists": "^2.0.0"
   },
   "scripts": {
