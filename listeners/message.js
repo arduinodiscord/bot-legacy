@@ -14,7 +14,7 @@ class MessageListener extends Listener {
   exec(message) {
     // File filter
     if (message.attachments.find(attachment => {
-      const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav']
+      const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav', 'pdf']
 	    const extension = attachment.name.split('.').pop().toLowerCase()
 	    return (!allowedExtensions.includes(extension)) && (!message.member.roles.cache.find(role => role.id === '451152561735467018'))
     })) {
@@ -54,7 +54,27 @@ class MessageListener extends Listener {
         }
       })
     }
-
+    
+    // Auto-crosspost feed channels
+    if ((message.channel.id === '610239559376044043') || (message.channel.id === '610239597317849248') || (message.channel.id === '610253712824467473')) {
+      var crosspostLog = message.guild.channels.resolve('801316586371416074')
+      message.crosspost().then(() => {
+        crosspostLog.send(
+          new MessageEmbed(embed)
+          .setTimestamp(new Date())
+          .setTitle(`Successfully auto-crossposted in #${message.channel.name}`)
+          )
+      }).catch(err => {
+        console.error(err)
+        crosspostLog.send(
+          new MessageEmbed(embed)
+          .setTimestamp(new Date())
+          .setTitle(`Failed to auto-crosspost in #${message.channel.name}`)
+          .setDescription('This is likely due to ratelimiting. Check production logs for more information.')
+        )
+      })
+    }
   }
 }
+
 module.exports = MessageListener
