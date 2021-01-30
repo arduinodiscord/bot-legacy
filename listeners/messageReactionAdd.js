@@ -21,7 +21,7 @@ class MessageReactionAddListener extends Listener {
 
 
     if (reaction.emoji.id === config.pasteEmoji && reaction.me) {
-      if (user.id === reaction.message.author.id || reaction.message.guild.members.resolve(user.id).roles.cache.find(role => role.id === config.helperRoleID)) {
+      if (user.id === reaction.message.author.id || reaction.message.guild.members.resolve(user.id).roles.cache.find(role => role.id === config.roles.helper)) {
         let message = reaction.message
         let content = message.content
 

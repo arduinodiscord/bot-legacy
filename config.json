@@ -1,9 +1,16 @@
 {
+  "token": "",
+  "debug": false,
   "prefix": "!",
+  "staffPrefix": "=",
   "embeds": {
     "footer":"Arduino Bot • Submit bugs on GitHub!",
     "color": "17989e"
   },
   "pasteEmoji": "752975737400721549",
-  "helperRoleID": "452631962373455893"
+  "roles": {
+    "helper": "452631962373455893",
+    "staff": "451380797782360069"
+  },
+  "owners": ["200616508328509442", "223217915673968641"]
 }
