@@ -16,7 +16,7 @@ class CodeBlockCommand extends Command {
       new MessageEmbed(embed)
       .setTimestamp(new Date())
       .setTitle('How to Send Code Blocks')
-      .setImage('https://cdn.discordapp.com/attachments/747642578668748800/754151197425795202/unknown.png')
+      .setImage('https://cdn.discordapp.com/attachments/420594746990526468/812680081808818236/CodeBlock.png')
       .setDescription('Surround the code in three backticks. If using new lines, a file extension can be placed directly after the first 3 backticks to highlight in that language. An example is shown below, highlighting code in C++.')
     )
   }
