@@ -16,8 +16,10 @@ class CodeBlockCommand extends Command {
       new MessageEmbed(embed)
       .setTimestamp(new Date())
       .setTitle('How to Send Code Blocks')
-      .setImage('https://cdn.discordapp.com/attachments/747642578668748800/754151197425795202/unknown.png')
-      .setDescription('Surround the code in three backticks. If using new lines, a file extension can be placed directly after the first 3 backticks to highlight in that language. An example is shown below, highlighting code in C++.')
+      .setImage('https://cdn.discordapp.com/attachments/812926313580068877/812931003772567552/CodeBlock.png')
+      .setDescription('Surround the code in three backticks. If using new lines, a file extension can be placed directly after the first 3 backticks ( ``` ) to highlight in that language. An example is shown below, highlighting code in C++ (Arduino Syntax).')
+      .addFields(
+        { name: 'How to find Backticks on your keyboard !', value: 'If you dont know where is the backtick key ( ` ) on your keyboard, then follow this link ... https://tinyurl.com/find-backtick . This will guide you.' },      )
     )
   }
 }
