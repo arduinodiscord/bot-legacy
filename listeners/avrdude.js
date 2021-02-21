@@ -10,7 +10,7 @@ class MessageListener extends Listener {
       event: 'message'
     })
   }
-    // Initial reaction for code block pastes
+    // Initial reaction for avr replays
     if (message.content.includes('avr')) {
       message.channel.send(
         new MessageEmbed(embed)
