@@ -21,4 +21,4 @@ class CodeBlockCommand extends Command {
     )
   }
 }
-module.exports = 
+module.exports = CodeBlockCommand
