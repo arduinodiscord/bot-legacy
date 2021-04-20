@@ -1,0 +1,47 @@
+{
+  "title": "Solving Avrdude Communication Error (try in order)",
+  "aliases": ["avrdude"],
+  "fields": [
+    {
+      "name": "1.",
+      "value": "If serial monitor is open, close it."
+    },
+    {
+      "name": "2.",
+      "value": "Try changing the port you are connecting and selecting it from software, you can find it in tools -> port."
+    },
+    {
+      "name": "3.",
+      "value": "Check if the power led on your board lights up. If it's on unplug and re-plug your board. Now check for blinking leds. If only power or no led lights up ask for further assistance. (not for all boards)"
+    },
+    {
+      "name": "4.",
+      "value": "Try using the old bootloader. Go to tools -> processor and select 328p(old bootloader). If you are not on Nano, you can skip this step and try it after doing option 5. In that case select your board as nano before you try(make sure you have a 328p chip board like uno)."
+    },
+    {
+      "name": "5.",
+      "value": "Try pressing reset button on arduino, if when you reset the onboard led doesn't blink, you probably have a broken bootloader, you can check [this tutorial](https://www.arduino.cc/en/Hacking/Bootloader?from=Tutorial.Bootloader) for how to burn bootloader."
+    },
+    {
+      "name": "6.",
+      "value": "If there's anything connected to Tx and Rx pins, try removing everything attached to them them."
+    },
+    {
+      "name": "7.",
+      "value": "This might just be a communication problem or your computer getting confused so try restarting your computer."
+    },
+    {
+      "name": "8.",
+      "value": "Check your drivers, sometimes just reinstalling them works. If you are using a clone board you might have CH340 communication chip, which isn't supported for Uno. You can check that by looking at your board and checking a chip's name (not the big one). [Click here](https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all) for installing CH340 chip. If you don't have CH340 chip you can try installing drivers from Windows device manager."
+    },
+    {
+      "name": "9.",
+      "value": "You can try checking [this website](https://learn.sparkfun.com/tutorials/how-to-install-ftdi-drivers/windows---in-depth) for your drivers."
+    },
+    {
+      "name": "10.",
+      "value": "Last thing might be Arduino IDE's problem. If you think that's the case try reinstalling Arduino IDE."
+    }
+  ],
+  "image": ""
+}

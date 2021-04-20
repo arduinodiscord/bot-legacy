@@ -24,7 +24,7 @@ class GistCommand extends Command {
   }
 
   exec(message, args) {
-    if (args.message && message.member.roles.cache.find(role => role.id === config.helperRoleID)) {
+    if (args.message) {
       var code = args.message
       gists.create({
         "description": `Code by ${code.author.tag} - ${new Date()}`,
