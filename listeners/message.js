@@ -31,7 +31,7 @@ class MessageListener extends Listener {
 
     // Initial reaction for code block pastes
     if (message.content.includes('```') && message.content.match(/```/g).length >= 2) {
-      message.react(config.pasteEmoji)
+      message.react(config.pasteEmoji).catch(err => console.error(err))
     }
 
     // Message link flattening

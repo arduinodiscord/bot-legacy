@@ -11,6 +11,7 @@ class ReadyListener extends Listener {
 
   exec() {
     console.log(`Arduino Bot ${version} ready for battle!`)
+    console.log(`Logged into account: ${this.client.user.tag}`)
   }
 }
 module.exports = ReadyListener
