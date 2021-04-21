@@ -21,7 +21,7 @@ class MainClient extends AkairoClient {
       presence: {
         status: 'online',
         activity: {
-          name: `Arduino | ${version}`,
+          name: `!help | ${version}`,
           type: 'WATCHING'
         }
       }
