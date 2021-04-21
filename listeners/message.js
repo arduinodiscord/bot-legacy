@@ -26,7 +26,10 @@ class MessageListener extends Listener {
             .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
             .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
         )
-      }).catch(err => console.error(err))
+      }).catch(err => {
+        console.log("Error occurred after deleting banned file attachment type.")
+        console.error(err)
+      })
     }
 
     // Initial reaction for code block pastes
