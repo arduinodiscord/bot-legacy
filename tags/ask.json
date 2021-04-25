@@ -3,8 +3,8 @@
     "aliases": ["ask", "justask"],
     "fields": [
       {
-        "name": "describe what your code/hardware does and what you want it to do instead. sharing is caring! share your code, use !code to learn how.",
-        "value": "keep in mind: no one here is paid to help you, so the least you can do is to refine your question in a proper language."
+        "name": "Describe what your code/hardware does and what you want it to do instead. Sharing is caring! Share your code, use !code to learn how.",
+        "value": "Keep in mind: no one here is paid to help you, so the least you can do is to refine your question in a proper language."
       }
     ],
     "image": ""
