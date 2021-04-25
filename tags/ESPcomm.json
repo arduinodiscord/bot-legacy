@@ -1,5 +1,5 @@
 {
-  "title": "Solving your ESP boards communication  errors (Try these in order)",
+  "title": "Solving your ESP boards communication errors (Try these in order)",
   "aliases": [
     "espcomm",
     "ESPcomm",
@@ -25,7 +25,7 @@
     },
     {
       "name": "5.",
-      "value": "make sure there is nothing connected to the TX and RX pins"
+      "value": "make sure there is nothing connected to the TX and RX pins."
     },
     {
       "name": "6.",
