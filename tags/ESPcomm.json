@@ -1,0 +1,48 @@
+{
+  "title": "Solving your ESP boards communication  errors (Try these in order)",
+  "aliases": [
+    "espcomm",
+    "ESPcomm",
+    "ESPcommerror",
+    "espcommerror"
+  ],
+  "fields": [
+    {
+      "name": "1.",
+      "value": "check if the correct COM port is selected."
+    },
+    {
+      "name": "2.",
+      "value": "check if the correct board is selected."
+    },
+    {
+      "name": "3.",
+      "value": "If serial monitor is open, close it."
+    },
+    {
+      "name": "4.",
+      "value": "if your serial monitor is not working or displaying gibberish, try setting it to the correct baud rate. most examples use 115200 baud."
+    },
+    {
+      "name": "5.",
+      "value": "make sure there is nothing connected to the TX and RX pins"
+    },
+    {
+      "name": "6.",
+      "value": "hold down the BOOT/FLASH button before uploading."
+    },
+    {
+      "name": "7.",
+      "value": "check if there are any wiring errors or loose connections (note that ESP32 CAM and FTDI TX and RX pins must be cross connected (TX goes to RX))."
+    },
+    {
+      "name": "8.",
+      "value": "If you don’t see your ESP’s COM port available, this often means you don’t have the USB drivers installed. Take a closer look at the USB chip and check its name. Go to Google and search for your particular chip to find the drivers and install them in your operating system. if you have the CP2102 chip, here are the [official drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)."
+    },
+    {
+      "name": "still not fixed?",
+      "value": "check out these troubleshooting guides for your respective boards:- [ESP32](https://randomnerdtutorials.com/esp32-troubleshooting-guide/#:~:text=When%20you%20try%20to%20upload,button%20in%20your%20ESP32%20board), [ESP32 CAM](https://randomnerdtutorials.com/esp32-cam-troubleshooting-guide/#:~:text=If%20you%20get%20this%20exact,times%2C%20might%20solve%20the%20issue.) and [ESP8266](https://randomnerdtutorials.com/esp8266-troubleshooting-guide/)"
+    }
+  ],
+  "image": ""
+}
