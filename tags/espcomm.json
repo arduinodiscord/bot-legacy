@@ -6,6 +6,7 @@
     "ESPcommerror",
     "espcommerror"
   ],
+  "directAliases": ["espcomm"],
   "fields": [
     {
       "name": "1.",

@@ -6,6 +6,7 @@
     "libmissing",
     "librarymissing"
   ],
+  "directAliases": ["liberror"],
   "fields": [
     {
       "name": "1. Is your Library properly installed?",
