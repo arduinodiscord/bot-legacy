@@ -2,7 +2,11 @@
   "token": "",
   "debug": false,
   "prefix": "!",
+  "guild": "420594746990526466",
   "staffPrefix": "=",
+  "channels": {
+    "joinLeaveLog": "746375238845071451"
+  },
   "embeds": {
     "footer":"Arduino Bot • Submit bugs on GitHub!",
     "color": "17989e"

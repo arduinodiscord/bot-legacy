@@ -1,6 +1,7 @@
 {
-  "title": "Solving Avrdude Communication Error (try in order)",
-  "aliases": ["avrdude"],
+  "title": "Solving Avrdude Communication Error (Try these in order)",
+  "aliases": ["avrdude", "stk500"],
+  "directAliases": ["avrdude"],
   "fields": [
     {
       "name": "1.",
@@ -16,7 +17,7 @@
     },
     {
       "name": "4.",
-      "value": "Try using the old bootloader. Go to tools -> processor and select 328p(old bootloader). If you are not on Nano, you can skip this step and try it after doing option 5. In that case select your board as nano before you try(make sure you have a 328p chip board like uno)."
+      "value": "If you have a Nano or other 328p based board try using the old bootloader. Go to tools -> processor and select 328p(old bootloader). If your board doesn't have a 328p chip, you can skip this step."
     },
     {
       "name": "5.",
@@ -24,7 +25,7 @@
     },
     {
       "name": "6.",
-      "value": "If there's anything connected to Tx and Rx pins, try removing everything attached to them them."
+      "value": "If there's anything connected to Tx and Rx pins, try removing everything attached to them."
     },
     {
       "name": "7.",

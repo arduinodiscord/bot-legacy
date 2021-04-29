@@ -21,7 +21,7 @@ class MainClient extends AkairoClient {
       presence: {
         status: 'online',
         activity: {
-          name: `Arduino | ${version}`,
+          name: `!help | ${version}`,
           type: 'WATCHING'
         }
       }
@@ -29,12 +29,14 @@ class MainClient extends AkairoClient {
     this.commandHandler = new CommandHandler(this, {
       directory: './commands/',
       prefix: config.prefix,
-      defaultCooldown: 5000
+      defaultCooldown: 5000,
+      commandUtil: true
     })
     this.staffComandHandler = new CommandHandler(this, {
       directory: './staff_commands/',
       prefix: config.staffPrefix,
-      defaultCooldown: 1000
+      defaultCooldown: 1000,
+      commandUtil: true
     })
 
     this.staffInhibitorHandler = new InhibitorHandler(this, {
