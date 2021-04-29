@@ -33,22 +33,34 @@ class TagCommand extends Command {
     // var usedAlias = message.util.parsed.alias -- This should work but it's not so I'm writing a workaround
     var usedAlias = message.content.replace(config.prefix, '').split(' ')[0]
     if (usedAlias === ('tag' || 'qr' || 'res')) {
-      files.forEach(file => {
-        if (file.endsWith('.json') && (file !== 'template.json')) {
-          var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
-          if (tagFile.aliases.includes(args.tagAlias)) {
-            var tagEmbed = new MessageEmbed(embed)
-              .setTitle(tagFile.title)
-  
-            if (tagFile.image) tagEmbed.setImage(tagFile.image)
-            tagFile.fields.forEach(field => {
-              tagEmbed.addField(field.name, field.value, false)
-            })
-  
-            message.channel.send(tagEmbed)
+      if (!args.tagAlias) {
+        var tagEmbed = new MessageEmbed(embed)
+        .setTitle("List of available tags")
+        files.forEach(file => {
+          if (file.endsWith('.json') && (file !== 'template.json')) {
+            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
+            tagEmbed.addField(tagFile.directAliases[0], tagFile.title)
           }
-        }
-      })
+        })
+        message.channel.send(tagEmbed)
+      } else {
+        files.forEach(file => {
+          if (file.endsWith('.json') && (file !== 'template.json')) {
+            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
+            if (tagFile.aliases.includes(args.tagAlias)) {
+              var tagEmbed = new MessageEmbed(embed)
+                .setTitle(tagFile.title)
+
+              if (tagFile.image) tagEmbed.setImage(tagFile.image)
+              tagFile.fields.forEach(field => {
+                tagEmbed.addField(field.name, field.value, false)
+              })
+
+              return message.channel.send(tagEmbed)
+            }
+          }
+        })
+      }
     } else {
       files.forEach(file => {
         if (file.endsWith('.json') && (file !== 'template.json')) {
@@ -56,13 +68,13 @@ class TagCommand extends Command {
           if (tagFile.directAliases.includes(usedAlias)) {
             var tagEmbed = new MessageEmbed(embed)
               .setTitle(tagFile.title)
-  
+
             if (tagFile.image) tagEmbed.setImage(tagFile.image)
             tagFile.fields.forEach(field => {
               tagEmbed.addField(field.name, field.value, false)
             })
-  
-            message.channel.send(tagEmbed)
+
+            return message.channel.send(tagEmbed)
           }
         }
       })
