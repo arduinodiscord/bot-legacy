@@ -2,7 +2,6 @@ const { Listener } = require('discord-akairo')
 const { version } = require('../package.json')
 const config = require('../config.json')
 const cache = require('../utils/cache')
-const cache = require('../utils/cache')
 
 class InviteCreateListener extends Listener {
   constructor() {
