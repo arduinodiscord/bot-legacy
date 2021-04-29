@@ -4,6 +4,7 @@ const cache = require('../utils/cache')
 const config = require('../config.json')
 const { MessageEmbed } = require('discord.js')
 const { embed } = require('../bot')
+const { DateTime } = require('luxon')
 
 class GuildMemberAddListener extends Listener {
   constructor() {
@@ -27,12 +28,13 @@ class GuildMemberAddListener extends Listener {
         .setDescription(`#${member.guild.memberCount} to join`)
 
       if (inviteSource) {
+        cache.setInviteCache(inviteSource.code, inviteSource.uses)
         logChannel.send(
-          inviteEmbed.addField(`Joined with invite code ${inviteSource.code} created by ${inviteSource.inviter.tag}`, `Account created ${member.user.createdAt}`)
+          inviteEmbed.addField(`Joined with invite code ${inviteSource.code} created by ${inviteSource.inviter.tag}`, `Account created ${DateTime.fromJSDate(member.user.createdAt).toLocaleString()}`)
         )
       } else {
         logChannel.send(
-          inviteEmbed.addField(`Joined with unknown invite code. Likely through Server Discovery.`, `Account created ${member.user.createdAt}`)
+          inviteEmbed.addField(`Joined with unknown invite code. Likely through Server Discovery.`, `Account created ${DateTime.fromJSDate(member.user.createdAt).toLocaleString()}`)
         )
       }
     })
