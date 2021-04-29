@@ -2,8 +2,7 @@
   "token": "",
   "debug": false,
   "prefix": "!",
-  "guild": "804881891609673738",
-  "real_guild": "420594746990526466",
+  "guild": "420594746990526466",
   "staffPrefix": "=",
   "channels": {
     "joinLeaveLog": "746375238845071451"
