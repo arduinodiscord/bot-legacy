@@ -1,5 +1,5 @@
 {
-  "title": "Solving AVRDUDE Communication Errors (Try these in order)",
+  "title": "Solving AVRDUDE communication errors (Try these in order)",
   "aliases": ["avrdude", "stk500"],
   "fields": [
     {
