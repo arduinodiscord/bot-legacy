@@ -6,6 +6,7 @@
     "libmissing",
     "librarymissing"
   ],
+  "directAliases": ["liberror"],
   "fields": [
     {
       "name": "1. Is your Library installed?",
@@ -16,7 +17,7 @@
       "value": "check for any capitalization errors as well!"
     },
     {
-      "name": "still cant fix it?",
+      "name": "Still can't fix it?",
       "value": "check out [this arduino-forum post](https://forum.arduino.cc/t/no-headers-files-h-found/596090#:~:text=This%20might%20be%20result%20from,one%20of%20the%20libraries%20folders.) for more assistance."
     }
   ],

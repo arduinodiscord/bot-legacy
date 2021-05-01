@@ -1,6 +1,7 @@
 {
   "title": "Solving AVRDUDE Communication Errors (Try these in order)",
   "aliases": ["avrdude", "stk500"],
+  "directAliases": ["avrdude"],
   "fields": [
     {
       "name": "1. Is your Serial monitor open?",
