@@ -1,6 +1,7 @@
 {
     "title": "Dont ask to ask - Just ask!",
     "aliases": ["ask", "justask"],
+    "directAliases": ["ask"],
     "fields": [
       {
         "name": "Describe what your code/hardware does and what you want it to do instead. Sharing is caring! Share your code, use !code to learn how.",
