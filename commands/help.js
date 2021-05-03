@@ -19,7 +19,7 @@ class HelpCommand extends Command {
       .setTimestamp(new Date())
 
     this.handler.modules.each(module => {
-      helpEmbed.addField(`${config.prefix}${module.aliases[0]}`, module.description, true)
+      helpEmbed.addField(`${config.prefix}${module.id}`, module.description, true)
     })
     message.channel.send(helpEmbed)
   }

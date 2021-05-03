@@ -1,8 +1,7 @@
 # Arduino Bot
-Welcome to the official [Arduino Discord](https://discord.gg/jQJFwW7) bot GitHub Repo! This is an open source project involving the community to build a Discord bot that makes helping each other out easier!
+[![Issues Badge](https://img.shields.io/github/issues/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/issues) [![Forks Badge](https://img.shields.io/github/forks/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![Stars Badge](https://img.shields.io/github/stars/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![License Badge](https://img.shields.io/github/license/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/blob/master/LICENSE) [![Discord Badge](https://img.shields.io/discord/420594746990526466?color=%237289DA&label=%20Discord%20&logo=discord&logoColor=%23FFFFFF)](https://arduino.cc/discord)
+
+Arduino Bot is a utility Discord bot built for use on the official [Arduino Discord Server](https://arduino.cc/discord "Arduino Discord Server"). This is an open source project involving the community to build a Discord bot that makes helping others easier.
 
 # Contributing
-If you would like to contribute, check out [`contributing.md`](https://github.com/blulightshow/arduino-bot/blob/master/CONTRIBUTING.md) for details. More information will be out soon.
-
-# Roadmap
-**Update to discord.js v12 using a new command framework is released!** New roadmap coming soon...
+If you're interested in contributing, please see [`contributing.md`](https://github.com/BluLightShow/arduino-bot/blob/main/CONTRIBUTING.md)

@@ -2,6 +2,7 @@ const { Command } = require('discord-akairo')
 const { MessageEmbed } = require('discord.js')
 const { embed } = require('../bot')
 const { version } = require('../package.json')
+const { Duration } = require('luxon')
 
 var packLock
 try {
@@ -9,7 +10,6 @@ try {
 } catch (err) {
   packLock = undefined
 }
-
 class AboutCommand extends Command {
   constructor() {
     super('about', {
@@ -22,12 +22,16 @@ class AboutCommand extends Command {
     const about = new MessageEmbed(embed)
     .setTimestamp(new Date())
     .setTitle('About Arduino Bot')
-    .addField('Bot Version', version)
-    .addField('Node Version', process.version)
+    .addField('Bot Version', version, true)
+    .addField('Node Version', process.version, true)
 
     if (packLock) {
-      about.addField('DiscordJS Version', 'v' + packLock.dependencies['discord.js'].version)
+      about.addField('DiscordJS Version', 'v' + packLock.dependencies['discord.js'].version, true)
+      about.addField('Akairo Version', 'v' + packLock.dependencies['discord-akairo'].version, true)
     }
+    about.addField('Contributing', '[GitHub](https://github.com/BluLightShow/arduino-bot)', true)
+    var clientDuration = Duration.fromMillis(this.client.uptime)
+    about.addField('Uptime', `${clientDuration.minutes} minutes, ${clientDuration.hours} hours, ${clientDuration.days} days`)
     message.channel.send(about)
   }
 }
