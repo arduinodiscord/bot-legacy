@@ -40,8 +40,12 @@
       "value": "Check your drivers, sometimes just reinstalling them works. If you are using a clone board, you might have the CH340 USB-Serial chip, which isn't supported by default. You can check by looking at your board and checking the SMD USB-Serial chip's name (not the big one). [Click here](https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all) to learn how to install CH340 Drivers. If you don't have the CH340 chip we recommend googling the USB-Serial chip that your board uses."
     },
     {
-      "name": "10. Is this a problem with your IDE?",
-      "value": "This could also be your IDE's problem. If you think that's the case, try reinstalling the IDE."
+      "name": "10. Is your cable faulty or capable of sending data?",
+      "value": "some USB cables arent capable of transferring data, and some may be faulty, so make sure to try a different one to see if it works!"
+    },
+    {
+      "name": "11. Is this a problem with your IDE?",
+      "value": "If you think that's the case, try reinstalling the IDE."
     }
   ],
   "image": ""
