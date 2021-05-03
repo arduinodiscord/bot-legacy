@@ -9,36 +9,36 @@
   "directAliases": ["espcomm"],
   "fields": [
     {
-      "name": "1.",
-      "value": "Check if the correct COM port is selected."
+      "name": "1. Is your Serial monitor open?",
+      "value": "If it is, close it. This allows your IDE to upload sketches without conflicts with the Serial Monitor."
     },
     {
-      "name": "2.",
-      "value": "Check if the correct board is selected."
+      "name": "2. Have you selected the right port in your IDE? ",
+      "value": "You could have selected something that is **not** your Arduino. Change the port in the Arduino IDE by going into Tools -> Port."
     },
     {
-      "name": "3.",
-      "value": "If serial monitor is open, close it."
+      "name": "3. Have you selected the right board in your IDE?",
+      "value": "You need to select the right board and model."
     },
     {
-      "name": "4.",
-      "value": "If your serial monitor is not working or displaying gibberish, try setting it to the correct baud rate. most examples use 115200 baud."
+      "name": "4. Is your Serial monitor showing gibberish?",
+      "value": "Try setting it to the correct baud rate (At the bottom right corner of the Serial monitor). Most examples use 115200 baud."
     },
     {
-      "name": "5.",
-      "value": "Make sure there is nothing connected to the TX and RX pins."
+      "name": "5. Is anything connected to your Tx and Rx pins?",
+      "value": "If there is, try removing everything connected to them."
     },
     {
-      "name": "6.",
-      "value": "Hold down the BOOT/FLASH button before uploading."
+      "name": "6. Have you tried holding down the BOOT/FLASH button?",
+      "value": "Try Holding down the BOOT/FLASH button before uploading."
     },
     {
-      "name": "7.",
-      "value": "Check if there are any wiring errors or loose connections (note that ESP32 CAM and FTDI TX and RX pins must be cross connected (TX goes to RX))."
+      "name": "7. Are there any problems with your wiring?",
+      "value": "Check if there are any wiring errors or loose connections (Note:- if you are using an FTDI Board, FTDI TX and RX pins must be cross-connected with the ESP Tx and Rx pins(TX goes to RX))."
     },
     {
-      "name": "8.",
-      "value": "If you don’t see your ESP’s COM port available, this often means you don’t have the USB drivers installed. Take a closer look at the USB chip and check its name. Go to Google and search for your particular chip to find the drivers and install them in your operating system. If you have the CP2102 chip, here are the [official drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)."
+      "name": "8. Cant see your ESP's COM Port?",
+      "value": "This often means you don’t have the USB drivers installed. Take a closer look at the USB chip and check its name, Go to Google and search for your particular chip to find the drivers and install them in your operating system. If you have the CP2102 chip, here are the [official drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)."
     },
     {
       "name": "Still not fixed?",
