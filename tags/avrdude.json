@@ -40,12 +40,12 @@
       "value": "If you are running Linux, try checking which groups you belong by using the `groups` command, then look at which group you need to be in with `ls -l /dev/ttyACM*`, `ls -l /dev/S*` or `ls -ls /dev/USB*` (replace the `*` with your port number), then use this command:- `sudo usermod -a -G dialout <username>` and add your user to the necessary groups."
     },
     {
-      "name": "10. Are your drivers properly installed?",
+      "name": "10. Are your drivers installed?",
       "value": "Check your drivers, sometimes just reinstalling them works. If you are using a clone board, you might have the CH340 USB-Serial chip, which isn't supported by default. You can check by looking at your board and checking the SMD USB-Serial chip's name (not the big one). [Click here](https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all) to learn how to install CH340 Drivers. If you have an FTDI chip, [This website](https://learn.sparkfun.com/tutorials/how-to-install-ftdi-drivers/all) will show you how to install their drivers. If you don't have either we recommend googling the USB-Serial chip that your board uses."
     },
     {
       "name": "11. Is your cable faulty or capable of sending data?",
-      "value": "some USB cables arent capable of transferring data, and some may be faulty, so make sure to try a different one to see if it works!"
+      "value": "Some USB cables arent capable of transferring data, and some may be faulty, so make sure to try a different one to see if it works!"
     },
     {
       "name": "12. Is this a problem with your IDE?",
