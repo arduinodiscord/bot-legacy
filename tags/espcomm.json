@@ -14,7 +14,7 @@
     },
     {
       "name": "2. Have you selected the right port in your IDE? ",
-      "value": "You could have selected something that is **not** your Arduino. Change the port in the Arduino IDE by going into Tools -> Port."
+      "value": "You could have selected something that is **not** your ESP. Change the port in the Arduino IDE by going into Tools -> Port."
     },
     {
       "name": "3. Have you selected the right board in your IDE?",
