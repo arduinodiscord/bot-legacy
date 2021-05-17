@@ -22,8 +22,8 @@ class MessageListener extends Listener {
         message.channel.send(
           new MessageEmbed(embed)
             .setTimestamp(new Date())
-            .setTitle("We don't support file debugging!")
-            .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
+            .setTitle("Sorry, your code was too long for discord. Please use website link below to paste your code.")
+            .setDescription('Please paste your code on a [website](https://pastebin.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
             .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
         )
       }).catch(err => {
