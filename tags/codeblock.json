@@ -1,12 +1,11 @@
 {
-  "title": "How to Send Code Blocks",
+  "title": "How to Send Code:-",
   "aliases": ["codeblock", "code", "codeblocks", "block"],
   "directAliases": ["codeblock", "code"],
   "fields": [
     {
-      "name": "Surround the code in three backticks",
-      "value": "If using new lines, a file extension can be placed directly after the first 3 backticks to highlight in that language. An example is shown below, highlighting code in arduino. The backtick key is typically found to the left of the 1 key."
+      "name": "Post the file containing your code directly.",
+      "value": "click on the upload button (the big + button) to the left of your message bar, then, select and upload your files **carefully** so you can seek help with your code."
     }
-  ],
-  "image": "https://this-u.lol/09kbow.png"
+  ]
 }

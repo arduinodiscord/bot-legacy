@@ -14,7 +14,7 @@ class MessageListener extends Listener {
   exec(message) {
     // File filter
     if (message.attachments.find(attachment => {
-      const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav', 'pdf']
+      const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav', 'pdf', 'txt', 'ino', 'cpp', 'h', 'py', 'js']
       const extension = attachment.name.split('.').pop().toLowerCase()
       return (!allowedExtensions.includes(extension)) && (!message.member.roles.cache.find(role => role.id === '451152561735467018'))
     })) {
@@ -22,8 +22,8 @@ class MessageListener extends Listener {
         message.channel.send(
           new MessageEmbed(embed)
             .setTimestamp(new Date())
-            .setTitle("We don't support file debugging!")
-            .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
+            .setTitle("We don't support this file extension!")
+            .setDescription('if someone is trying to assist you, and you really need to post this file, **ask for permission to Direct Message them**.')
             .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
         )
       }).catch(err => {
