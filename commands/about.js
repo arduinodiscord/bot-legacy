@@ -2,7 +2,6 @@ const { Command } = require('discord-akairo')
 const { MessageEmbed } = require('discord.js')
 const { embed } = require('../bot')
 const { version } = require('../package.json')
-const { Duration } = require('luxon')
 
 var packLock
 try {
@@ -19,6 +18,17 @@ class AboutCommand extends Command {
   }
 
   exec(message) {
+    // Calculating Client Uptime
+    var totalSeconds = (this.client.uptime / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    totalSeconds %= 86400;
+    const hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+
+    const formattedUptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
     const about = new MessageEmbed(embed)
     .setTimestamp(new Date())
     .setTitle('About Arduino Bot')
@@ -30,8 +40,7 @@ class AboutCommand extends Command {
       about.addField('Akairo Version', 'v' + packLock.dependencies['discord-akairo'].version, true)
     }
     about.addField('Contributing', '[GitHub](https://github.com/BluLightShow/arduino-bot)', true)
-    var clientDuration = Duration.fromMillis(this.client.uptime)
-    about.addField('Uptime', `${clientDuration.minutes} minutes, ${clientDuration.hours} hours, ${clientDuration.days} days`)
+    about.addField('Uptime', formattedUptime)
     message.channel.send(about)
   }
 }
