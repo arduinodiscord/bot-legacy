@@ -21,7 +21,7 @@ class MainClient extends AkairoClient {
       presence: {
         status: 'online',
         activity: {
-          name: `!help | ${version}`,
+          name: `${config.prefix}help | ${version}`,
           type: 'WATCHING'
         }
       }
