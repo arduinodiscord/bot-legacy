@@ -30,8 +30,8 @@ class AboutCommand extends Command {
       about.addField('Akairo Version', 'v' + packLock.dependencies['discord-akairo'].version, true)
     }
     about.addField('Contributing', '[GitHub](https://github.com/BluLightShow/arduino-bot)', true)
-    var clientDuration = Duration.fromMillis(this.client.uptime)
-    about.addField('Uptime', `${clientDuration.minutes} minutes, ${clientDuration.hours} hours, ${clientDuration.days} days`)
+    var clientDuration = Duration.fromMillis(this.client.uptime).toFormat('d h m').split(' ')
+    about.addField('Uptime', `${clientDuration[0]} days, ${clientDuration[1]} hours, ${clientDuration[2]} minutes`)
     message.channel.send(about)
   }
 }
