@@ -1,5 +1,6 @@
 const { Listener } = require('discord-akairo')
 const { MessageEmbed } = require('discord.js')
+const stringSimilarity = require('string-similarity')
 const { embed } = require('../bot')
 const config = require('../config.json')
 
@@ -12,18 +13,55 @@ class MessageListener extends Listener {
   }
 
   exec(message) {
+    if (message.author.bot) return
+    // Duplicates filter
+    for (var i = 0; i < config.channels.preventDuplicates.length; i++) {
+      var channelID = config.channels.preventDuplicates[i]
+      if (message.channel.id === channelID) continue
+      var channel = message.guild.channels.resolve(channelID)
+      var original = channel.messages.cache.find(msg => stringSimilarity.compareTwoStrings(msg.content, message.content) >= 0.9)
+
+      if (original) {
+        message.delete()
+
+        // DM offender
+        var dmMessage = new MessageEmbed(embed)
+          .setTitle("We've detected that you sent a duplicate message in multiple channels.")
+          .setDescription("This is against our rules, please refrain from crossposting duplicate messages in the future. If you believe this message was sent in error, please DM <@799678733723893821> with valid reasoning.")
+          .setTimestamp(new Date())
+        if (message.author.dmChannel) {
+          message.author.dmChannel.send(dmMessage)
+        } else {
+          message.author.createDM().then(dmChannel => {
+            dmChannel.send(dmMessage)
+          })
+        }
+
+        // Post to mod log
+        message.guild.channels.resolve(config.channels.moderationLog).send(
+          new MessageEmbed(embed)
+            .setTitle("Duplicate Crosspost Detected")
+            .addField("Offender", message.author.tag, true)
+            .addField("Channel", message.channel.toString())
+            .addField("Similarity", `${Math.floor(stringSimilarity.compareTwoStrings(original.content, message.content) * 10000) / 100}%`, true)
+            .setTimestamp(new Date())
+        )
+        break
+      }
+    }
+
     // File filter
     if (message.attachments.find(attachment => {
-      const allowedExtensions = ['png', 'jpg', 'gif', 'webp', 'tiff', 'heif', 'jpeg', 'svg', 'webm', 'mpg', 'mpeg', 'ogg', 'mp4', 'm4v', 'avi', 'mov', 'm4a', 'mp3', 'wav', 'pdf']
+      const blockedExtensions = ['exe', 'dll', 'lnk', 'swf', 'sys', 'scr', 'bat', 'ws', 'bin', 'com', 'ocx', 'drv', 'class', 'xnxx', 'dev', 'pif', 'sop', 'exe1', 'lik', 'cih', 'dyz', 'osa', 'scr', 'bup', 'vexe', 'oar']
       const extension = attachment.name.split('.').pop().toLowerCase()
-      return (!allowedExtensions.includes(extension)) && (!message.member.roles.cache.find(role => role.id === '451152561735467018'))
+      return (blockedExtensions.includes(extension)) && (!message.member.roles.cache.find(role => role.id === '451152561735467018'))
     })) {
       message.delete().then(() => {
         message.channel.send(
           new MessageEmbed(embed)
             .setTimestamp(new Date())
-            .setTitle("We don't support file debugging!")
-            .setDescription('Please paste your code on a [website](https://gist.github.com) or in a [code block](https://discordapp.com/channels/420594746990526466/549794917036326912/555379356604825610).')
+            .setTitle("That filetype is not allowed.")
+            .setDescription('Please DM <@799678733723893821> for more information.')
             .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
         )
       }).catch(err => {
@@ -59,8 +97,8 @@ class MessageListener extends Listener {
     }
 
     // Auto-crosspost feed channels
-    if ((message.channel.id === '610239559376044043') || (message.channel.id === '610239597317849248') || (message.channel.id === '610253712824467473')) {
-      var crosspostLog = message.guild.channels.resolve('801316586371416074')
+    if (config.channels.toCrosspost.includes(message.channel.id)) {
+      var crosspostLog = message.guild.channels.resolve(config.channels.crosspostLog)
       if (message.crosspostable) {
         message.crosspost().then(() => {
           crosspostLog.send(
