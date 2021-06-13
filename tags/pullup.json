@@ -4,18 +4,23 @@
 	"directAliases": ["pullup"],
 	"fields":	[
 		{
+			"name": "Pins used as INPUT",
 			"value": "Pins used as INPUT should not be left unconnected (floating) at any time as this can lead to undesired behavior. If input pins are connected to digital sensors then the sensor itself usually keeps the pin either HIGH or LOW."
 		},
 		{
+			"name": "Pins used with switches",
 			"value": "Pins used with switches (pushbuttons or other) should use a resistor to 'pull' the pin HIGH or LOW."
 		},
 		{
+			"name": "What does it mean to be pulled up and pulled down?",
 			"value": "If the pin is connected to Vcc through a resistor it is said to be 'pulled up', if the pin goes to ground through a resistor it is said to be 'pulled down'. When a resistor is used this way the input is held at either Vcc or ground when the switch is not closed so that it is never 'floating'."
 		},
 		{
+			"name": "Behavior",
 			"value": "Pins that are pulled down are normally LOW and go HIGH when the switch (wired to Vcc) is closed. Pins that are pulled up are normally HIGH and go LOW when the switch (wired to ground) is closed. (The resistor, often 10K, allows only a small current to flow from Vcc to ground when the switch is closed, if the pin was tied directly to a power rail closing the switch would short out the power supply!)"
 		},
 		{
+			"name": "Extra Information",
 			"value": "Many chips include internal resistors so that an external resistor doesn't need to be added to your circuit. On the ATmega328P chips used on many Arduino boards you can pull up the pin by using `pinMode(pin, INPUT_PULLUP)`. If the pin is declared this way it is normally HIGH and all that is needed is a switch wired from the pin to ground. When the switch is closed the pin will go LOW. The example below shows pin 2 setup this way."
 		}
 	],
