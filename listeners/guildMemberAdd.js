@@ -1,9 +1,8 @@
 const { Listener } = require('discord-akairo')
 const { version } = require('../package.json')
 const cache = require('../utils/cache')
-const config = require('../config.json')
 const { MessageEmbed } = require('discord.js')
-const { embed } = require('../bot')
+const { embed, config } = require('../bot')
 const { DateTime } = require('luxon')
 
 class GuildMemberAddListener extends Listener {

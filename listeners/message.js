@@ -1,8 +1,7 @@
 const { Listener } = require('discord-akairo')
 const { MessageEmbed } = require('discord.js')
 const stringSimilarity = require('string-similarity')
-const { embed } = require('../bot')
-const config = require('../config.json')
+const { embed, config } = require('../bot')
 
 class MessageListener extends Listener {
   constructor() {
@@ -20,7 +19,8 @@ class MessageListener extends Listener {
       if (message.channel.id === channelID) continue
       var channel = message.guild.channels.resolve(channelID)
       var original = channel.messages.cache.find(msg => {
-        return (stringSimilarity.compareTwoStrings(msg.content, message.content) >= 0.9) && (msg.content.length >= 5) && (message.author === msg.author)
+        // Conditions to flag message as duplicate
+        return (stringSimilarity.compareTwoStrings(msg.content, message.content) >= 0.9) && (msg.content.length >= 10) && (message.author === msg.author)
       })
 
       if (original) {

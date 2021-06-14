@@ -2,14 +2,35 @@ require('dotenv').config()
 const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } = require('discord-akairo')
 const Discord = require('discord.js')
 const version = require('./package.json').version
-const config = require('./config.json')
+
+var config
+try {
+  console.log('Attempting to use development config...')
+  config = require('./config-dev.json')
+} catch (err) {
+  console.log('Failed to find development config...trying production...')
+}
+
+if (!config) {
+  try {
+    config = require('./config-prod.json')
+  } catch (err) {
+    console.error('Failed to load a production config...missing config file?')
+    process.exit(1)
+  }
+} else {
+  console.log('Starting up with development config...')
+}
 
 const embed = new Discord.MessageEmbed()
   .setFooter(config.embeds.footer)
   .setColor(config.embeds.color)
 
 module.exports = {
-  embed
+  config,
+  embed,
+  enableMaintenance,
+  disableMaintenance
 }
 
 class MainClient extends AkairoClient {
@@ -59,6 +80,30 @@ class MainClient extends AkairoClient {
   }
 }
 const client = new MainClient()
+
+function enableMaintenance() {
+  client.commandHandler.removeAll()
+  client.listenerHandler.removeAll()
+  client.user.setPresence({
+    status: 'dnd',
+    activity: {
+      name: `Offline - Back soon!`,
+      type: 'WATCHING'
+    }
+  })
+}
+
+function disableMaintenance() {
+  client.commandHandler.loadAll()
+  client.listenerHandler.loadAll()
+  client.user.setPresence({
+    status: 'online',
+    activity: {
+      name: `${config.prefix}help | ${version}`,
+      type: 'WATCHING'
+    }
+  })
+}
 
 if (config.token) {
   console.log("Logging in via config token...")

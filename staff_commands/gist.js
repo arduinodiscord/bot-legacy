@@ -1,7 +1,6 @@
 const { Command } = require('discord-akairo')
 const Gists = require('gists')
-const config = require('../config.json')
-const { embed } = require('../bot')
+const { embed, config } = require('../bot')
 const { MessageEmbed } = require('discord.js')
 
 const gists = new Gists({

@@ -1,8 +1,7 @@
 const { Command } = require('discord-akairo')
-const config = require('../config.json')
 const fs = require('fs')
 const { MessageEmbed } = require('discord.js')
-const { embed } = require('../bot')
+const { embed, config } = require('../bot')
 
 class HelpCommand extends Command {
   constructor() {
