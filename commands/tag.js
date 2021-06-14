@@ -35,7 +35,7 @@ class TagCommand extends Command {
     if (usedAlias === ('tag' || 'qr' || 'res')) {
       if (!args.tagAlias) {
         var tagEmbed = new MessageEmbed(embed)
-        .setTitle("List of available tags")
+          .setTitle("List of available tags")
         files.forEach(file => {
           if (file.endsWith('.json') && (file !== 'template.json')) {
             var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
@@ -55,6 +55,7 @@ class TagCommand extends Command {
               tagFile.fields.forEach(field => {
                 tagEmbed.addField(field.name, field.value, false)
               })
+              .setFooter(field.footer)
 
               return message.channel.send(tagEmbed)
             }
@@ -73,6 +74,7 @@ class TagCommand extends Command {
             tagFile.fields.forEach(field => {
               tagEmbed.addField(field.name, field.value, false)
             })
+            .setFooter(field.footer)
 
             return message.channel.send(tagEmbed)
           }
