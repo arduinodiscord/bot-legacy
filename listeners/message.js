@@ -19,7 +19,9 @@ class MessageListener extends Listener {
       var channelID = config.channels.preventDuplicates[i]
       if (message.channel.id === channelID) continue
       var channel = message.guild.channels.resolve(channelID)
-      var original = channel.messages.cache.find(msg => stringSimilarity.compareTwoStrings(msg.content, message.content) >= 0.9)
+      var original = channel.messages.cache.find(msg => {
+        return (stringSimilarity.compareTwoStrings(msg.content, message.content) >= 0.9) && (msg.content.length >= 5) && (message.author === msg.author)
+      })
 
       if (original) {
         message.delete()
