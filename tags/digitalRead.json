@@ -1,0 +1,22 @@
+{
+    "title": "digitalRead()",
+    "aliases": ["digitalread","read","digital"],
+    "directAliases": ["digitalread"],
+    "description": ["Reads the value from a specified digital pin, either HIGH or LOW."],
+    "fields": [
+      {
+        "name": "Syntax",
+        "value": "`digitalRead(pin)`"
+      },
+      {
+        "name": "Parameters",
+        "value": "`pin` : the Arduino pin number you want to read."
+      },
+      {
+        "name": "Returns",
+        "value": "`HIGH` or `LOW`"
+      }
+    ],
+    "footer": "Source(https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/)",
+    "image": ""
+  }

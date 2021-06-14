@@ -1,0 +1,22 @@
+{
+    "title": "analogWrite()",
+    "aliases": ["analogwrite","write","analog"],
+    "directAliases": ["analogwrite"],
+    "description": ["Writes an analog value (PWM wave) to a pin. Can be used to light a LED at varying brightnesses or drive a motor at various speeds."],
+    "fields": [
+      {
+        "name": "Syntax",
+        "value": "`analogWrite(pin, value)`"
+      },
+      {
+        "name": "Parameters",
+        "value": "`pin`: the Arduino pin to write to. Allowed data types: `int`. \n `value`: the duty cycle: between 0 (always off) and 255 (always on). Allowed data types: `int.`"
+      },
+      {
+        "name": "Returns",
+        "value": "Nothing"
+      }
+    ],
+    "footer": "Source(https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/)",
+    "image": ""
+  }
