@@ -5,7 +5,6 @@ var setInviteCache = (invite, uses) => {
 }
 
 var getInviteCache = (invite) => {
-  console.log(inviteCache)
   return inviteCache[invite]
 }
 

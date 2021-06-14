@@ -10,7 +10,7 @@
   "fields": [
     {
       "name": "1. Is your Library installed?",
-      "value": "go to the Library Manager (Sketch -> Include Library -> Manage Libraries), search for the library, and intall it. if it is already installed, try re-installing it through the library manager (Sketch -> include Library -> Manage Libraries)."
+      "value": "go to the Library Manager (Sketch -> Include Library -> Manage Libraries), search for the library, and install it. if it is already installed, try re-installing it through the library manager (Sketch -> include Library -> Manage Libraries)."
     },
     {
       "name": "2. is your #include statement spelt correctly?",
