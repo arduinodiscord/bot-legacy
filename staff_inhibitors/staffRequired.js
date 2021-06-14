@@ -1,5 +1,5 @@
 const { Inhibitor } = require('discord-akairo')
-const config = require('../config.json')
+const { config } = require('../bot')
 
 class StaffRequiredInhibitor extends Inhibitor {
   constructor() {

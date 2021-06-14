@@ -1,8 +1,7 @@
 const { Listener } = require('discord-akairo')
 const { MessageEmbed } = require('discord.js')
 const Gists = require('gists')
-const { embed } = require('../bot')
-const config = require('../config.json')
+const { embed, config } = require('../bot')
 
 const gists = new Gists({
   token: process.env.GITHUB_TOKEN

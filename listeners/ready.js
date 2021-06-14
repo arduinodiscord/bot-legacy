@@ -1,6 +1,6 @@
 const { Listener } = require('discord-akairo')
 const { version } = require('../package.json')
-const config = require('../config.json')
+const { config } = require('../bot')
 const cache = require('../utils/cache')
 
 class ReadyListener extends Listener {
