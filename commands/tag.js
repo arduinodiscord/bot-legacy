@@ -55,7 +55,7 @@ class TagCommand extends Command {
               tagFile.fields.forEach(field => {
                 tagEmbed.addField(field.name, field.value, false)
               })
-              .setFooter(field.footer)
+              if(tagFile.footer) tagEmbed.setFooter(tagFile.footer)
 
               return message.channel.send(tagEmbed)
             }
@@ -74,7 +74,7 @@ class TagCommand extends Command {
             tagFile.fields.forEach(field => {
               tagEmbed.addField(field.name, field.value, false)
             })
-            .setFooter(field.footer)
+            if(tagFile.footer) tagEmbed.setFooter(tagFile.footer)
 
             return message.channel.send(tagEmbed)
           }
