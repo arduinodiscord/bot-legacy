@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo')
 const fs = require('fs')
 const { MessageEmbed } = require('discord.js')
 const { embed, config } = require('../bot')
-var files = fs.readdirSync('./tags')
+var files = fs.readdirSync('./src/tags')
 
 var aggregateAliases = []
 files.forEach(file => {

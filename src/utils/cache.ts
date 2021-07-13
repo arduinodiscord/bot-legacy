@@ -8,7 +8,7 @@ var getInviteCache = (invite) => {
   return inviteCache[invite]
 }
 
-module.exports = {
+export = {
   setInviteCache,
   getInviteCache
 }

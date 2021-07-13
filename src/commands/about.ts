@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo')
 const { MessageEmbed } = require('discord.js')
 const { embed } = require('../bot')
-const { version } = require('../package.json')
+const { version } = require('../../package.json')
 const { Duration } = require('luxon')
 
 var packLock

@@ -12,10 +12,12 @@
     "string-similarity": "^4.0.4"
   },
   "scripts": {
-    "start": "node bot.js",
+    "start": "tsc && node build/bot.js",
+    "build": "tsc",
     "lint": "standard"
   },
   "devDependencies": {
+    "@types/node": "^16.3.1",
     "eslint": "^7.1.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",

@@ -1,7 +1,7 @@
 require('dotenv').config()
-const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } = require('discord-akairo')
-const Discord = require('discord.js')
-const version = require('./package.json').version
+import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } from 'discord-akairo'
+import Discord from 'discord.js'
+const version = require('../package.json').version
 
 var config
 try {
@@ -34,7 +34,30 @@ module.exports = {
 }
 
 class MainClient extends AkairoClient {
-  constructor() {
+
+  public commandHandler: CommandHandler = new CommandHandler(this, {
+    directory: './commands/',
+    prefix: config.prefix,
+    defaultCooldown: 5000,
+    commandUtil: true
+  })
+
+  public staffComandHandler = new CommandHandler(this, {
+    directory: './staff_commands/',
+    prefix: config.staffPrefix,
+    defaultCooldown: 1000,
+    commandUtil: true
+  })
+
+  public staffInhibitorHandler = new InhibitorHandler(this, {
+    directory: './staff_inhibitors/'
+  })
+
+  public listenerHandler = new ListenerHandler(this, {
+    directory: './listeners/'
+  })
+
+  public constructor() {
     super({
       ownerID: config.owners
     }, {
@@ -47,36 +70,15 @@ class MainClient extends AkairoClient {
         }
       }
     })
-    this.commandHandler = new CommandHandler(this, {
-      directory: './commands/',
-      prefix: config.prefix,
-      defaultCooldown: 5000,
-      commandUtil: true
-    })
-    this.staffComandHandler = new CommandHandler(this, {
-      directory: './staff_commands/',
-      prefix: config.staffPrefix,
-      defaultCooldown: 1000,
-      commandUtil: true
-    })
+  // Main Handlers
+  this.commandHandler.useListenerHandler(this.listenerHandler)
+  this.listenerHandler.loadAll()
+  this.commandHandler.loadAll()
 
-    this.staffInhibitorHandler = new InhibitorHandler(this, {
-      directory: './staff_inhibitors/'
-    })
-
-    this.listenerHandler = new ListenerHandler(this, {
-      directory: './listeners/'
-    })
-
-    // Main Handlers
-    this.commandHandler.useListenerHandler(this.listenerHandler)
-    this.listenerHandler.loadAll()
-    this.commandHandler.loadAll()
-
-    // Staff Handlers
-    this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
-    this.staffComandHandler.loadAll()
-    this.staffInhibitorHandler.loadAll()
+  // Staff Handlers
+  this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
+  this.staffComandHandler.loadAll()
+  this.staffInhibitorHandler.loadAll()
   }
 }
 const client = new MainClient()
