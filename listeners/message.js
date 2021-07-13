@@ -99,7 +99,7 @@ class MessageListener extends Listener {
     }
 
     // Auto-crosspost feed channels
-    if (config.channels.toCrosspost.includes(message.channel.id)) {
+    if (config.channels.toCrosspost.includes(`${message.channel.id}`)) {
       var crosspostLog = message.guild.channels.resolve(config.channels.crosspostLog)
       if (message.crosspostable) {
         message.crosspost().then(() => {
