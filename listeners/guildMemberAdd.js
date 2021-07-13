@@ -23,8 +23,10 @@ class GuildMemberAddListener extends Listener {
 
       var inviteEmbed = new MessageEmbed(embed)
         .setTitle("Member joined")
+        .setTimestamp(new Date())
         .setAuthor(member.user.tag, member.user.avatarURL({ dynamic: true }))
         .setDescription(`#${member.guild.memberCount} to join`)
+        .setFooter(`ID: ${member.id}`)
 
       if (inviteSource) {
         cache.setInviteCache(inviteSource.code, inviteSource.uses)
