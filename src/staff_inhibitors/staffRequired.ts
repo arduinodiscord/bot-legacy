@@ -1,7 +1,8 @@
-const { Inhibitor } = require('discord-akairo')
-const { config } = require('../bot')
+import { Command, Inhibitor} from 'discord-akairo'
+import { Message } from 'discord.js'
+import { config } from '../bot'
 
-class StaffRequiredInhibitor extends Inhibitor {
+export default class StaffRequiredInhibitor extends Inhibitor {
   constructor() {
     super('staffRequired', {
       reason: 'staffRoleRequired',
@@ -9,16 +10,17 @@ class StaffRequiredInhibitor extends Inhibitor {
     })
   }
 
-  exec(message, command) {
+  exec(message: Message, command:Command) {
+    if(!message.guild) throw "Message Guild not found"
+
     let member = message.guild.members.cache.find(member => member.id === message.author.id)
 
-    var roleAbsent = roleId => {
-      if (member.roles.cache.find(role => role.id === roleId)) {
-        return false
-      } else {
-        return true
-      }
+    var roleAbsent = (roleId:any) => {
+      if(!member) throw "Can't find member";
+
+      return !!member.roles.cache.find(role => role.id === roleId);
     }
+
     if (command.id === "gist") {
       return roleAbsent(config.roles.helper)
     } else {
@@ -26,4 +28,3 @@ class StaffRequiredInhibitor extends Inhibitor {
     }
   }
 }
-module.exports = StaffRequiredInhibitor

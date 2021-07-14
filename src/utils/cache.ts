@@ -1,14 +1,9 @@
-var inviteCache = {}
+let inviteCache:any = {}
 
-var setInviteCache = (invite, uses) => {
+export const setInviteCache = (invite:any, uses:any) => {
   inviteCache = {...inviteCache, [invite]: uses}
 }
 
-var getInviteCache = (invite) => {
+export const getInviteCache = (invite:any) => {
   return inviteCache[invite]
-}
-
-export = {
-  setInviteCache,
-  getInviteCache
 }

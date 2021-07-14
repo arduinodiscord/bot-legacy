@@ -1,116 +1,130 @@
-require('dotenv').config()
-import { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } from 'discord-akairo'
-import Discord from 'discord.js'
-const version = require('../package.json').version
+import { config as envConfig } from "dotenv";
+envConfig();
 
-var config
-try {
-  console.log('Attempting to use development config...')
-  config = require('./config-dev.json')
-} catch (err) {
-  console.log('Failed to find development config...trying production...')
-}
+import {
+  AkairoClient,
+  CommandHandler,
+  InhibitorHandler,
+  ListenerHandler,
+} from "discord-akairo";
+import * as Discord from "discord.js";
+import { version } from "./../package.json";
+import * as config from "./../config-prod.json"; // maybe only have one config file?
 
-if (!config) {
-  try {
-    config = require('./config-prod.json')
-  } catch (err) {
-    console.error('Failed to load a production config...missing config file?')
-    process.exit(1)
-  }
-} else {
-  console.log('Starting up with development config...')
-}
+// let config: Config = ;
+
+// try {
+//   console.log("Attempting to use development config...");
+//   config = require("./config-dev.json");
+// } catch (err) {
+//   console.log("Failed to find development config...trying production...");
+// }
+
+// if (!config) {
+//   try {
+//     config = require("./config-prod.json");
+//   } catch (err) {
+//     console.error("Failed to load a production config...missing config file?");
+//     process.exit(1);
+//   }
+// } else {
+//   console.log("Starting up with development config...");
+// }
 
 const embed = new Discord.MessageEmbed()
   .setFooter(config.embeds.footer)
-  .setColor(config.embeds.color)
+  .setColor(config.embeds.color);
 
-module.exports = {
+export {
   config,
   embed,
   enableMaintenance,
-  disableMaintenance
-}
+  disableMaintenance,
+};
 
 class MainClient extends AkairoClient {
-
   public commandHandler: CommandHandler = new CommandHandler(this, {
-    directory: './commands/',
+    directory: "./commands/",
     prefix: config.prefix,
     defaultCooldown: 5000,
-    commandUtil: true
-  })
+    commandUtil: true,
+  });
 
   public staffComandHandler = new CommandHandler(this, {
-    directory: './staff_commands/',
+    directory: "./staff_commands/",
     prefix: config.staffPrefix,
     defaultCooldown: 1000,
-    commandUtil: true
-  })
+    commandUtil: true,
+  });
 
   public staffInhibitorHandler = new InhibitorHandler(this, {
-    directory: './staff_inhibitors/'
-  })
+    directory: "./staff_inhibitors/",
+  });
 
   public listenerHandler = new ListenerHandler(this, {
-    directory: './listeners/'
-  })
+    directory: "./listeners/",
+  });
 
   public constructor() {
-    super({
-      ownerID: config.owners
-    }, {
-      fetchAllMembers: true,
-      presence: {
-        status: 'online',
-        activity: {
-          name: `${config.prefix}help | ${version}`,
-          type: 'WATCHING'
-        }
+    super(
+      {
+        ownerID: config.owners,
+      },
+      {
+        fetchAllMembers: true,
+        presence: {
+          status: "online",
+          activity: {
+            name: `${config.prefix}help | ${version}`,
+            type: "WATCHING",
+          },
+        },
       }
-    })
-  // Main Handlers
-  this.commandHandler.useListenerHandler(this.listenerHandler)
-  this.listenerHandler.loadAll()
-  this.commandHandler.loadAll()
+    );
+    
+    // Main Handlers
+    this.commandHandler.useListenerHandler(this.listenerHandler);
+    this.listenerHandler.loadAll();
+    this.commandHandler.loadAll();
 
-  // Staff Handlers
-  this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
-  this.staffComandHandler.loadAll()
-  this.staffInhibitorHandler.loadAll()
+    // Staff Handlers
+    this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler);
+    this.staffComandHandler.loadAll();
+    this.staffInhibitorHandler.loadAll();
   }
 }
-const client = new MainClient()
+const client = new MainClient();
 
 function enableMaintenance() {
-  client.commandHandler.removeAll()
-  client.listenerHandler.removeAll()
+  if(!client.user) throw "Client User not initilized";
+  client.commandHandler.removeAll();
+  client.listenerHandler.removeAll();
   client.user.setPresence({
-    status: 'dnd',
+    status: "dnd",
     activity: {
       name: `Offline - Back soon!`,
-      type: 'WATCHING'
-    }
-  })
+      type: "WATCHING",
+    },
+  });
 }
 
 function disableMaintenance() {
-  client.commandHandler.loadAll()
-  client.listenerHandler.loadAll()
+  if(!client.user) throw "Client User not initilized";
+  client.commandHandler.loadAll();
+  client.listenerHandler.loadAll();
   client.user.setPresence({
-    status: 'online',
+    status: "online",
     activity: {
       name: `${config.prefix}help | ${version}`,
-      type: 'WATCHING'
-    }
-  })
+      type: "WATCHING",
+    },
+  });
 }
 
 if (config.token) {
-  console.log("Logging in via config token...")
-  client.login(config.token)
+  console.log("Logging in via config token...");
+  client.login(config.token);
 } else {
-  console.log("Logging in via environment token...")
-  client.login(process.env.BOT_TOKEN)
+  console.log("Logging in via environment token...");
+  client.login(process.env.BOT_TOKEN);
 }

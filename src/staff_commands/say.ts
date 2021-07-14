@@ -1,6 +1,6 @@
-const { Command } = require('discord-akairo')
-const { MessageEmbed } = require('discord.js')
-const { embed } = require('../bot')
+import { Command } from 'discord-akairo';
+import { MessageEmbed } from 'discord.js'
+import { embed } from '../bot'
 
 class SayCommand extends Command {
   constructor() {
@@ -19,7 +19,7 @@ class SayCommand extends Command {
           id: 'channel',
           type: 'channel',
           prompt: {
-            start: m => {
+            start: (m:any) => {
               return new MessageEmbed(embed)
                 .setTitle('What channel would you like the message sent in?')
                 .setTimestamp(new Date())
@@ -30,7 +30,7 @@ class SayCommand extends Command {
           id: 'title',
           type: 'string',
           prompt: {
-            start: m => {
+            start: (m:any) => {
               return new MessageEmbed(embed)
                 .setTitle('What would you like the primary embed title to be?')
             }
@@ -40,7 +40,7 @@ class SayCommand extends Command {
           id: 'description',
           type: 'string',
           prompt: {
-            start: m => {
+            start: (m:any) => {
               return new MessageEmbed(embed)
                 .setTitle('What would you like the primary embed description to be?')
             }
@@ -52,7 +52,7 @@ class SayCommand extends Command {
           prompt: {
             infinite: true,
             stopWord: 'done',
-            start: m => {
+            start: (m:any) => {
               return new MessageEmbed(embed)
                 .setTitle('What fields would you like to send? **Read below!!**')
                 .setDescription('Please send **separate** messages alternating between the new field title and the new field value. Add as many fields as you want, and when you are ready to go to the next step, send the message "`done`". You have 20 minutes to complete this step.')
@@ -64,7 +64,7 @@ class SayCommand extends Command {
     })
   }
 
-  exec(message, args) {
+  exec(message:any, args:any) {
     if ((args.fields.length % 2) !== 0) {
       return message.channel.send(
         new MessageEmbed(embed)
@@ -76,10 +76,10 @@ class SayCommand extends Command {
       new MessageEmbed(embed)
         .setTitle('If you would like to add a thumbnail (small in top right), react with ✅. Otherwise react with ❌')
         .setTimestamp(new Date())
-    ).then(m => {
+    ).then((m:any) => {
       m.react('✅').then(() => {
         m.react('❌').then(() => {
-          m.awaitReactions((reaction, user) => user === message.author, { max: 1, time: 300000 }).then(reactionCollection => {
+          m.awaitReactions((reaction:any, user:any) => user === message.author, { max: 1, time: 300000 }).then((reactionCollection:any) => {
             let reaction = reactionCollection.first()
             if (reaction.emoji.toString() === '✅') {
               message.channel.send(
@@ -87,7 +87,7 @@ class SayCommand extends Command {
                   .setTitle('What thumbnail would you like to add? Please provide a direct URL.')
                   .setTimestamp(new Date())
               ).then(() => {
-                message.channel.awaitMessages(msg => msg.author === message.author, { max: 1, time: 300000}).then(msgCollector => {
+                message.channel.awaitMessages((msg:any) => msg.author === message.author, { max: 1, time: 300000}).then((msgCollector:any) => {
                   let msg = msgCollector.first()
                   try {
                     var url = new URL(msg.content)
@@ -110,7 +110,7 @@ class SayCommand extends Command {
       })
     })
 
-    function sendIt(thumbnail) {
+    function sendIt(thumbnail:any) {
       const say = new MessageEmbed(embed)
         .setTimestamp(new Date())
         .setTitle(args.title).setDescription(args.description)
@@ -133,7 +133,7 @@ class SayCommand extends Command {
           .setTitle('Great success!')
           .setDescription('Embed sent.')
         )
-      }).catch(err => {
+      }).catch((err:any) => {
         message.channel.send(
           new MessageEmbed(embed)
           .setTimestamp(new Date())

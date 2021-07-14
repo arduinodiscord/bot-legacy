@@ -62,3 +62,4 @@ typings/
 
 # development configuration file
 config-dev.json
+build/

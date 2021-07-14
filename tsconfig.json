@@ -1,8 +1,17 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
     "outDir": "./build",
-    "allowJs": true,
-    "target": "es5"
+    "resolveJsonModule": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
+    "typeRoots": ["interfaces", "../node_modules/@types"]
   },
-  "include": ["./src/**/*"]
+  "include": ["**/*.ts"]
 }
