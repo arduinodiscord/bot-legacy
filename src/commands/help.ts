@@ -1,9 +1,8 @@
-const { Command } = require('discord-akairo')
-const fs = require('fs')
-const { MessageEmbed } = require('discord.js')
-const { embed, config } = require('../bot')
+import { Command } from 'discord-akairo'
+import { MessageEmbed } from 'discord.js'
+import { embed, config } from '../bot'
 
-class HelpCommand extends Command {
+export class HelpCommand extends Command {
   constructor() {
     super('help', {
       aliases: ['help', '?'],
@@ -12,7 +11,7 @@ class HelpCommand extends Command {
     })
   }
 
-  exec(message) {
+  exec(message:any) {
     var helpEmbed = new MessageEmbed(embed)
       .setTitle('Arduino Bot Help')
       .setTimestamp(new Date())
@@ -23,4 +22,3 @@ class HelpCommand extends Command {
     message.channel.send(helpEmbed)
   }
 }
-module.exports = HelpCommand

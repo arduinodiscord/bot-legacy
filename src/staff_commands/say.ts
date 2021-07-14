@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js'
 import { embed } from '../bot'
 
-class SayCommand extends Command {
+export class SayCommand extends Command {
   constructor() {
     super('say', {
       aliases: ['say'],
@@ -144,4 +144,3 @@ class SayCommand extends Command {
     }
   }
 }
-module.exports = SayCommand

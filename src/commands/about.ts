@@ -1,16 +1,12 @@
-const { Command } = require('discord-akairo')
-const { MessageEmbed } = require('discord.js')
-const { embed } = require('../bot')
-const { version } = require('../../package.json')
-const { Duration } = require('luxon')
+import { Command } from 'discord-akairo'
+import { MessageEmbed } from 'discord.js'
+import { embed } from '../bot'
+import { version } from '../../package.json'
+import { Duration } from 'luxon'
 
-var packLock
-try {
-  packLock = require('../package-lock.json')
-} catch (err) {
-  packLock = undefined
-}
-class AboutCommand extends Command {
+import packLock from './../../package-lock.json'
+
+export class AboutCommand extends Command {
   constructor() {
     super('about', {
       aliases: ['about'],
@@ -18,7 +14,7 @@ class AboutCommand extends Command {
     })
   }
 
-  exec(message) {
+  exec(message:any) {
     const about = new MessageEmbed(embed)
     .setTimestamp(new Date())
     .setTitle('About Arduino Bot')
@@ -29,10 +25,13 @@ class AboutCommand extends Command {
       about.addField('DiscordJS Version', 'v' + packLock.dependencies['discord.js'].version, true)
       about.addField('Akairo Version', 'v' + packLock.dependencies['discord-akairo'].version, true)
     }
+
     about.addField('Contributing', '[GitHub](https://github.com/BluLightShow/arduino-bot)', true)
+    
+    if(!this.client.uptime) throw "Uptime invalid"
+
     var clientDuration = Duration.fromMillis(this.client.uptime).toFormat('d h m').split(' ')
     about.addField('Uptime', `${clientDuration[0]} days, ${clientDuration[1]} hours, ${clientDuration[2]} minutes`)
     message.channel.send(about)
   }
 }
-module.exports = AboutCommand

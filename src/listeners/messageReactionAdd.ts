@@ -1,13 +1,15 @@
-const { Listener } = require('discord-akairo')
-const { MessageEmbed } = require('discord.js')
-const Gists = require('gists')
-const { embed, config } = require('../bot')
+import { Listener } from 'discord-akairo'
+import { MessageEmbed } from'discord.js'
+import { embed, config } from'../bot'
+
+//@ts-ignore
+import Gists from 'gists'
 
 const gists = new Gists({
   token: process.env.GITHUB_TOKEN
 })
 
-class MessageReactionAddListener extends Listener {
+export class MessageReactionAddListener extends Listener {
   constructor() {
     super('messageReactionAdd', {
       emitter: 'client',
@@ -15,12 +17,12 @@ class MessageReactionAddListener extends Listener {
     })
   }
 
-  exec(reaction, user) {
+  exec(reaction:any, user:any) {
     if (user.bot) return
 
 
     if (reaction.emoji.id === config.pasteEmoji && reaction.me) {
-      if (user.id === reaction.message.author.id || reaction.message.guild.members.resolve(user.id).roles.cache.find(role => role.id === config.roles.helper)) {
+      if (user.id === reaction.message.author.id || reaction.message.guild.members.resolve(user.id).roles.cache.find((role:any) => role.id === config.roles.helper)) {
         let message = reaction.message
         let content = message.content
 
@@ -52,7 +54,7 @@ class MessageReactionAddListener extends Listener {
           "description": `Code by ${message.author.tag} - ${new Date()}`,
           "public": true,
           "files": { ...files }
-        }).then(gist => {
+        }).then((gist:any) => {
           message.channel.send(
             new MessageEmbed(embed)
             .setTimestamp(new Date())
@@ -61,7 +63,7 @@ class MessageReactionAddListener extends Listener {
             .setAuthor(`Code by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .addField('Paste requested by:', user.tag, true)
             ).then(() => {
-              message.delete().catch(err => {
+              message.delete().catch((err:any) => {
                 console.error(err)
                 console.log("Error occurred deleting original after reaction paste.")
               })
@@ -73,4 +75,3 @@ class MessageReactionAddListener extends Listener {
     }
   }
 }
-module.exports = MessageReactionAddListener

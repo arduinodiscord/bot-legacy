@@ -1,7 +1,7 @@
-const { Command } = require('discord-akairo')
-const { config } = require('../bot')
+import { Command } from 'discord-akairo'
+import { config } from '../bot'
 
-class PingCommand extends Command {
+export class PingCommand extends Command {
   constructor () {
     super('ping', {
       aliases: ['ping', 'ms'],
@@ -10,17 +10,17 @@ class PingCommand extends Command {
     })
   }
 
-  exec (message) {
+  exec (message:any) {
     const pingInit = {
       title: 'Pinging...',
       color: '#00b3b3',
       timestamp: new Date(),
       footer: {
-        text: config.footer
+        text: config.embeds.footer
       }
     }
     const pingEmbed = this.client.util.embed(pingInit)
-    message.channel.send(pingEmbed).then(m => {
+    message.channel.send(pingEmbed).then((m:any) => {
       const newPingEmbed = this.client.util.embed({
         ...pingInit,
         title: `Pong! Round-trip latency is ${m.createdTimestamp - message.createdTimestamp}ms. API latency is ${Math.round(this.client.ws.ping)}ms.`
@@ -29,4 +29,3 @@ class PingCommand extends Command {
     })
   }
 }
-module.exports = PingCommand

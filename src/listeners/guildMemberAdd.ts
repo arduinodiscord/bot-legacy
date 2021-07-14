@@ -1,11 +1,10 @@
-const { Listener } = require('discord-akairo')
-const { version } = require('../package.json')
-const cache = require('../utils/cache')
-const { MessageEmbed } = require('discord.js')
-const { embed, config } = require('../bot')
-const { DateTime } = require('luxon')
+import {Listener } from'discord-akairo'
+import * as cache from'../utils/cache'
+import { MessageEmbed } from'discord.js'
+import {embed, config } from'../bot'
+import { DateTime } from 'luxon'
 
-class GuildMemberAddListener extends Listener {
+export class GuildMemberAddListener extends Listener {
   constructor() {
     super('guildMemberAdd', {
       emitter: 'client',
@@ -13,11 +12,11 @@ class GuildMemberAddListener extends Listener {
     })
   }
 
-  exec(member) {
+  exec(member:any) {
     var logChannel = member.guild.channels.resolve(config.channels.joinLeaveLog)
-    member.guild.fetchInvites().then(invites => {
-      var inviteSource = undefined
-      invites.each(invite => {
+    member.guild.fetchInvites().then((invites:any) => {
+      var inviteSource: undefined | any = undefined
+      invites.each((invite:any) => {
         if (invite.uses !== cache.getInviteCache(invite.code)) inviteSource = invite
       })
 
@@ -41,4 +40,3 @@ class GuildMemberAddListener extends Listener {
     })
   }
 }
-module.exports = GuildMemberAddListener

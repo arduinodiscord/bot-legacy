@@ -1,13 +1,15 @@
-const { Command } = require('discord-akairo')
-const Gists = require('gists')
-const { embed, config } = require('../bot')
-const { MessageEmbed } = require('discord.js')
+import { Command } from 'discord-akairo'
+import { embed, config } from '../bot'
+import { MessageEmbed } from 'discord.js'
+
+//@ts-ignore
+import Gists from 'gists'
 
 const gists = new Gists({
   token: process.env.GITHUB_TOKEN
 })
 
-class GistCommand extends Command {
+export class GistCommand extends Command {
   constructor() {
     super('gist', {
       aliases: ['gist', 'paste'],
@@ -22,7 +24,7 @@ class GistCommand extends Command {
     })
   }
 
-  exec(message, args) {
+  exec(message:any, args:any) {
     if (args.message) {
       var code = args.message
       gists.create({
@@ -40,7 +42,7 @@ class GistCommand extends Command {
             "content": code.content
           }
         }
-      }).then(gist => {
+      }).then((gist:any) => {
         message.channel.send(
           new MessageEmbed(embed)
             .setTimestamp(new Date())
@@ -49,10 +51,9 @@ class GistCommand extends Command {
             .setAuthor(`Code by ${code.author.tag}`, code.author.avatarURL({ dynamic: true }))
             .addField('Paste requested by:', message.author.tag, true)
         ).then(() => {
-          code.delete().catch(err => console.error(err))
+          code.delete().catch((err:any) => console.error(err))
         })
       })
     }
   }
 }
-module.exports = GistCommand

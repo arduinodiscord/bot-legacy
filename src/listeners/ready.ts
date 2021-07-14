@@ -1,9 +1,9 @@
-const { Listener } = require('discord-akairo')
-const { version } = require('../package.json')
-const { config } = require('../bot')
-const cache = require('../utils/cache')
+import { Listener } from 'discord-akairo'
+import { version } from './../../package.json'
+import { config } from '../bot'
+import * as cache from './../utils/cache'
 
-class ReadyListener extends Listener {
+export class ReadyListener extends Listener {
   constructor() {
     super('ready', {
       emitter: 'client',
@@ -12,9 +12,13 @@ class ReadyListener extends Listener {
   }
 
   exec() {
+    if(!this.client || !this.client.user) throw "Client/User not initilized"
+
     console.log(`Logged into account: ${this.client.user.tag}`)
 
-    var guild = this.client.guilds.resolve(config.guild)
+    let guild = this.client.guilds.resolve(config.guild)
+
+    if(!guild) throw "Guild not found"
 
     guild.fetchInvites().then(invites => {
       invites.each(invite => {
@@ -27,4 +31,3 @@ class ReadyListener extends Listener {
     console.log(`Arduino Bot ${version} ready for battle!`)
   }
 }
-module.exports = ReadyListener

@@ -1,9 +1,9 @@
-const { Command } = require('discord-akairo')
-const { MessageEmbed } = require('discord.js')
-const { embed, enableMaintenance, disableMaintenance } = require('../bot')
+import { Command } from 'discord-akairo'
+import { MessageEmbed } from 'discord.js'
+import { embed, enableMaintenance, disableMaintenance } from '../bot'
 var maintenanceEnabled = false
 
-class MaintenanceCommand extends Command {
+export class MaintenanceCommand extends Command {
   constructor() {
     super('maintenance', {
       aliases: ['maintenance'],
@@ -13,7 +13,7 @@ class MaintenanceCommand extends Command {
     })
   }
 
-  exec(message, args) {
+  exec(message:any, args:any) {
     if (maintenanceEnabled) {
       disableMaintenance()
       maintenanceEnabled = false
@@ -33,4 +33,3 @@ class MaintenanceCommand extends Command {
     }
   }
 }
-module.exports = MaintenanceCommand

@@ -1,19 +1,20 @@
-const { Command } = require('discord-akairo')
-const fs = require('fs')
-const { MessageEmbed } = require('discord.js')
-const { embed, config } = require('../bot')
-var files = fs.readdirSync('./src/tags')
+import { Command } from 'discord-akairo'
+import fs from 'fs'
+import { MessageEmbed } from 'discord.js'
+import { embed, config } from '../bot'
 
-var aggregateAliases = []
+let files = fs.readdirSync('./src/tags')
+
+var aggregateAliases: any[] = []
 files.forEach(file => {
   if (file.endsWith('.json') && (file !== 'template.json')) {
-    var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
+    var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
     aggregateAliases = [...aggregateAliases, ...tagFile.directAliases]
   }
 })
 
 
-class TagCommand extends Command {
+export class TagCommand extends Command {
   constructor() {
     super('tag', {
       aliases: [...aggregateAliases, 'tag', 'qr', 'res'],
@@ -28,7 +29,7 @@ class TagCommand extends Command {
     })
   }
 
-  exec(message, args) {
+  exec(message:any, args:any) {
     // var usedAlias = message.util.parsed.alias -- This should work but it's not so I'm writing a workaround
     var usedAlias = message.content.replace(config.prefix, '').split(' ')[0]
     if (usedAlias === ('tag' || 'qr' || 'res')) {
@@ -37,7 +38,7 @@ class TagCommand extends Command {
         .setTitle("List of available tags")
         files.forEach(file => {
           if (file.endsWith('.json') && (file !== 'template.json')) {
-            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
+            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
             tagEmbed.addField(tagFile.directAliases[0], tagFile.title)
           }
         })
@@ -45,13 +46,13 @@ class TagCommand extends Command {
       } else {
         files.forEach(file => {
           if (file.endsWith('.json') && (file !== 'template.json')) {
-            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
+            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
             if (tagFile.aliases.includes(args.tagAlias)) {
               var tagEmbed = new MessageEmbed(embed)
                 .setTitle(tagFile.title)
 
               if (tagFile.image) tagEmbed.setImage(tagFile.image)
-              tagFile.fields.forEach(field => {
+              tagFile.fields.forEach((field:any) => {
                 tagEmbed.addField(field.name, field.value, false)
               })
 
@@ -63,13 +64,13 @@ class TagCommand extends Command {
     } else {
       files.forEach(file => {
         if (file.endsWith('.json') && (file !== 'template.json')) {
-          var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`))
+          var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
           if (tagFile.directAliases.includes(usedAlias)) {
             var tagEmbed = new MessageEmbed(embed)
               .setTitle(tagFile.title)
 
             if (tagFile.image) tagEmbed.setImage(tagFile.image)
-            tagFile.fields.forEach(field => {
+            tagFile.fields.forEach((field:any) => {
               tagEmbed.addField(field.name, field.value, false)
             })
 
@@ -80,4 +81,3 @@ class TagCommand extends Command {
     }
   }
 }
-module.exports = TagCommand

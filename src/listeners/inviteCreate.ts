@@ -1,9 +1,7 @@
-const { Listener } = require('discord-akairo')
-const { version } = require('../package.json')
-const { config } = require('../bot')
-const cache = require('../utils/cache')
+import { Listener } from 'discord-akairo'
+import * as cache from '../utils/cache'
 
-class InviteCreateListener extends Listener {
+export class InviteCreateListener extends Listener {
   constructor() {
     super('inviteCreate', {
       emitter: 'client',
@@ -11,8 +9,7 @@ class InviteCreateListener extends Listener {
     })
   }
 
-  exec(invite) {
+  exec(invite:any) {
     cache.setInviteCache(invite.code, 0)
   }
 }
-module.exports = InviteCreateListener
