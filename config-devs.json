@@ -1,0 +1,24 @@
+{
+  "token": "",
+  "debug": false,
+  "prefix": "!",
+  "guild": "804881891609673738",
+  "staffPrefix": "=",
+  "channels": {
+    "joinLeaveLog": "746375238845071451",
+    "crosspostLog": "801316586371416074",
+    "moderationLog": "804881891609673741",
+    "toCrosspost": ["610239559376044043", "610239597317849248", "610253712824467473"],
+    "preventDuplicates": ["804881891609673741", "825393757578461184"]
+  },
+  "embeds": {
+    "footer":"Arduino Bot • Submit bugs on GitHub!",
+    "color": "17989e"
+  },
+  "pasteEmoji": "752975737400721549",
+  "roles": {
+    "helper": "452631962373455893",
+    "staff": "838823168126877737"
+  },
+  "owners": ["200616508328509442", "223217915673968641"]
+}

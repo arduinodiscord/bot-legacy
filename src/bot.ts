@@ -10,116 +10,137 @@ import {
 import * as Discord from 'discord.js'
 import { version } from '../package.json'
 
-let config: any
+let localConfig: any
+const devLocation = '../config-dev.json'
+const prodLocation = '../config-prod.json'
 
 console.log('Attempting to use development config...')
-import('../config-dev.json')
+import(devLocation)
   .then((configDev) => {
-    config = configDev
+    localConfig = configDev
+    initilize()
   })
   .catch((err) => {
+    console.log(err)
     console.log('Failed to find development config...trying production...')
-    import('../config-prod.json')
+    import(prodLocation)
       .then((configProd) => {
-        config = configProd
+        localConfig = configProd
+        initilize()
       })
       .catch((err) => {
-        console.error(
-          'Failed to load a production config...missing config file?'
-        )
-        process.exit(1)
+        console.log(err)
+        console.log('Failed to load a production config...missing config file? Stopping.')
+        process.exit()
       })
   })
 
-const embed = new Discord.MessageEmbed()
-  .setFooter(config.embeds.footer)
-  .setColor(config.embeds.color)
+let embedExport: Discord.MessageEmbed
+let enableMaintenanceExport: Function
+let disableMaintenanceExport: Function
+function initilize() {
+  // Dumping Current Configuration
+  console.log(`[CONFIG] Prefix: ${localConfig.prefix}`)
+  console.log(`[CONFIG] Guild: ${localConfig.guild}`)
 
-export { config, embed, enableMaintenance, disableMaintenance }
+  const embed = new Discord.MessageEmbed()
+    .setFooter(localConfig.embeds.footer)
+    .setColor(localConfig.embeds.color)
 
-class MainClient extends AkairoClient {
-  public commandHandler: CommandHandler = new CommandHandler(this, {
-    directory: './commands/',
-    prefix: config.prefix,
-    defaultCooldown: 5000,
-    commandUtil: true
-  })
+  class MainClient extends AkairoClient {
+    public commandHandler: CommandHandler = new CommandHandler(this, {
+      directory: './commands/',
+      prefix: localConfig.prefix,
+      defaultCooldown: 5000,
+      commandUtil: true
+    })
 
-  public staffComandHandler = new CommandHandler(this, {
-    directory: './staff_commands/',
-    prefix: config.staffPrefix,
-    defaultCooldown: 1000,
-    commandUtil: true
-  })
+    public staffComandHandler = new CommandHandler(this, {
+      directory: './staff_commands/',
+      prefix: localConfig.staffPrefix,
+      defaultCooldown: 1000,
+      commandUtil: true
+    })
 
-  public staffInhibitorHandler = new InhibitorHandler(this, {
-    directory: './staff_inhibitors/'
-  })
+    public staffInhibitorHandler = new InhibitorHandler(this, {
+      directory: './staff_inhibitors/'
+    })
 
-  public listenerHandler = new ListenerHandler(this, {
-    directory: './listeners/'
-  })
+    public listenerHandler = new ListenerHandler(this, {
+      directory: './build/src/listeners'
+    })
 
-  public constructor() {
-    super(
-      {
-        ownerID: config.owners
-      },
-      {
-        fetchAllMembers: true,
-        presence: {
-          status: 'online',
-          activity: {
-            name: `${config.prefix}help | ${version}`,
-            type: 'WATCHING'
+    public constructor() {
+      super(
+        {
+          ownerID: localConfig.owners
+        },
+        {
+          fetchAllMembers: true,
+          presence: {
+            status: 'online',
+            activity: {
+              name: `${localConfig.prefix}help | ${version}`,
+              type: 'WATCHING'
+            }
           }
         }
-      }
-    )
+      )
 
-    // Main Handlers
-    this.commandHandler.useListenerHandler(this.listenerHandler)
-    this.listenerHandler.loadAll()
-    this.commandHandler.loadAll()
+      // Main Handlers
+      this.commandHandler.useListenerHandler(this.listenerHandler)
+      this.listenerHandler.loadAll()
+      this.commandHandler.loadAll()
 
-    // Staff Handlers
-    this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
-    this.staffComandHandler.loadAll()
-    this.staffInhibitorHandler.loadAll()
+      // Staff Handlers
+      this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
+      this.staffComandHandler.loadAll()
+      this.staffInhibitorHandler.loadAll()
+    }
   }
-}
-const client = new MainClient()
+  const client = new MainClient()
 
-function enableMaintenance() {
-  if (!client.user) throw 'Client User not initilized'
-  client.commandHandler.removeAll()
-  client.listenerHandler.removeAll()
-  client.user.setPresence({
-    status: 'dnd',
-    activity: {
-      name: `Offline - Back soon!`,
-      type: 'WATCHING'
-    }
-  })
-}
+  function enableMaintenance() {
+    if (!client.user) throw 'Client User not initilized'
+    client.commandHandler.removeAll()
+    client.listenerHandler.removeAll()
+    client.user.setPresence({
+      status: 'dnd',
+      activity: {
+        name: `Offline - Back soon!`,
+        type: 'WATCHING'
+      }
+    })
+  }
 
-function disableMaintenance() {
-  if (!client.user) throw 'Client User not initilized'
-  client.commandHandler.loadAll()
-  client.listenerHandler.loadAll()
-  client.user.setPresence({
-    status: 'online',
-    activity: {
-      name: `${config.prefix}help | ${version}`,
-      type: 'WATCHING'
-    }
-  })
-}
+  function disableMaintenance() {
+    if (!client.user) throw 'Client User not initilized'
+    client.commandHandler.loadAll()
+    client.listenerHandler.loadAll()
+    client.user.setPresence({
+      status: 'online',
+      activity: {
+        name: `${localConfig.prefix}help | ${version}`,
+        type: 'WATCHING'
+      }
+    })
+  }
 
-if (config.token) {
-  console.log('Logging in via config token...')
-  client.login(config.token)
-} else {
-  console.log('Logging in via environment token...')
-  client.login(process.env.BOT_TOKEN)
+  if (localConfig.token) {
+    console.log('Logging in via config token...')
+    client.login(localConfig.token)
+  } else {
+    console.log('Logging in via environment token...')
+    client.login(process.env.BOT_TOKEN)
+  }
+
+  embedExport = embed
+  enableMaintenanceExport = enableMaintenance
+  disableMaintenanceExport = disableMaintenance
+}
+export {
+  localConfig as config,
+  embedExport as embed,
+  enableMaintenanceExport as enableMaintenance,
+  disableMaintenanceExport as disableMaintenance
 }

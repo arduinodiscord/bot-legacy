@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    /* Basics */
+    "target": "esnext",
     "module": "commonjs",
     "outDir": "./build",
     "resolveJsonModule": true,
@@ -11,7 +12,10 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "baseUrl": "./src",
-    "typeRoots": ["interfaces", "../node_modules/@types"]
+    "typeRoots": ["interfaces", "../node_modules/@types"],
+    /* Resolution */
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "src/bot.ts", "config-dev.json", "config-prod.json"]
 }
