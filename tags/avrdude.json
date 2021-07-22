@@ -37,7 +37,7 @@
     },
     {
       "name": "9. Are you running Linux?",
-      "value": "If you are running Linux, try checking which groups you belong by using the `groups` command, then look at which group you need to be in with `ls -l /dev/ttyACM*`, `ls -l /dev/S*` or `ls -ls /dev/USB*` (replace the `*` with your port number), then use this command:- `sudo usermod -a -G <group> <username>` and add your user to the necessary groups."
+      "value": "If you are running Linux, try checking which groups you belong by using the `groups` command, then look at which group you need to be in with `ls -l /dev/ttyACM*`, `ls -l /dev/S*` or `ls -ls /dev/USB*` (replace the `*` with your port number), then use this command:- `sudo gpasswd -a <user> <groups>` and add your user to the necessary groups."
     },
     {
       "name": "10. Are your drivers installed?",
