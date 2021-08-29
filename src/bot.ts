@@ -30,7 +30,9 @@ import(devLocation)
       })
       .catch((err) => {
         console.log(err)
-        console.log('Failed to load a production config...missing config file? Stopping.')
+        console.log(
+          'Failed to load a production config...missing config file? Stopping.'
+        )
         process.exit()
       })
   })
@@ -49,21 +51,21 @@ function initilize() {
 
   class MainClient extends AkairoClient {
     public commandHandler: CommandHandler = new CommandHandler(this, {
-      directory: './commands/',
+      directory: './build/src/commands/',
       prefix: localConfig.prefix,
       defaultCooldown: 5000,
       commandUtil: true
     })
 
     public staffComandHandler = new CommandHandler(this, {
-      directory: './staff_commands/',
+      directory: './build/src/staff_commands/',
       prefix: localConfig.staffPrefix,
       defaultCooldown: 1000,
       commandUtil: true
     })
 
     public staffInhibitorHandler = new InhibitorHandler(this, {
-      directory: './staff_inhibitors/'
+      directory: './build/src/staff_inhibitors/'
     })
 
     public listenerHandler = new ListenerHandler(this, {
@@ -76,14 +78,16 @@ function initilize() {
           ownerID: localConfig.owners
         },
         {
-          fetchAllMembers: true,
           presence: {
             status: 'online',
-            activity: {
-              name: `${localConfig.prefix}help | ${version}`,
-              type: 'WATCHING'
-            }
-          }
+            activities: [
+              {
+                name: `${localConfig.prefix}help | ${version}`,
+                type: 'WATCHING'
+              }
+            ]
+          },
+          intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_PRESENCES', 'DIRECT_MESSAGES', 'GUILD_INTEGRATIONS', 'GUILD_MEMBERS']
         }
       )
 
@@ -106,10 +110,10 @@ function initilize() {
     client.listenerHandler.removeAll()
     client.user.setPresence({
       status: 'dnd',
-      activity: {
+      activities: [{
         name: `Offline - Back soon!`,
         type: 'WATCHING'
-      }
+      }]
     })
   }
 
@@ -119,10 +123,10 @@ function initilize() {
     client.listenerHandler.loadAll()
     client.user.setPresence({
       status: 'online',
-      activity: {
+      activities: [{
         name: `${localConfig.prefix}help | ${version}`,
         type: 'WATCHING'
-      }
+      }]
     })
   }
 

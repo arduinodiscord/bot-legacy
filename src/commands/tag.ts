@@ -8,7 +8,7 @@ let files = fs.readdirSync('./src/tags')
 var aggregateAliases: any[] = []
 files.forEach(file => {
   if (file.endsWith('.json') && (file !== 'template.json')) {
-    var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
+    var tagFile = JSON.parse(fs.readFileSync(`./build/src/tags/${file}`, 'utf-8'))
     aggregateAliases = [...aggregateAliases, ...tagFile.directAliases]
   }
 })
@@ -38,7 +38,7 @@ export class TagCommand extends Command {
         .setTitle("List of available tags")
         files.forEach(file => {
           if (file.endsWith('.json') && (file !== 'template.json')) {
-            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
+            var tagFile = JSON.parse(fs.readFileSync(`./build/src/tags/${file}`, 'utf-8'))
             tagEmbed.addField(tagFile.directAliases[0], tagFile.title)
           }
         })
@@ -46,7 +46,7 @@ export class TagCommand extends Command {
       } else {
         files.forEach(file => {
           if (file.endsWith('.json') && (file !== 'template.json')) {
-            var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
+            var tagFile = JSON.parse(fs.readFileSync(`./build/src/tags/${file}`, 'utf-8'))
             if (tagFile.aliases.includes(args.tagAlias)) {
               var tagEmbed = new MessageEmbed(embed)
                 .setTitle(tagFile.title)
@@ -64,7 +64,7 @@ export class TagCommand extends Command {
     } else {
       files.forEach(file => {
         if (file.endsWith('.json') && (file !== 'template.json')) {
-          var tagFile = JSON.parse(fs.readFileSync(`./tags/${file}`, 'utf-8'))
+          var tagFile = JSON.parse(fs.readFileSync(`./build/src/tags/${file}`, 'utf-8'))
           if (tagFile.directAliases.includes(usedAlias)) {
             var tagEmbed = new MessageEmbed(embed)
               .setTitle(tagFile.title)

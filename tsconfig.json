@@ -9,13 +9,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "declaration": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "typeRoots": ["interfaces", "../node_modules/@types"],
     /* Resolution */
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["**/*.ts", "src/bot.ts", "config-dev.json", "config-prod.json"]
+  "include": ["**/*.ts", "src/bot.ts", "config-dev.json", "config-prod.json", "src/tags/*.json"]
 }
