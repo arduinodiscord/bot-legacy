@@ -30,23 +30,27 @@ export default class GuildMemberAddListener extends Listener {
 
       if (inviteSource) {
         cache.setInviteCache(inviteSource.code, inviteSource.uses)
-        logChannel.send(
-          inviteEmbed.addField(
-            `Joined with invite code ${inviteSource.code} created by ${inviteSource.inviter.tag}`,
-            `Account created ${DateTime.fromJSDate(
-              member.user.createdAt
-            ).toLocaleString()}`
-          )
-        )
+        logChannel.send({
+          embeds: [
+            inviteEmbed.addField(
+              `Joined with invite code ${inviteSource.code} created by ${inviteSource.inviter.tag}`,
+              `Account created ${DateTime.fromJSDate(
+                member.user.createdAt
+              ).toLocaleString()}`
+            )
+          ]
+        })
       } else {
-        logChannel.send(
-          inviteEmbed.addField(
-            `Joined with unknown invite code. Likely through Server Discovery.`,
-            `Account created ${DateTime.fromJSDate(
-              member.user.createdAt
-            ).toLocaleString()}`
-          )
-        )
+        logChannel.send({
+          embeds: [
+            inviteEmbed.addField(
+              `Joined with unknown invite code. Likely through Server Discovery.`,
+              `Account created ${DateTime.fromJSDate(
+                member.user.createdAt
+              ).toLocaleString()}`
+            )
+          ]
+        })
       }
     })
   }

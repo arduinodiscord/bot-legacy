@@ -18,7 +18,7 @@ console.log('Attempting to use development config...')
 import(devLocation)
   .then((configDev) => {
     localConfig = configDev
-    initilize()
+    initialize()
   })
   .catch((err) => {
     console.log(err)
@@ -26,7 +26,7 @@ import(devLocation)
     import(prodLocation)
       .then((configProd) => {
         localConfig = configProd
-        initilize()
+        initialize()
       })
       .catch((err) => {
         console.log(err)
@@ -40,7 +40,7 @@ import(devLocation)
 let embedExport: Discord.MessageEmbed
 let enableMaintenanceExport: Function
 let disableMaintenanceExport: Function
-function initilize() {
+function initialize() {
   // Dumping Current Configuration
   console.log(`[CONFIG] Prefix: ${localConfig.prefix}`)
   console.log(`[CONFIG] Guild: ${localConfig.guild}`)
@@ -87,56 +87,73 @@ function initilize() {
               }
             ]
           },
-          intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_PRESENCES', 'DIRECT_MESSAGES', 'GUILD_INTEGRATIONS', 'GUILD_MEMBERS']
+          intents: [
+            'GUILDS',
+            'GUILD_MESSAGES',
+            'GUILD_PRESENCES',
+            'DIRECT_MESSAGES',
+            'GUILD_INTEGRATIONS',
+            'GUILD_MEMBERS'
+          ]
         }
       )
 
       // Main Handlers
       this.commandHandler.useListenerHandler(this.listenerHandler)
       this.listenerHandler.loadAll()
+      console.log('Loaded main listeners: ' + this.listenerHandler.modules.size)
       this.commandHandler.loadAll()
+      console.log('Loaded main commands: ' + this.commandHandler.modules.size)
 
       // Staff Handlers
       this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
       this.staffComandHandler.loadAll()
+      console.log('Loaded staff commands: ' + this.staffComandHandler.modules.size)
       this.staffInhibitorHandler.loadAll()
+      console.log('Loaded staff inhibitors: ' + this.staffInhibitorHandler.modules.size)
     }
   }
+  console.log('Registering client...')
   const client = new MainClient()
 
   function enableMaintenance() {
-    if (!client.user) throw 'Client User not initilized'
+    if (!client.user) throw 'Client user is not initialized'
     client.commandHandler.removeAll()
     client.listenerHandler.removeAll()
     client.user.setPresence({
       status: 'dnd',
-      activities: [{
-        name: `Offline - Back soon!`,
-        type: 'WATCHING'
-      }]
+      activities: [
+        {
+          name: `Offline - Back soon!`,
+          type: 'WATCHING'
+        }
+      ]
     })
   }
 
   function disableMaintenance() {
-    if (!client.user) throw 'Client User not initilized'
+    if (!client.user) throw 'Client user is not initialized'
     client.commandHandler.loadAll()
     client.listenerHandler.loadAll()
     client.user.setPresence({
       status: 'online',
-      activities: [{
-        name: `${localConfig.prefix}help | ${version}`,
-        type: 'WATCHING'
-      }]
+      activities: [
+        {
+          name: `${localConfig.prefix}help | ${version}`,
+          type: 'WATCHING'
+        }
+      ]
     })
   }
 
-  if (localConfig.token) {
-    console.log('Logging in via config token...')
-    client.login(localConfig.token)
-  } else {
-    console.log('Logging in via environment token...')
-    client.login(process.env.BOT_TOKEN)
-  }
+  client.login(process.env.BOT_TOKEN)
+  // if (localConfig.token !== '') {
+  //   console.log('Logging in via config token...')
+  //   client.login(localConfig.token)
+  // } else {
+  //   console.log('Logging in via environment token...')
+  //   client.login(process.env.BOT_TOKEN)
+  // }
 
   embedExport = embed
   enableMaintenanceExport = enableMaintenance

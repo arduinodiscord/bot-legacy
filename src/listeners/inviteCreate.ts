@@ -1,7 +1,7 @@
 import { Listener } from 'discord-akairo'
 import * as cache from '../utils/cache'
 
-export class InviteCreateListener extends Listener {
+export default class InviteCreateListener extends Listener {
   constructor() {
     super('inviteCreate', {
       emitter: 'client',
@@ -9,7 +9,7 @@ export class InviteCreateListener extends Listener {
     })
   }
 
-  exec(invite:any) {
+  exec(invite: any) {
     cache.setInviteCache(invite.code, 0)
   }
 }

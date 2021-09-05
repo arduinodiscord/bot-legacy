@@ -6,7 +6,7 @@ import { Duration } from 'luxon'
 
 import packLock from './../../package-lock.json'
 
-export class AboutCommand extends Command {
+export default class AboutCommand extends Command {
   constructor() {
     super('about', {
       aliases: ['about'],
@@ -14,24 +14,36 @@ export class AboutCommand extends Command {
     })
   }
 
-  exec(message:any) {
+  exec(message: any) {
     const about = new MessageEmbed(embed)
-    .setTimestamp(new Date())
-    .setTitle('About Arduino Bot')
-    .addField('Bot Version', version, true)
-    .addField('Node Version', process.version, true)
+      .setTimestamp(new Date())
+      .setTitle('About Arduino Bot')
+      .addField('Bot Version', version, true)
+      .addField('Node Version', process.version, true)
 
     if (packLock) {
-      about.addField('DiscordJS Version', 'v' + packLock.dependencies['discord.js'].version, true)
-      about.addField('Akairo Version', 'v' + packLock.dependencies['discord-akairo'].version, true)
+      about.addField(
+        'DiscordJS Version',
+        'v' + packLock.dependencies['discord.js'].version,
+        true
+      )
     }
 
-    about.addField('Contributing', '[GitHub](https://github.com/BluLightShow/arduino-bot)', true)
-    
-    if(!this.client.uptime) throw "Uptime invalid"
+    about.addField(
+      'Contributing',
+      '[GitHub](https://github.com/BluLightShow/arduino-bot)',
+      true
+    )
 
-    var clientDuration = Duration.fromMillis(this.client.uptime).toFormat('d h m').split(' ')
-    about.addField('Uptime', `${clientDuration[0]} days, ${clientDuration[1]} hours, ${clientDuration[2]} minutes`)
-    message.channel.send(about)
+    if (!this.client.uptime) throw 'Uptime invalid'
+
+    var clientDuration = Duration.fromMillis(this.client.uptime)
+      .toFormat('d h m')
+      .split(' ')
+    about.addField(
+      'Uptime',
+      `${clientDuration[0]} days, ${clientDuration[1]} hours, ${clientDuration[2]} minutes`
+    )
+    message.channel.send({ embeds: [about] })
   }
 }
