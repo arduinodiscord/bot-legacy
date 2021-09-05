@@ -41,10 +41,6 @@ let embedExport: Discord.MessageEmbed
 let enableMaintenanceExport: Function
 let disableMaintenanceExport: Function
 function initialize() {
-  // Dumping Current Configuration
-  console.log(`[CONFIG] Prefix: ${localConfig.prefix}`)
-  console.log(`[CONFIG] Guild: ${localConfig.guild}`)
-
   const embed = new Discord.MessageEmbed()
     .setFooter(localConfig.embeds.footer)
     .setColor(localConfig.embeds.color)
@@ -108,9 +104,13 @@ function initialize() {
       // Staff Handlers
       this.staffComandHandler.useInhibitorHandler(this.staffInhibitorHandler)
       this.staffComandHandler.loadAll()
-      console.log('Loaded staff commands: ' + this.staffComandHandler.modules.size)
+      console.log(
+        'Loaded staff commands: ' + this.staffComandHandler.modules.size
+      )
       this.staffInhibitorHandler.loadAll()
-      console.log('Loaded staff inhibitors: ' + this.staffInhibitorHandler.modules.size)
+      console.log(
+        'Loaded staff inhibitors: ' + this.staffInhibitorHandler.modules.size
+      )
     }
   }
   console.log('Registering client...')
@@ -146,14 +146,13 @@ function initialize() {
     })
   }
 
-  client.login(process.env.BOT_TOKEN)
-  // if (localConfig.token !== '') {
-  //   console.log('Logging in via config token...')
-  //   client.login(localConfig.token)
-  // } else {
-  //   console.log('Logging in via environment token...')
-  //   client.login(process.env.BOT_TOKEN)
-  // }
+  if (localConfig.token !== '') {
+    console.log('Logging in via config token...')
+    client.login(localConfig.token)
+  } else {
+    console.log('Logging in via environment token...')
+    client.login(process.env.BOT_TOKEN)
+  }
 
   embedExport = embed
   enableMaintenanceExport = enableMaintenance
