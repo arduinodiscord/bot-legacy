@@ -140,14 +140,6 @@ export default class MessageCreateListener extends Listener {
         })
     }
 
-    // Initial reaction for code block pastes
-    if (
-      message.content.includes('```') &&
-      message.content.match(/```/g).length >= 2
-    ) {
-      message.react(config.pasteEmoji).catch((err: any) => console.error(err))
-    }
-
     // Message link flattening
     const messageLinkMatchArray = message.content.match(
       /https?:\/\/(canary.)?discord\.com\/channels\/\d{18}\/\d{18}\/\d{18}/gm
