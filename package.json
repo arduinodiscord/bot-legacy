@@ -4,7 +4,7 @@
   "description": "A bot to help the arduino community!",
   "main": "src/bot.ts",
   "dependencies": {
-    "discord-akairo": "github:discord-akairo/discord-akairo",
+    "discord-akairo": "^8.1.0",
     "discord.js": "^13.1.0",
     "dotenv": "^8.2.0",
     "gists": "^2.0.0",
@@ -31,8 +31,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "prettier-eslint": "^12.0.0",
-    "standard": "^12.0.1",
+    "prettier-eslint": "^8.2.2",
+    "standard": "^16.0.4",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   },
