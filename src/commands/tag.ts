@@ -6,11 +6,9 @@ import { embed, config } from '../bot'
 let files = fs.readdirSync('./src/tags')
 
 var aggregateAliases: any[] = []
-files.forEach((file) => {
+files.forEach(file => {
   if (file.endsWith('.json') && file !== 'template.json') {
-    var tagFile = JSON.parse(
-      fs.readFileSync(`./build/src/tags/${file}`, 'utf-8')
-    )
+    var tagFile = JSON.parse(fs.readFileSync(`./src/tags/${file}`, 'utf-8'))
     aggregateAliases = [...aggregateAliases, ...tagFile.directAliases]
   }
 })
@@ -38,20 +36,20 @@ export default class TagCommand extends Command {
         var tagEmbed = new MessageEmbed(embed).setTitle(
           'List of available tags'
         )
-        files.forEach((file) => {
+        files.forEach(file => {
           if (file.endsWith('.json') && file !== 'template.json') {
             var tagFile = JSON.parse(
-              fs.readFileSync(`./build/src/tags/${file}`, 'utf-8')
+              fs.readFileSync(`./src/tags/${file}`, 'utf-8')
             )
             tagEmbed.addField(tagFile.directAliases[0], tagFile.title)
           }
         })
         message.channel.send({ embeds: [tagEmbed] })
       } else {
-        files.forEach((file) => {
+        files.forEach(file => {
           if (file.endsWith('.json') && file !== 'template.json') {
             var tagFile = JSON.parse(
-              fs.readFileSync(`./build/src/tags/${file}`, 'utf-8')
+              fs.readFileSync(`./src/tags/${file}`, 'utf-8')
             )
             if (tagFile.aliases.includes(args.tagAlias)) {
               var tagEmbed = new MessageEmbed(embed).setTitle(tagFile.title)
@@ -67,10 +65,10 @@ export default class TagCommand extends Command {
         })
       }
     } else {
-      files.forEach((file) => {
+      files.forEach(file => {
         if (file.endsWith('.json') && file !== 'template.json') {
           var tagFile = JSON.parse(
-            fs.readFileSync(`./build/src/tags/${file}`, 'utf-8')
+            fs.readFileSync(`./src/tags/${file}`, 'utf-8')
           )
           if (tagFile.directAliases.includes(usedAlias)) {
             var tagEmbed = new MessageEmbed(embed).setTitle(tagFile.title)

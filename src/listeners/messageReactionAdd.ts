@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo'
-import { MessageEmbed } from 'discord.js'
+import { MessageEmbed, MessageReaction, User } from 'discord.js'
 import { embed, config } from '../bot'
 
 //@ts-ignore
@@ -17,23 +17,28 @@ export default class MessageReactionAddListener extends Listener {
     })
   }
 
-  exec(reaction: any, user: any) {
+  exec(reaction: MessageReaction, user: User) {
+    console.log('hello')
+
     if (user.bot) return
 
     if (reaction.emoji.id === config.pasteEmoji && reaction.me) {
+      if (!reaction.message.guild) return
       if (
-        user.id === reaction.message.author.id ||
+        user.id === reaction.message.author?.id ||
         reaction.message.guild.members
           .resolve(user.id)
-          .roles.cache.find((role: any) => role.id === config.roles.helper)
+          ?.roles.cache.find((role: any) => role.id === config.roles.helper)
       ) {
         let message = reaction.message
         let content = message.content
 
-        let numberOfSeparators = message.content.match(/```/g).length
+        let numberOfSeparators = message.content?.match(/```/g)?.length
+
+        if (!content) return
 
         let array = content
-          .slice(content.indexOf('```'), content.length)
+          .slice(content?.indexOf('```'), content?.length)
           .split('```')
         let currentCodeBlock = 0
         let files = {
@@ -45,7 +50,7 @@ export default class MessageReactionAddListener extends Listener {
             \n# ⬇️ Pasted Code ⬇️`
           }
         }
-        for (let i = 0; i <= numberOfSeparators; i++) {
+        for (let i = 0; i <= (numberOfSeparators || 0); i++) {
           if (i % 2 !== 0) {
             currentCodeBlock++
             files = {
@@ -58,7 +63,7 @@ export default class MessageReactionAddListener extends Listener {
         }
         gists
           .create({
-            description: `Code by ${message.author.tag} - ${new Date()}`,
+            description: `Code by ${message.author?.tag} - ${new Date()}`,
             public: true,
             files: { ...files }
           })
@@ -73,8 +78,8 @@ export default class MessageReactionAddListener extends Listener {
                     )
                     .setDescription(`**${gist.body.html_url}**`)
                     .setAuthor(
-                      `Code by ${message.author.tag}`,
-                      message.author.avatarURL({ dynamic: true })
+                      `Code by ${message.author?.tag}`,
+                      message.author?.avatarURL({ dynamic: true }) || ''
                     )
                     .addField('Paste requested by:', user.tag, true)
                 ]

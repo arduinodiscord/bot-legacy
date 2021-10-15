@@ -4,7 +4,7 @@
   "description": "A bot to help the arduino community!",
   "main": "src/bot.ts",
   "dependencies": {
-    "discord-akairo": "^8.1.0",
+    "discord-akairo": "github:discord-akairo/discord-akairo",
     "discord.js": "^13.1.0",
     "dotenv": "^8.2.0",
     "gists": "^2.0.0",

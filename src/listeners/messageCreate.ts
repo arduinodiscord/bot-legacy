@@ -57,14 +57,12 @@ export default class MessageCreateListener extends Listener {
               .addField('Channel', message.channel.toString())
               .addField(
                 'Similarity',
-                `${
-                  Math.floor(
-                    stringSimilarity.compareTwoStrings(
-                      original.content,
-                      message.content
-                    ) * 10000
-                  ) / 100
-                }%`,
+                `${Math.floor(
+                  stringSimilarity.compareTwoStrings(
+                    original.content,
+                    message.content
+                  ) * 10000
+                ) / 100}%`,
                 true
               )
               .setTimestamp(new Date())
@@ -105,7 +103,10 @@ export default class MessageCreateListener extends Listener {
           'vexe',
           'oar'
         ]
-        const extension = attachment.name.split('.').pop().toLowerCase()
+        const extension = attachment.name
+          .split('.')
+          .pop()
+          .toLowerCase()
         return (
           blockedExtensions.includes(extension) &&
           !message.member.roles.cache.find(
