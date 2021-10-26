@@ -17,9 +17,7 @@ export default class MessageReactionAddListener extends Listener {
     })
   }
 
-  exec(reaction: MessageReaction, user: User) {
-    console.log('hello')
-
+  exec(reaction: any, user: any) {
     if (user.bot) return
 
     if (reaction.emoji.id === config.pasteEmoji && reaction.me) {
@@ -79,7 +77,9 @@ export default class MessageReactionAddListener extends Listener {
                     .setDescription(`**${gist.body.html_url}**`)
                     .setAuthor(
                       `Code by ${message.author?.tag}`,
-                      message.author?.avatarURL({ dynamic: true }) || ''
+                      message.author?.avatarURL({
+                        dynamic: true
+                      }) || ''
                     )
                     .addField('Paste requested by:', user.tag, true)
                 ]

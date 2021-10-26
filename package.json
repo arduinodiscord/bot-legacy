@@ -5,7 +5,7 @@
   "main": "src/bot.ts",
   "dependencies": {
     "discord-akairo": "github:discord-akairo/discord-akairo",
-    "discord.js": "^13.1.0",
+    "discord.js": "^13.2.0",
     "dotenv": "^8.2.0",
     "gists": "^2.0.0",
     "luxon": "^1.26.0",

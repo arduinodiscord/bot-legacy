@@ -103,6 +103,7 @@ function initialize() {
         intents: [
           'GUILDS',
           'GUILD_MESSAGES',
+          'GUILD_MESSAGE_REACTIONS',
           'GUILD_PRESENCES',
           'DIRECT_MESSAGES',
           'GUILD_INTEGRATIONS',
