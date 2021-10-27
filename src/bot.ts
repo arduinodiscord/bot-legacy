@@ -7,41 +7,62 @@ import {
   InhibitorHandler,
   ListenerHandler
 } from 'discord-akairo'
-import * as Discord from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 import { version } from '../package.json'
 
-let localConfig: any
-const devLocation = '../config-dev.json'
-const prodLocation = '../config-prod.json'
+interface Config {
+  token: string
+  debug: boolean
+  prefix: string
+  guild: string
+  staffPrefix: string
+  channels: {
+    joinLeaveLog: string
+    crosspostLog: string
+    moderationLog: string
+    toCrosspost: string[]
+    preventDuplicates: string[]
+  }
+  embeds: {
+    footer: string
+    color: any
+  }
+  pasteEmoji: string
+  roles: {
+    helper: string
+    staff: string
+  }
+  owners: string[]
+}
+
+let localConfig: Config
 
 console.log('Attempting to use development config...')
-import(devLocation)
-  .then((configDev) => {
+
+;(async () => {
+  let configDev: Config | undefined = await import('../config-dev.json')
+  if (!configDev) {
+    console.log('Failed to find development config...trying production...')
+    let configProd: Config | undefined = await import('../config-prod.json')
+    if (!configProd)
+      throw new Error(
+        'Failed to load a production config...missing config file? Stopping.'
+      )
+    else {
+      localConfig = configProd
+      initialize()
+    }
+  } else {
     localConfig = configDev
     initialize()
-  })
-  .catch((err) => {
-    console.log(err)
-    console.log('Failed to find development config...trying production...')
-    import(prodLocation)
-      .then((configProd) => {
-        localConfig = configProd
-        initialize()
-      })
-      .catch((err) => {
-        console.log(err)
-        console.log(
-          'Failed to load a production config...missing config file? Stopping.'
-        )
-        process.exit()
-      })
-  })
+  }
+})()
 
-let embedExport: Discord.MessageEmbed
+let embedExport: MessageEmbed
 let enableMaintenanceExport: Function
 let disableMaintenanceExport: Function
 function initialize() {
-  const embed = new Discord.MessageEmbed()
+  const embed = new MessageEmbed()
     .setFooter(localConfig.embeds.footer)
     .setColor(localConfig.embeds.color)
 
