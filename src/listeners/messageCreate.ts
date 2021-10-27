@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo'
-import { MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed, TextChannel } from 'discord.js'
 import stringSimilarity from 'string-similarity'
 import { embed, config } from '../bot'
 
@@ -11,22 +11,24 @@ export default class MessageCreateListener extends Listener {
     })
   }
 
-  exec(message: any) {
+  exec(message: Message) {
     if (message.author.bot) return
     // Duplicates filter
     for (var i = 0; i < config.channels.preventDuplicates.length; i++) {
       var channelID = config.channels.preventDuplicates[i]
       if (message.channel.id === channelID) continue
-      var channel = message.guild.channels.resolve(channelID)
-      var original = channel.messages.cache.find((msg: any) => {
-        // Conditions to flag message as duplicate
-        return (
-          stringSimilarity.compareTwoStrings(msg.content, message.content) >=
-            0.9 &&
-          msg.content.length >= 10 &&
-          message.author === msg.author
-        )
-      })
+      var channel = message.guild?.channels.resolve(channelID)
+      var original = (channel as TextChannel).messages.cache.find(
+        (msg: any) => {
+          // Conditions to flag message as duplicate
+          return (
+            stringSimilarity.compareTwoStrings(msg.content, message.content) >=
+              0.9 &&
+            msg.content.length >= 10 &&
+            message.author === msg.author
+          )
+        }
+      )
 
       if (original) {
         message.delete()
@@ -40,16 +42,19 @@ export default class MessageCreateListener extends Listener {
             'This is against our rules, please refrain from crossposting duplicate messages in the future. If you believe this message was sent in error, please DM <@799678733723893821> with valid reasoning.'
           )
           .setTimestamp(new Date())
+
         if (message.author.dmChannel) {
           message.author.dmChannel.send({ embeds: [dmMessage] })
         } else {
-          message.author.createDM().then((dmChannel: any) => {
-            dmChannel.send(dmMessage)
+          message.author.createDM().then(dmChannel => {
+            dmChannel.send({ embeds: [dmMessage] })
           })
         }
 
         // Post to mod log
-        message.guild.channels.resolve(config.channels.moderationLog).send({
+        ;(message.guild?.channels.resolve(
+          config.channels.moderationLog
+        ) as TextChannel).send({
           embeds: [
             new MessageEmbed(embed)
               .setTitle('Duplicate Crosspost Detected')
@@ -109,7 +114,7 @@ export default class MessageCreateListener extends Listener {
           .toLowerCase()
         return (
           blockedExtensions.includes(extension) &&
-          !message.member.roles.cache.find(
+          !message.member?.roles.cache.find(
             (role: any) => role.id === '451152561735467018'
           )
         )
@@ -128,7 +133,7 @@ export default class MessageCreateListener extends Listener {
                 )
                 .setAuthor(
                   message.author.tag,
-                  message.author.avatarURL({ dynamic: true })
+                  message.author.avatarURL({ dynamic: true }) || ''
                 )
             ]
           })
@@ -144,7 +149,7 @@ export default class MessageCreateListener extends Listener {
     // Initial reaction for code block pastes
     if (
       message.content.includes('```') &&
-      message.content.match(/```/g).length >= 2
+      (message.content.match(/```/g) || '').length >= 2
     ) {
       message.react(config.pasteEmoji).catch((err: any) => console.error(err))
     }
@@ -157,10 +162,11 @@ export default class MessageCreateListener extends Listener {
       messageLinkMatchArray.forEach((link: any) => {
         let linkArray = link.split('/')
         linkArray.splice(0, 4)
-        if (linkArray[0] === message.guild.id) {
-          message.guild.channels
-            .resolve(linkArray[1])
-            .messages.fetch(linkArray[2])
+        if (linkArray[0] === message.guild?.id) {
+          ;(message.guild?.channels.resolve(
+            linkArray[1]
+          ) as TextChannel).messages
+            .fetch(linkArray[2])
             .then((msg: any) => {
               message.channel.send({
                 embeds: [
@@ -185,31 +191,35 @@ export default class MessageCreateListener extends Listener {
 
     // Auto-crosspost feed channels
     if (config.channels.toCrosspost.includes(`${message.channel.id}`)) {
-      var crosspostLog = message.guild.channels.resolve(
+      var crosspostLog = message.guild?.channels.resolve(
         config.channels.crosspostLog
       )
       if (message.crosspostable) {
         message
           .crosspost()
           .then(() => {
-            crosspostLog.send({
+            ;(crosspostLog as TextChannel).send({
               embeds: [
                 new MessageEmbed(embed)
                   .setTimestamp(new Date())
                   .setTitle(
-                    `Successfully auto-crossposted in #${message.channel.name}`
+                    `Successfully auto-crossposted in #${
+                      (message.channel as TextChannel).name
+                    }`
                   )
               ]
             })
           })
           .catch((err: any) => {
             console.error(err)
-            crosspostLog.send({
+            ;(crosspostLog as TextChannel).send({
               embeds: [
                 new MessageEmbed(embed)
                   .setTimestamp(new Date())
                   .setTitle(
-                    `Failed to auto-crosspost in #${message.channel.name}`
+                    `Failed to auto-crosspost in #${
+                      (message.channel as TextChannel).name
+                    }`
                   )
                   .setDescription(
                     'This is likely due to ratelimiting. Check production logs for more information.'
