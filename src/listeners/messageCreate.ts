@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo'
-import { MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed, TextChannel } from 'discord.js'
 import stringSimilarity from 'string-similarity'
 import { embed, config } from '../bot'
 
@@ -11,12 +11,12 @@ export default class MessageCreateListener extends Listener {
     })
   }
 
-  exec(message: any) {
+  exec(message: Message) {
     // Auto-crosspost feed channels
     if (config.channels.toCrosspost.includes(message.channel.id)) {
-      var crosspostLog = message.guild.channels.resolve(
+      var crosspostLog = message.guild?.channels.resolve(
         config.channels.crosspostLog
-      )
+      ) as TextChannel
       if (message.crosspostable) {
         message
           .crosspost()
@@ -26,7 +26,7 @@ export default class MessageCreateListener extends Listener {
                 new MessageEmbed(embed)
                   .setTimestamp(new Date())
                   .setTitle(
-                    `Successfully auto-crossposted in #${message.channel.name}`
+                    `Successfully auto-crossposted in #${(message.channel as TextChannel).name}`
                   )
               ]
             })
@@ -38,7 +38,7 @@ export default class MessageCreateListener extends Listener {
                 new MessageEmbed(embed)
                   .setTimestamp(new Date())
                   .setTitle(
-                    `Failed to auto-crosspost in #${message.channel.name}`
+                    `Failed to auto-crosspost in #${(message.channel as TextChannel).name}`
                   )
                   .setDescription(
                     'This is likely due to ratelimiting. Check production logs for more information.'
@@ -54,7 +54,7 @@ export default class MessageCreateListener extends Listener {
     for (var i = 0; i < config.channels.preventDuplicates.length; i++) {
       var channelID = config.channels.preventDuplicates[i]
       if (message.channel.id === channelID) continue
-      var channel = message.guild.channels.resolve(channelID)
+      var channel = message.guild?.channels.resolve(channelID) as TextChannel
       var original = channel.messages.cache.find((msg: any) => {
         // Conditions to flag message as duplicate
         return (
@@ -80,13 +80,13 @@ export default class MessageCreateListener extends Listener {
         if (message.author.dmChannel) {
           message.author.dmChannel.send({ embeds: [dmMessage] })
         } else {
-          message.author.createDM().then((dmChannel: any) => {
-            dmChannel.send(dmMessage)
+          message.author.createDM().then((dmChannel) => {
+            dmChannel.send({ embeds: [dmMessage] })
           })
         }
 
         // Post to mod log
-        message.guild.channels.resolve(config.channels.moderationLog).send({
+        (message.guild?.channels.resolve(config.channels.moderationLog) as TextChannel).send({
           embeds: [
             new MessageEmbed(embed)
               .setTitle('Duplicate Crosspost Detected')
@@ -146,7 +146,7 @@ export default class MessageCreateListener extends Listener {
         const extension = attachment.name.split('.').pop().toLowerCase()
         return (
           blockedExtensions.includes(extension) &&
-          !message.member.roles.cache.find(
+          !message.member?.roles.cache.find(
             (role: any) => role.id === '451152561735467018'
           )
         )
@@ -165,7 +165,7 @@ export default class MessageCreateListener extends Listener {
                 )
                 .setAuthor(
                   message.author.tag,
-                  message.author.avatarURL({ dynamic: true })
+                  message.author.avatarURL({ dynamic: true }) || ""
                 )
             ]
           })
@@ -186,9 +186,9 @@ export default class MessageCreateListener extends Listener {
       messageLinkMatchArray.forEach((link: any) => {
         let linkArray = link.split('/')
         linkArray.splice(0, 4)
-        if (linkArray[0] === message.guild.id) {
-          message.guild.channels
-            .resolve(linkArray[1])
+        if (linkArray[0] === message.guild?.id) {
+          (message.guild?.channels
+            .resolve(linkArray[1]) as TextChannel)
             .messages.fetch(linkArray[2])
             .then((msg: any) => {
               message.channel.send({
