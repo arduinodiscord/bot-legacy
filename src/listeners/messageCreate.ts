@@ -12,6 +12,43 @@ export default class MessageCreateListener extends Listener {
   }
 
   exec(message: any) {
+    // Auto-crosspost feed channels
+    if (config.channels.toCrosspost.includes(message.channel.id)) {
+      var crosspostLog = message.guild.channels.resolve(
+        config.channels.crosspostLog
+      )
+      if (message.crosspostable) {
+        message
+          .crosspost()
+          .then(() => {
+            crosspostLog.send({
+              embeds: [
+                new MessageEmbed(embed)
+                  .setTimestamp(new Date())
+                  .setTitle(
+                    `Successfully auto-crossposted in #${message.channel.name}`
+                  )
+              ]
+            })
+          })
+          .catch((err: any) => {
+            console.error(err)
+            crosspostLog.send({
+              embeds: [
+                new MessageEmbed(embed)
+                  .setTimestamp(new Date())
+                  .setTitle(
+                    `Failed to auto-crosspost in #${message.channel.name}`
+                  )
+                  .setDescription(
+                    'This is likely due to ratelimiting. Check production logs for more information.'
+                  )
+              ]
+            })
+          })
+      }
+    }
+
     if (message.author.bot) return
     // Duplicates filter
     for (var i = 0; i < config.channels.preventDuplicates.length; i++) {
@@ -21,10 +58,10 @@ export default class MessageCreateListener extends Listener {
       var original = channel.messages.cache.find((msg: any) => {
         // Conditions to flag message as duplicate
         return (
-          stringSimilarity.compareTwoStrings(msg.content, message.content) >=
-            0.9 &&
-          msg.content.length >= 10 &&
-          message.author === msg.author
+          (stringSimilarity.compareTwoStrings(msg.content, message.content) >=
+            0.9) &&
+          (msg.content.length >= 10) &&
+          (message.author === msg.author)
         )
       })
 
@@ -67,6 +104,7 @@ export default class MessageCreateListener extends Listener {
                 }%`,
                 true
               )
+              .addField('Matched Duplicate String', message.content)
               .setTimestamp(new Date())
           ]
         })
@@ -172,43 +210,6 @@ export default class MessageCreateListener extends Listener {
             })
         }
       })
-    }
-
-    // Auto-crosspost feed channels
-    if (config.channels.toCrosspost.includes(`${message.channel.id}`)) {
-      var crosspostLog = message.guild.channels.resolve(
-        config.channels.crosspostLog
-      )
-      if (message.crosspostable) {
-        message
-          .crosspost()
-          .then(() => {
-            crosspostLog.send({
-              embeds: [
-                new MessageEmbed(embed)
-                  .setTimestamp(new Date())
-                  .setTitle(
-                    `Successfully auto-crossposted in #${message.channel.name}`
-                  )
-              ]
-            })
-          })
-          .catch((err: any) => {
-            console.error(err)
-            crosspostLog.send({
-              embeds: [
-                new MessageEmbed(embed)
-                  .setTimestamp(new Date())
-                  .setTitle(
-                    `Failed to auto-crosspost in #${message.channel.name}`
-                  )
-                  .setDescription(
-                    'This is likely due to ratelimiting. Check production logs for more information.'
-                  )
-              ]
-            })
-          })
-      }
     }
   }
 }
