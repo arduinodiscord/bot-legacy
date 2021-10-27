@@ -46,15 +46,17 @@ export default class MessageCreateListener extends Listener {
         if (message.author.dmChannel) {
           message.author.dmChannel.send({ embeds: [dmMessage] })
         } else {
-          message.author.createDM().then(dmChannel => {
+          message.author.createDM().then((dmChannel) => {
             dmChannel.send({ embeds: [dmMessage] })
           })
         }
 
         // Post to mod log
-        ;(message.guild?.channels.resolve(
-          config.channels.moderationLog
-        ) as TextChannel).send({
+        ;(
+          message.guild?.channels.resolve(
+            config.channels.moderationLog
+          ) as TextChannel
+        ).send({
           embeds: [
             new MessageEmbed(embed)
               .setTitle('Duplicate Crosspost Detected')
@@ -62,12 +64,14 @@ export default class MessageCreateListener extends Listener {
               .addField('Channel', message.channel.toString())
               .addField(
                 'Similarity',
-                `${Math.floor(
-                  stringSimilarity.compareTwoStrings(
-                    original.content,
-                    message.content
-                  ) * 10000
-                ) / 100}%`,
+                `${
+                  Math.floor(
+                    stringSimilarity.compareTwoStrings(
+                      original.content,
+                      message.content
+                    ) * 10000
+                  ) / 100
+                }%`,
                 true
               )
               .setTimestamp(new Date())
@@ -108,10 +112,7 @@ export default class MessageCreateListener extends Listener {
           'vexe',
           'oar'
         ]
-        const extension = attachment.name
-          .split('.')
-          .pop()
-          .toLowerCase()
+        const extension = attachment.name.split('.').pop().toLowerCase()
         return (
           blockedExtensions.includes(extension) &&
           !message.member?.roles.cache.find(
@@ -163,9 +164,9 @@ export default class MessageCreateListener extends Listener {
         let linkArray = link.split('/')
         linkArray.splice(0, 4)
         if (linkArray[0] === message.guild?.id) {
-          ;(message.guild?.channels.resolve(
-            linkArray[1]
-          ) as TextChannel).messages
+          ;(
+            message.guild?.channels.resolve(linkArray[1]) as TextChannel
+          ).messages
             .fetch(linkArray[2])
             .then((msg: any) => {
               message.channel.send({
