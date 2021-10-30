@@ -38,7 +38,6 @@ interface Config {
 let localConfig: Config
 
 console.log('Attempting to use development config...')
-
 ;(async () => {
   let configDev: Config | undefined = await import('../config-dev.json')
   if (!configDev) {

@@ -1,6 +1,6 @@
 {
   "name": "arduino-bot",
-  "version": "v0.1.7",
+  "version": "v0.2.0",
   "description": "A bot to help the arduino community!",
   "main": "src/bot.ts",
   "dependencies": {

@@ -26,7 +26,9 @@ export default class MessageCreateListener extends Listener {
                 new MessageEmbed(embed)
                   .setTimestamp(new Date())
                   .setTitle(
-                    `Successfully auto-crossposted in #${(message.channel as TextChannel).name}`
+                    `Successfully auto-crossposted in #${
+                      (message.channel as TextChannel).name
+                    }`
                   )
               ]
             })
@@ -38,7 +40,9 @@ export default class MessageCreateListener extends Listener {
                 new MessageEmbed(embed)
                   .setTimestamp(new Date())
                   .setTitle(
-                    `Failed to auto-crosspost in #${(message.channel as TextChannel).name}`
+                    `Failed to auto-crosspost in #${
+                      (message.channel as TextChannel).name
+                    }`
                   )
                   .setDescription(
                     'This is likely due to ratelimiting. Check production logs for more information.'
@@ -58,10 +62,10 @@ export default class MessageCreateListener extends Listener {
       var original = channel.messages.cache.find((msg: any) => {
         // Conditions to flag message as duplicate
         return (
-          (stringSimilarity.compareTwoStrings(msg.content, message.content) >=
-            0.9) &&
-          (msg.content.length >= 10) &&
-          (message.author === msg.author)
+          stringSimilarity.compareTwoStrings(msg.content, message.content) >=
+            0.9 &&
+          msg.content.length >= 10 &&
+          message.author === msg.author
         )
       })
 
@@ -86,7 +90,11 @@ export default class MessageCreateListener extends Listener {
         }
 
         // Post to mod log
-        (message.guild?.channels.resolve(config.channels.moderationLog) as TextChannel).send({
+        ;(
+          message.guild?.channels.resolve(
+            config.channels.moderationLog
+          ) as TextChannel
+        ).send({
           embeds: [
             new MessageEmbed(embed)
               .setTitle('Duplicate Crosspost Detected')
@@ -165,7 +173,7 @@ export default class MessageCreateListener extends Listener {
                 )
                 .setAuthor(
                   message.author.tag,
-                  message.author.avatarURL({ dynamic: true }) || ""
+                  message.author.avatarURL({ dynamic: true }) || ''
                 )
             ]
           })
@@ -187,9 +195,10 @@ export default class MessageCreateListener extends Listener {
         let linkArray = link.split('/')
         linkArray.splice(0, 4)
         if (linkArray[0] === message.guild?.id) {
-          (message.guild?.channels
-            .resolve(linkArray[1]) as TextChannel)
-            .messages.fetch(linkArray[2])
+          ;(
+            message.guild?.channels.resolve(linkArray[1]) as TextChannel
+          ).messages
+            .fetch(linkArray[2])
             .then((msg: any) => {
               message.channel.send({
                 embeds: [
