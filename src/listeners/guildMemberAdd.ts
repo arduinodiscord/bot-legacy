@@ -14,7 +14,7 @@ export default class GuildMemberAddListener extends Listener {
 
   public exec(member: any) {
     var logChannel = member.guild.channels.resolve(config.channels.joinLeaveLog)
-    member.guild.invites.fetch.then((invites: any) => {
+    member.guild.invites.fetch().then((invites: any) => {
       var inviteSource: undefined | any = undefined
       invites.each((invite: any) => {
         if (invite.uses !== cache.getInviteCache(invite.code))
