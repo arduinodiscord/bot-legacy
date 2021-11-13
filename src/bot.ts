@@ -9,52 +9,29 @@ import {
 } from 'discord-akairo'
 import { MessageEmbed } from 'discord.js'
 import { version } from '../package.json'
+import { readFile } from 'fs/promises'
 
-interface Config {
-  token: string
-  debug: boolean
-  prefix: string
-  guild: string
-  staffPrefix: string
-  channels: {
-    joinLeaveLog: string
-    crosspostLog: string
-    moderationLog: string
-    toCrosspost: string[]
-    preventDuplicates: string[]
-  }
-  embeds: {
-    footer: string
-    color: any
-  }
-  pasteEmoji: string
-  roles: {
-    helper: string
-    staff: string
-  }
-  owners: string[]
-}
-
-let localConfig: Config
+let localConfig: any
 
 console.log('Attempting to use development config...')
 ;(async () => {
-  let configDev: Config | undefined = await import('../config-dev.json')
-  if (!configDev) {
+  try {
+    let configDevFile = await readFile('./config-dev.json', 'utf-8')
+    let devJson = JSON.parse(configDevFile as string)
+    localConfig = devJson
+  } catch {
     console.log('Failed to find development config...trying production...')
-    let configProd: Config | undefined = await import('../config-prod.json')
-    if (!configProd)
+    try {
+      let configProdFile = await readFile('./config-prod.json', 'utf-8')
+      let prodJson = JSON.parse(configProdFile as string)
+      localConfig = prodJson
+    } catch {
       throw new Error(
         'Failed to load a production config...missing config file? Stopping.'
       )
-    else {
-      localConfig = configProd
-      initialize()
     }
-  } else {
-    localConfig = configDev
-    initialize()
   }
+  initialize()
 })()
 
 let embedExport: MessageEmbed
