@@ -8,6 +8,29 @@
       "value": "If using new lines, a file extension can be placed directly after the first 3 backticks to highlight in that language. An example is shown below, highlighting code in arduino. The backtick key is typically found to the left of the 1 key."
     }
   ],
-  "content": "",
+  "actionRow": {
+    "components": [
+      {
+        "type": "BUTTON",
+        "label": "Copy Characters",
+        "customId": "copy",
+        "style": "SECONDARY",
+        "emoji": "💾"
+      }
+    ]
+  },
+  "buttonReplies": {
+    "copy": {
+      "ephemeral": true,
+      "embeds": [
+        {
+          "title": "Please copy the 3 characters above and place them before & after your code message",
+          "description": "For mobile hold this message and tap \"Copy Text\"",
+          "color": "2f3136"
+        }
+      ],
+      "content": "```"
+    }
+  },
   "image": "https://this-u.lol/09kbow.png"
 }

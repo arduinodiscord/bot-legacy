@@ -1,6 +1,15 @@
 import { Command } from 'discord-akairo'
 import fs from 'fs'
-import { MessageEmbed } from 'discord.js'
+import {
+  ButtonInteraction,
+  Interaction,
+  Message,
+  MessageActionRow,
+  MessageButton,
+  MessageEmbed,
+  MessageOptions,
+  SelectMenuInteraction
+} from 'discord.js'
 import { embed, config } from '../bot'
 
 let files = fs.readdirSync('./src/tags')
@@ -31,7 +40,7 @@ export default class TagCommand extends Command {
   }
 
   exec(message: any, args: any) {
-    // var usedAlias = message.util.parsed.alias -- This should work but it's not so I'm writing a workaround
+    // var usedAlias = message.util.parsed.alias // This should work but it's not so I'm writing a workaround
     var usedAlias = message.content.replace(config.prefix, '').split(' ')[0]
     if (usedAlias === ('tag' || 'qr' || 'res')) {
       if (!args.tagAlias) {
@@ -61,7 +70,35 @@ export default class TagCommand extends Command {
                 tagEmbed.addField(field.name, field.value, false)
               })
 
-              return message.channel.send({ embeds: [tagEmbed], content: tagFile.content ? tagFile.content : '' })
+              var messageObject: MessageOptions = {
+                embeds: [tagEmbed]
+              }
+              if (tagFile.actionRow) {
+                messageObject = {
+                  ...messageObject,
+                  components: [{ ...tagFile.actionRow, type: 'ACTION_ROW' }]
+                }
+              }
+              var messageTiedToId: String
+              message.channel
+                .send(messageObject)
+                .then((msg: Message) => (messageTiedToId = msg.id))
+
+              message.channel
+                .createMessageComponentCollector({
+                  componentType: 'BUTTON',
+                  time: 300_000,
+                  filter: (interaction: ButtonInteraction) => {
+                    return interaction.message.id === messageTiedToId
+                  }
+                })
+                .on('collect', (interaction: ButtonInteraction) => {
+                  if (tagFile.buttonReplies[interaction.customId]) {
+                    interaction.reply(
+                      tagFile.buttonReplies[interaction.customId]
+                    )
+                  }
+                })
             }
           }
         })
@@ -80,7 +117,33 @@ export default class TagCommand extends Command {
               tagEmbed.addField(field.name, field.value, false)
             })
 
-            return message.channel.send({ embeds: [tagEmbed], content: tagFile.content ? tagFile.content : '' })
+            var messageObject: MessageOptions = {
+              embeds: [tagEmbed]
+            }
+            if (tagFile.actionRow) {
+              messageObject = {
+                ...messageObject,
+                components: [{ ...tagFile.actionRow, type: 'ACTION_ROW' }]
+              }
+            }
+            var messageTiedToId: String
+            message.channel
+              .send(messageObject)
+              .then((msg: Message) => (messageTiedToId = msg.id))
+
+            message.channel
+              .createMessageComponentCollector({
+                componentType: 'BUTTON',
+                time: 300_000,
+                filter: (interaction: ButtonInteraction) => {
+                  return interaction.message.id === messageTiedToId
+                }
+              })
+              .on('collect', (interaction: ButtonInteraction) => {
+                if (tagFile.buttonReplies[interaction.customId]) {
+                  interaction.reply(tagFile.buttonReplies[interaction.customId])
+                }
+              })
           }
         }
       })
