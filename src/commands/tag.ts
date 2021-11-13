@@ -61,7 +61,7 @@ export default class TagCommand extends Command {
                 tagEmbed.addField(field.name, field.value, false)
               })
 
-              return message.channel.send({ embeds: [tagEmbed] })
+              return message.channel.send({ embeds: [tagEmbed], content: tagFile.content ? tagFile.content : '' })
             }
           }
         })
@@ -80,7 +80,7 @@ export default class TagCommand extends Command {
               tagEmbed.addField(field.name, field.value, false)
             })
 
-            return message.channel.send({ embeds: [tagEmbed] })
+            return message.channel.send({ embeds: [tagEmbed], content: tagFile.content ? tagFile.content : '' })
           }
         }
       })
