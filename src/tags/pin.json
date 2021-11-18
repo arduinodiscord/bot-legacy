@@ -1,0 +1,20 @@
+{
+  "title": "Powering an arduino",
+  "aliases": ["power", "pin"],
+  "directAliases": ["power", "pin"],
+  "fields": [
+    {
+      "name": "1. How much power can an arduino provide?",
+      "value": "Most PC USB ports are limited to 500ma. The Arduino has a fuse on the board to help protect your PC, and the Arduino from shorts. This is limited to 400ma. If you try to draw more current than this, the fuse will get hot and stop the short."
+    },
+    {
+      "name": "2. How much power can each pin of the arduino provide?",
+      "value": "Each pin of the Arduino is rated 20ma. In many cases, if you do not provide a resistor to the circuit on a pin, then you can damage the Arduino. We use resistors for LED's or any other component that can draw more than 20ma. Motors should not be driven directly off of the arduino PIN's."
+    },
+    {
+      "name": "3. Powering the Arduino properly",
+      "value": "On most Arduino boards there will be a pin marked VIN. This stands for Voltage Input. You can provide the max power rating for your board on this pin. UNO will accept 7-12v. If you have a regulated 5 volt power supply, you can sometimes use the 5v pin to power the Arduino. You should NOT connect batteries to the 5v or 3.3v pins. You can also power Arduino's by the USB plugs, or the Barrel jack on some boards."
+    }
+  ],
+  "image": ""
+}

@@ -8,5 +8,17 @@
       "value": ""
     }
   ],
+  "actionRow": {
+    "components": [
+      {
+        "type": "BUTTON",
+        "label": "",
+        "customId": "",
+        "style": "SECONDARY",
+        "emoji": ""
+      }
+    ]
+  },
+  "buttonReplies": {},
   "image": ""
 }
