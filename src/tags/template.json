@@ -1,0 +1,24 @@
+{
+  "title": "",
+  "aliases": [],
+  "directAliases": [],
+  "fields": [
+    {
+      "name": "",
+      "value": ""
+    }
+  ],
+  "actionRow": {
+    "components": [
+      {
+        "type": "BUTTON",
+        "label": "",
+        "customId": "",
+        "style": "SECONDARY",
+        "emoji": ""
+      }
+    ]
+  },
+  "buttonReplies": {},
+  "image": ""
+}
