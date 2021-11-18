@@ -1,18 +1,18 @@
 {
   "title": "Can your arduino be used as a keyboard, or mouse?",
-  "aliases": ["hid",],
+  "aliases": ["hid", "mouse", "keyboard"],
   "directAliases": ["hid"],
   "fields": [
     {
-      "name": "You want to use your arduino for a Humin Interface Device?",
-      "value": "Arduino has many boards that can be used as a mouse/keyboard nativly. This is reffered to as a HID. ",
+      "name": "You want to use your arduino for a Human Interface Device?",
+      "value": "Arduino has many boards that can be used as a mouse/keyboard natively. This is reffered to as a HID."
     },
     {
-      "name": "Boards that are NOT HID complient.",
-      "value": "Uno, Mega, Nano, Pro mini, are not capible of use as an HID device. "
+      "name": "Boards that are __NOT__ HID compliant.",
+      "value": "Uno, Mega, Nano, Pro mini, are not capible of use as an HID device."
     },
     {
-      "name": "Boards that ARE HID complient.",
+      "name": "Boards that __ARE__ HID compliant.",
       "value": "Leonardo, (Pro)Micro, Any other 8u2/16u2/at90usb8/162/32u2/32u4 compatible board, Zero, MKR1000."
     }
   ],

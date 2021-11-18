@@ -1,11 +1,6 @@
 {
   "title": "Solving library errors (such as \"yourlib.h not found\")",
-  "aliases": [
-    "liberror",
-    "libraryerror",
-    "libmissing",
-    "librarymissing"
-  ],
+  "aliases": ["liberror", "libraryerror", "libmissing", "librarymissing"],
   "directAliases": ["liberror"],
   "fields": [
     {

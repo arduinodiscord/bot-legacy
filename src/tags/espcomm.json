@@ -1,11 +1,6 @@
 {
   "title": "Solving your ESP board's communication errors (Try these in order)",
-  "aliases": [
-    "espcomm",
-    "ESPcomm",
-    "ESPcommerror",
-    "espcommerror"
-  ],
+  "aliases": ["espcomm", "ESPcomm", "ESPcommerror", "espcommerror"],
   "directAliases": ["espcomm"],
   "fields": [
     {
