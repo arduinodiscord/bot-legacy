@@ -1,6 +1,5 @@
 import { Listener } from 'discord-akairo'
 import { Message, MessageEmbed, TextChannel } from 'discord.js'
-import stringSimilarity from 'string-similarity'
 import { embed, config } from '../bot'
 
 export default class MessageCreateListener extends Listener {
@@ -52,73 +51,7 @@ export default class MessageCreateListener extends Listener {
           })
       }
     }
-
     if (message.author.bot) return
-    // Duplicates filter
-    for (var i = 0; i < config.channels.preventDuplicates.length; i++) {
-      var channelID = config.channels.preventDuplicates[i]
-      if (message.channel.id === channelID) continue
-      var channel = message.guild?.channels.resolve(channelID) as TextChannel
-      var original = channel.messages.cache.find((msg: any) => {
-        // Conditions to flag message as duplicate
-        return (
-          stringSimilarity.compareTwoStrings(msg.content, message.content) >=
-            0.9 &&
-          msg.content.length >= 10 &&
-          message.author === msg.author
-        )
-      })
-
-      if (original) {
-        message.delete()
-
-        // DM offender
-        var dmMessage = new MessageEmbed(embed)
-          .setTitle(
-            "We've detected that you sent a duplicate message in multiple channels."
-          )
-          .setDescription(
-            'This is against our rules, please refrain from crossposting duplicate messages in the future. If you believe this message was sent in error, please DM <@799678733723893821> with valid reasoning.'
-          )
-          .setTimestamp(new Date())
-        if (message.author.dmChannel) {
-          message.author.dmChannel.send({ embeds: [dmMessage] })
-        } else {
-          message.author.createDM().then((dmChannel) => {
-            dmChannel.send({ embeds: [dmMessage] })
-          })
-        }
-
-        // Post to mod log
-        ;(
-          message.guild?.channels.resolve(
-            config.channels.moderationLog
-          ) as TextChannel
-        ).send({
-          embeds: [
-            new MessageEmbed(embed)
-              .setTitle('Duplicate Crosspost Detected')
-              .addField('Offender', message.author.tag, true)
-              .addField('Channel', message.channel.toString())
-              .addField(
-                'Similarity',
-                `${
-                  Math.floor(
-                    stringSimilarity.compareTwoStrings(
-                      original.content,
-                      message.content
-                    ) * 10000
-                  ) / 100
-                }%`,
-                true
-              )
-              .addField('Matched Duplicate String', message.content)
-              .setTimestamp(new Date())
-          ]
-        })
-        break
-      }
-    }
 
     // File filter
     if (
