@@ -1,0 +1,12 @@
+{
+  "title": "What is an XY problem?",
+  "aliases": ["xy"],
+  "directAliases": ["xy"],
+  "fields": [
+    {
+      "name": "What is it?",
+      "value": "The XY problem is asking about your attempted solution rather than your actual problem. This leads to enormous amounts of wasted time and energy, both on the part of people asking for help, and on the part of those providing help. \n Find out more at https://xyproblem.info/"
+    }
+  ],
+  "image": ""
+}
