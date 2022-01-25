@@ -1,0 +1,18 @@
+
+{
+    "title": "SchoolAssignments",
+    "aliases": ["assins", "asignments", "r5"],
+    "directAliases": ["r5"],
+    "fields": [
+      {
+        "name": "Rule 5:",
+        "value": "We will not provide or request help on projects that may break laws, breach terms of services, be considered malicious or inappropriate. We will not help with ongoing exams. Do not provide or request solutions for graded assignments, although general guidance is okay."
+      }
+      {
+        "name": "General Guidance",
+        "value": "We can give you general guidance if you have specific questions. "
+      }
+
+    ],
+  }
+
