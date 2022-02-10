@@ -1,0 +1,36 @@
+{
+    "title": "WokWi - A browser-based Arduino Simulator",
+    "aliases": ["wokwi", "simulator", "wokwi-simulator", "wokwi-simulator-arduino"],
+    "directAliases": ["wokwi", "simulator"],
+    "fields": [
+      {
+        "name": "Don't have an Arduino? Would like to test your code on a computer or just play around?",
+        "value": "Perhaps you have an arduino, and would simple like a browser-based simulator? Whatever the reason. Give Wokwi a try!"
+      }
+    ],
+    "actionRow": {
+      "components": [
+        {
+          "type": "BUTTON",
+          "label": "Try WokWi today! (opens in new tab) <a href='https://wokwi.com'>https://wokwi.com</a>",
+          "customId": "wokwi-button",
+          "style": "SECONDARY",
+          "emoji": ":arduino:"
+        }
+      ]
+    },
+    "buttonReplies": {
+        "copy": {
+            "ephemeral": true,
+            "embeds": [
+              {
+                "title": "WokWi - A browser-based Arduino Simulator",
+                "description": "Test all your Arduino code on a browser. No need to install Arduino or any other software. Just navigate to WokWi and start coding!",
+                "color": "2f3136"
+              }
+            ],
+            "content": ""
+          }
+    },
+    "image": "https://imgur.com/a/ibdVRVY"
+  }
