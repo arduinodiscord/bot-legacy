@@ -1,0 +1,60 @@
+{
+    "title": "How to Solder Joints",
+    "aliases": ["solderjoint", "solder", "joints"],
+    "directAliases": ["solderjoint", "solder"],
+    "fields": [
+      {
+        "name":  "Setup the joint for soldering",
+        "value": "Heat part and the associated pad for 2 - 3 seconds."
+      },
+      {
+        "name": "Add solder to the pad",
+        "value": "Add solder to the pad and make sure not to touch the solder or the pad."
+      },
+      {
+        "name": "Continue Heating",
+        "value": "Continue adding heat to the pad for 1 - 2 seconds."
+      },
+      {
+        "name": "Let the joint cool down",
+        "value": "Let the joint cool down and DO NOT touch or blow on the joint or the pad."
+      },
+      {
+        "name": "Remove the solder",
+        "value": "Remove the solder from the pad and DO NOT touch or blow on the joint or the pad."
+      },
+      {
+        "name": "Clean the joint",
+        "value": "Clean the joint with a damp cloth or a dry cloth."
+      },
+      {
+        "name": "Clean the pad",
+        "value": "Clean the pad with a damp cloth or a dry cloth."
+      }
+    ],
+    "actionRow": {
+      "components": [
+        {
+          "type": "BUTTON",
+          "label": "I understand",
+          "customId": "action-button",
+          "style": "SECONDARY",
+          "emoji": "💡"
+        }
+      ]
+    },
+    "buttonReplies": {
+      "copy": {
+        "ephemeral": true,
+        "embeds": [
+          {
+            "title": "Now you know how to solder joints!",
+            "description": "You can use this command again to see the steps.",
+            "color": "2f3136"
+          }
+        ],
+        "content": "Good luck!"
+      }
+    },
+    "image": "https://imgur.com/a/ggBefe0"
+  }
