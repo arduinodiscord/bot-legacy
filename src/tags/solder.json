@@ -32,29 +32,5 @@
         "value": "Clean the pad with a damp cloth or a dry cloth."
       }
     ],
-    "actionRow": {
-      "components": [
-        {
-          "type": "BUTTON",
-          "label": "I understand",
-          "customId": "action-button",
-          "style": "SECONDARY",
-          "emoji": "💡"
-        }
-      ]
-    },
-    "buttonReplies": {
-      "copy": {
-        "ephemeral": true,
-        "embeds": [
-          {
-            "title": "Now you know how to solder joints!",
-            "description": "You can use this command again to see the steps.",
-            "color": "2f3136"
-          }
-        ],
-        "content": "Good luck!"
-      }
-    },
     "image": "https://imgur.com/a/ggBefe0"
   }
