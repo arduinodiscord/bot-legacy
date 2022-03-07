@@ -1,0 +1,21 @@
+{
+  "title": "What is debounce?",
+  "aliases": ["debounce", "bounce"],
+  "directAliases": ["debounce", "bounce"],
+  "fields": [
+    {
+      "name": "Switches/buttons are not always fast enough.",
+      "value": "When you press a button, the micro-controller is so fast that it will read micro contacts in the button. This happens because the button is a mechanical device and is common. You can learn more by [Clicking here](https://www.nuvation.com/resources/article/switch-debouncing-electronic-product-designs#:~:text=Switch%20debouncing%20in%20an%20electronic,in%20both%20hardware%20and%20software). The two ways of correcting this are:"
+    },
+    {
+      "name": "Hardware debounce:",
+      "value": "If you use a resistor and a capacitor, you can filter out the micro contacts of most buttons and or switches. You need to select the correct capacitor, and the correct resistor for the job. This can make wiring a bit more complex as your adding 4 connections."
+    },
+    {
+      "name": "Software debounce through code.",
+      "value": "We can also use code to debounce the button/switch. You can go you your arduino IDE. File>Examples>Digital>Debounce. You can find the code here if you want an example that you can use to incorporate your code into it."
+    }
+  ],
+  "image": "https://ibb.co/rsgLjMH",
+  "image": "http://wiki.ros.org/rosserial_arduino/Tutorials/Push%20Button?action=AttachFile&do=get&target=debounce.png"
+}
