@@ -1,6 +1,7 @@
 import { Listener } from 'discord-akairo'
-import { Message, MessageEmbed, TextChannel } from 'discord.js'
+import { Guild, Message, MessageEmbed, TextChannel } from 'discord.js'
 import { embed, config } from '../bot'
+import { checkMessage } from '../utils/globalFilter'
 
 export default class MessageCreateListener extends Listener {
   constructor() {
@@ -52,6 +53,9 @@ export default class MessageCreateListener extends Listener {
       }
     }
     if (message.author.bot) return
+
+    // !!! PASS SPAM FILTER !!!
+    if (!checkMessage(message, <Guild>message.guild)) return
 
     // File filter
     if (
