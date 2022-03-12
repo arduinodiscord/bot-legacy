@@ -1,0 +1,32 @@
+{
+  "title": "How does ohm's Law work.",
+  "aliases": ["ohm", "ohms"],
+  "directAliases": ["ohm", "ohms", "law","ohmslaw"],
+  "fields": [
+    {
+      "name": "Ohms law is used to calculate the fundamentals of Electronics.",
+      "value": "Ohms lay is broken down to 4 main parts. If you have 2 parts of it you can then solve for the missing value. If you would like to learn more about this [click here](https://www.circuitbread.com/tutorials/ohms-law-tutorial-with-easy-practice-problems). Here are the basics:"
+    },
+    {
+      "name": "Find missing resonance:",
+      "value": "Resistance is Voltage divided by current. R=(V/I)"
+    },
+    {
+      "name": "Find the missing current:",
+      "value": "Current is voltage divided by resistance. I=(V/R)."
+    },
+    {
+      "name": "Find missing voltage:",
+      "value": "Voltage is current multiplied by voltage. V=(I*R)."
+    },
+    {
+      "name": " Finding power[watts].",
+      "value": "Power is voltage multiplied by current. P=(E*I)."
+    },
+    {
+      "name": "How to use the diagram bellow:",
+      "value": "Bellow is a diagram that shows you all the different ways of calculating for one of the values above. The inner circle is what your looking for. And the outer circle in that area shows the math used to calculate for the missing value in the inner circle."
+    }
+  ],
+  "image": "https://ibb.co/t4bL7qc"
+}
