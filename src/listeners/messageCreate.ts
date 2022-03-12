@@ -86,7 +86,9 @@ export default class MessageCreateListener extends Listener {
           'scr',
           'bup',
           'vexe',
-          'oar'
+          'oar',
+          'rar',
+          'zip'
         ]
         const extension = attachment.name.split('.').pop().toLowerCase()
         return (
