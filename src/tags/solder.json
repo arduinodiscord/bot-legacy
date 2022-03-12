@@ -1,36 +1,40 @@
 {
-    "title": "How to Solder Joints",
-    "aliases": ["solderjoint", "solder", "joints"],
-    "directAliases": ["solderjoint", "solder"],
-    "fields": [
-      {
-        "name":  "Setup the joint for soldering",
-        "value": "Heat part and the associated pad for 2 - 3 seconds."
-      },
-      {
-        "name": "Add solder to the pad",
-        "value": "Add solder to the pad and make sure not to touch the solder or the pad."
-      },
-      {
-        "name": "Continue Heating",
-        "value": "Continue adding heat to the pad for 1 - 2 seconds."
-      },
-      {
-        "name": "Let the joint cool down",
-        "value": "Let the joint cool down and DO NOT touch or blow on the joint or the pad."
-      },
-      {
-        "name": "Remove the solder",
-        "value": "Remove the solder from the pad and DO NOT touch or blow on the joint or the pad."
-      },
-      {
-        "name": "Clean the joint",
-        "value": "Clean the joint with a damp cloth or a dry cloth."
-      },
-      {
-        "name": "Clean the pad",
-        "value": "Clean the pad with a damp cloth or a dry cloth."
-      }
-    ],
-    "image": "https://imgur.com/a/ggBefe0"
-  }
+  "title": "How to Solder",
+  "aliases": ["solder", "soldering", "joints"],
+  "directAliases": ["solderjoint", "solder"],
+  "fields": [
+    {
+      "name": "Setup for soldering",
+      "value": " - Use a soldering iron of >30W at about 400?C/750?F\n - Flux core solder Tin\n - Tip cleaner + damped solder sponge\n - Cutting pliers\n - Third hand or some other holder"
+    },
+    {
+      "name": "Treating your tip",
+      "value": "Make sure the end of your solder tip is tinned (shiny metal look) at all times, even when storing. If it isn't shiny start by cleaning your tip, then heat it up and add a little solder tin to it. If your tip still shows any contamination add more solder until it drips, shake or wipe off excess.\nNever let your iron heat for more than 10 minutes without keeping it tinned.\n"
+    },
+    {
+      "name": "Preparing to solder",
+      "value": "Make sure the pieces to be soldered are firmly in place and can't move around if you apply pressure with your iron and solder. If you have flux you can add a little to the joint."
+    },
+    {
+      "name": "Start soldering",
+      "value": "Add a tiny bit of solder to your tip and touch it to the damped sponge or wipe it on the brass wire sponge. Place the tip on both wires together or to the pad and pin or leg together. All parts to solder together must be heated evenly at the same time. If the settings of your iron are correct you should be able to melt a tiny bit of solder to your tip, this tiny drop should create a better heat transfer to both parts. After another second you should be able to melt the solder by touching the pads, legs and/or wires. At this point don't touch your tip with the solder, only the parts to solder. Add solder as needed, keep your tip heating for another second and gently pull it up the leg or along the wire connection. If all goes well and your iron is at correct temperature this whole process shouldn't take longer than 2-3 seconds. If it doesn't melt your solder yet, get out, let it cool and try again in a few minutes. Never let it heat for too long, the quicker the better."
+    },
+    {
+      "name": "Clean your tip",
+      "value": "Add a tiny bit of solder to your tip and touch it to the damped sponge or wipe it on the brass wire sponge. Take off excessive drops but keep a shiny tin layer. Let your iron cool or get back to the previous step."
+    },
+    {
+      "name": "Inspection",
+      "value": "When done have a look at the examples below. If your joint looks ok you've made it, if not let it cool down and heat it again later, adding or removing solder or wetting more as needed to become a clean proper joint."
+    },
+    {
+      "name": "Clean the solder joint",
+      "value": "If you used a flux other than rosin core make sure to thoroughly clean your board with Isopropyl Alcohol rinsing it with distilled water afterwards. Cotton swabs may be helpful to remove heavier deposits of flux."
+    },
+    {
+      "name": "After soldering",
+      "value": "Did we already mention to keep your tip clean when done or storing your iron? And to make sure not to let it overheat? Probably did, but make sure your tip is tinned at all times and, oh, and keep it clean."
+    }
+  ],
+  "image": "https://imgur.com/a/ggBefe0"
+}
