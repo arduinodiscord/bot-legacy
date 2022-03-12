@@ -16,6 +16,5 @@
       "value": "We can also use code to debounce the button/switch. You can go you your arduino IDE. File>Examples>Digital>Debounce. You can find the code here if you want an example that you can use to incorporate your code into it."
     }
   ],
-  "image": "https://ibb.co/rsgLjMH",
-  "image": "http://wiki.ros.org/rosserial_arduino/Tutorials/Push%20Button?action=AttachFile&do=get&target=debounce.png"
+  "image": "https://ibb.co/rsgLjMH"
 }
