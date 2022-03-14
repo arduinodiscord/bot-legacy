@@ -4,8 +4,8 @@
   "directAliases": ["language"],
   "fields": [
     {
-      "name": "Arduino IDE code is normally C++14",
-      "value": "The language most often used in Arduino IDE for programming is primarily C++14. There are some added functions that are very useful for using the Arduino platform. They can be found at https://www.arduino.cc/reference/en/."
+      "name": "Arduino IDE code is normally C++11",
+      "value": "The language most often used in Arduino IDE for programming is primarily C++11. There are some added functions that are very useful for using the Arduino platform. They can be found at https://www.arduino.cc/reference/en/."
     }
   ],
   "image": ""
