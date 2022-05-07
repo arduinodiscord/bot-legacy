@@ -1,3 +1,6 @@
+# **Project Sunsetting Soon**
+> ### This repository is pending archival in the facilitation of our transition to the revamped version of this bot. Please see https://github.com/BluLightShow/arduino-bot
+
 # Arduino Bot
 [![Issues Badge](https://img.shields.io/github/issues/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/issues) [![Forks Badge](https://img.shields.io/github/forks/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![Stars Badge](https://img.shields.io/github/stars/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot) [![License Badge](https://img.shields.io/github/license/BluLightShow/arduino-bot)](https://github.com/BluLightShow/arduino-bot/blob/master/LICENSE) [![Discord Badge](https://img.shields.io/discord/420594746990526466?color=%237289DA&label=%20Discord%20&logo=discord&logoColor=%23FFFFFF)](https://arduino.cc/discord)
 
