@@ -9,7 +9,7 @@
     },
     {
       "name": "Boards that are __NOT__ HID compliant.",
-      "value": "Uno (other than R4), Mega, Nano, Pro mini, are not capible of use as an HID device."
+      "value": "Uno (other than R4), Mega, Nano, Pro mini, are not capable of use as an HID device."
     },
     {
       "name": "Boards that __ARE__ HID compliant.",
