@@ -9,11 +9,11 @@
     },
     {
       "name": "Boards that are __NOT__ HID compliant.",
-      "value": "Uno, Mega, Nano, Pro mini, are not capible of use as an HID device."
+      "value": "Uno (R3 or older), Mega, Nano, Pro mini, cannot be used as a HID device."
     },
     {
       "name": "Boards that __ARE__ HID compliant.",
-      "value": "Leonardo, (Pro)Micro, Any other 8u2/16u2/at90usb8/162/32u2/32u4 compatible board, Zero, MKR1000."
+      "value": "Uno R4, Giga, RP2040, Leonardo, (Pro)Micro, any other 8u2/16u2/at90usb8/162/32u2/32u4 board, Zero, MKR1000."
     }
   ],
   "image": ""
