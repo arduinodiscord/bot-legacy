@@ -5,7 +5,7 @@
   "fields": [
     {
       "name": "You want to use your arduino for a Human Interface Device?",
-      "value": "Arduino has many boards that can be used as a mouse/keyboard natively. This is reffered to as a HID."
+      "value": "Arduino has many boards that can be used as a mouse/keyboard natively. This is reffered to as HID."
     },
     {
       "name": "Boards that are __NOT__ HID compliant.",
